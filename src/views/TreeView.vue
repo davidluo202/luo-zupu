@@ -257,6 +257,16 @@ function buildTree() {
   const NODE_H = 64
   const GAP = 16
 
+  // Build parent map for sorting children near parents
+  const childToParentId = new Map()
+  for (const m of treeMembers) {
+    if (m.spouses) for (const sp of m.spouses) {
+      if (sp.children) for (const cid of sp.children) {
+        childToParentId.set(cid, m.id)
+      }
+    }
+  }
+
   // Group by generation
   const genGroups = new Map()
   for (const m of treeMembers) {
@@ -265,18 +275,26 @@ function buildTree() {
   }
   const gens = Array.from(genGroups.keys()).sort((a,b) => a - b)
 
-  // Layout nodes
+  // Layout nodes - sort children by parent position
   allNodeData = []
+  const idToX = new Map()
   gens.forEach((gen, gi) => {
-    const mems = genGroups.get(gen)
+    let mems = genGroups.get(gen)
+    // Sort by parent's X position (so siblings stay near their parent)
+    if (gi > 0) {
+      mems = mems.sort((a, b) => {
+        const paX = idToX.get(childToParentId.get(a.id)) ?? 0
+        const pbX = idToX.get(childToParentId.get(b.id)) ?? 0
+        if (paX !== pbX) return paX - pbX
+        return 0 // preserve data order for same parent
+      })
+    }
     const totalW = mems.length * (NODE_W + GAP) - GAP
     const startX = -totalW / 2
     mems.forEach((m, mi) => {
-      allNodeData.push({
-        ...m,
-        x: startX + mi * (NODE_W + GAP) + NODE_W/2,
-        y: gi * ROW_H
-      })
+      const x = startX + mi * (NODE_W + GAP) + NODE_W/2
+      allNodeData.push({ ...m, x, y: gi * ROW_H })
+      idToX.set(m.id, x)
     })
   })
 
