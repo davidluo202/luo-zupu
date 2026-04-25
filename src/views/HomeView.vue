@@ -2,9 +2,9 @@
   <div class="min-h-[calc(100vh-56px)] flex flex-col">
     <!-- Hero section with ink-wash mountain background -->
     <section class="flex-1 flex flex-col items-center justify-center px-4 py-16 text-center relative overflow-hidden">
-      <!-- Large ink-wash mountain background at top -->
+      <!-- Scholar decorations at top -->
       <div class="absolute top-0 left-0 right-0 pointer-events-none">
-        <InkMountains height="250" :opacity="0.6" />
+        <ScholarDecor :opacity="0.8" />
       </div>
       <!-- Decorative ink blobs -->
       <div class="absolute inset-0 pointer-events-none">
@@ -143,6 +143,7 @@
 import { onMounted } from 'vue'
 import { members, generationChars, dynastyMap } from '@/data/genealogy.js'
 import InkMountains from '@/components/InkMountains.vue'
+import ScholarDecor from '@/components/ScholarDecor.vue'
 
 // Scroll reveal observer
 onMounted(() => {
