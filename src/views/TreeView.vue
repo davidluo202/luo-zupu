@@ -54,8 +54,8 @@
 
     <!-- Tree canvas with scholar background -->
     <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)">
-      <!-- Scholar figure background decoration (left side, above SVG canvas) -->
-      <div class="absolute left-2 top-2 pointer-events-none" style="z-index: 5; opacity: 0.12">
+      <!-- Scholar figure background decoration (now rendered inside D3 SVG) -->
+      <div class="hidden">
         <svg width="280" height="400" viewBox="0 0 280 400" fill="none">
           <!-- Scholar sitting -->
           <g transform="translate(80, 100)">
@@ -267,9 +267,54 @@ function buildTree() {
     }
   }
 
+  // Identify "early death no descendants" members and group by parent
+  const hasChildren = new Set()
+  for (const m of treeMembers) {
+    if (m.spouses) for (const sp of m.spouses) {
+      if (sp.children?.length) hasChildren.add(m.id)
+    }
+  }
+  const earlyDeathByParent = new Map() // parentId -> [member, ...]
+  const earlyDeathIds = new Set()
+  for (const m of treeMembers) {
+    const isEarlyDeath = (m.note === '早故' || (m.note && m.note.includes('早故'))) && !hasChildren.has(m.id)
+    if (isEarlyDeath) {
+      const pid = childToParentId.get(m.id)
+      if (pid) {
+        if (!earlyDeathByParent.has(pid)) earlyDeathByParent.set(pid, [])
+        earlyDeathByParent.get(pid).push(m)
+        earlyDeathIds.add(m.id)
+      }
+    }
+  }
+
+  // Create merged nodes for early-death groups
+  const mergedNodes = []
+  for (const [pid, eds] of earlyDeathByParent) {
+    if (eds.length >= 1) {
+      const firstEd = eds[0]
+      mergedNodes.push({
+        id: '_ed_' + pid,
+        name: eds.map(e => e.name).join('、'),
+        generation: firstEd.generation,
+        branch: firstEd.branch,
+        note: '早故',
+        _isMergedEarlyDeath: true,
+        _parentId: pid,
+        _count: eds.length,
+      })
+    }
+  }
+
+  // Build display members: replace individual early-death with merged
+  const displayMembers = [
+    ...treeMembers.filter(m => !earlyDeathIds.has(m.id)),
+    ...mergedNodes,
+  ]
+
   // Group by generation
   const genGroups = new Map()
-  for (const m of treeMembers) {
+  for (const m of displayMembers) {
     if (!genGroups.has(m.generation)) genGroups.set(m.generation, [])
     genGroups.get(m.generation).push(m)
   }
@@ -298,16 +343,25 @@ function buildTree() {
     })
   })
 
-  // Build links
+  // Build links (handle merged early-death nodes)
   const linkData = []
   const childToParent = buildParentMap()
   for (const [childId, parentIds] of childToParent) {
+    if (earlyDeathIds.has(childId)) continue // skip individual early-death, merged node handles it
     for (const pid of parentIds) {
       const pn = allNodeData.find(n => n.id === pid)
       const cn = allNodeData.find(n => n.id === childId)
       if (pn && cn) {
         linkData.push({ parentId: pid, childId, px: pn.x, py: pn.y, cx: cn.x, cy: cn.y })
       }
+    }
+  }
+  // Links for merged early-death nodes
+  for (const mn of mergedNodes) {
+    const pn = allNodeData.find(n => n.id === mn._parentId)
+    const cn = allNodeData.find(n => n.id === mn.id)
+    if (pn && cn) {
+      linkData.push({ parentId: mn._parentId, childId: mn.id, px: pn.x, py: pn.y, cx: cn.x, cy: cn.y })
     }
   }
 
@@ -318,6 +372,20 @@ function buildTree() {
     .attr('viewBox', `0 0 ${W} ${H}`)
   zoom = d3.zoom().scaleExtent([0.03, 4]).on('zoom', e => g.attr('transform', e.transform))
   svg.call(zoom)
+
+  // Fixed background decoration (doesn't zoom)
+  const bgGroup = svg.append('g').attr('opacity', 0.1)
+  // Scholar figure
+  bgGroup.append('path').attr('d', 'M60 180 Q40 160 45 130 Q50 110 60 100 Q70 110 75 130 Q80 160 60 180').attr('fill', 'var(--ink-medium)')
+  bgGroup.append('path').attr('d', 'M60 180 Q30 200 20 250 Q25 280 40 300 L80 300 Q95 280 100 250 Q90 200 60 180').attr('fill', 'var(--ink-medium)')
+  bgGroup.append('circle').attr('cx', 60).attr('cy', 90).attr('r', 18).attr('fill', 'var(--ink-medium)')
+  // Book
+  bgGroup.append('rect').attr('x', 35).attr('y', 205).attr('width', 50).attr('height', 35).attr('rx', 2).attr('fill', 'var(--paper-dark)').attr('opacity', 0.8)
+  // Bamboo
+  bgGroup.append('line').attr('x1', 140).attr('y1', 50).attr('x2', 140).attr('y2', H - 20).attr('stroke', 'var(--jade-green)').attr('stroke-width', 3)
+  bgGroup.append('path').attr('d', 'M140 120 L160 100 Q168 92 175 88').attr('stroke', 'var(--jade-green)').attr('stroke-width', 1).attr('fill', 'none')
+  bgGroup.append('path').attr('d', 'M140 200 L120 180 Q112 172 105 168').attr('stroke', 'var(--jade-green)').attr('stroke-width', 1).attr('fill', 'none')
+
   g = svg.append('g')
 
   // Gen labels
@@ -359,10 +427,12 @@ function buildTree() {
   nodeGroups.append('rect')
     .attr('width', NODE_W).attr('height', NODE_H)
     .attr('rx', 8).attr('ry', 8)
-    .attr('fill', d => mainLineage.includes(d.id) ? 'var(--paper-aged)' : 'var(--paper-cream)')
-    .attr('stroke', d => mainLineage.includes(d.id) ? 'var(--gold-bright)' : 'var(--paper-dark)')
+    .attr('fill', d => d._isMergedEarlyDeath ? 'var(--paper-dark)' : (mainLineage.includes(d.id) ? 'var(--paper-aged)' : 'var(--paper-cream)'))
+    .attr('stroke', d => d._isMergedEarlyDeath ? 'var(--ink-faint)' : (mainLineage.includes(d.id) ? 'var(--gold-bright)' : 'var(--paper-dark)'))
     .attr('stroke-width', d => mainLineage.includes(d.id) ? 2 : 1)
+    .attr('stroke-dasharray', d => d._isMergedEarlyDeath ? '4,2' : null)
     .attr('filter', 'drop-shadow(0 1px 3px rgba(0,0,0,0.06))')
+    .attr('opacity', d => d._isMergedEarlyDeath ? 0.6 : 1)
 
   // Main lineage dot
   nodeGroups.filter(d => mainLineage.includes(d.id))
@@ -370,13 +440,31 @@ function buildTree() {
     .attr('cx', NODE_W - 7).attr('cy', 7).attr('r', 3.5)
     .attr('fill', 'var(--gold-bright)')
 
+  // Early death indicator
+  nodeGroups.filter(d => d._isMergedEarlyDeath)
+    .append('text')
+    .attr('x', NODE_W - 10).attr('y', 14)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px')
+    .text('🕯️')
+
+  // "早故" label for merged nodes
+  nodeGroups.filter(d => d._isMergedEarlyDeath)
+    .append('text')
+    .attr('x', NODE_W/2).attr('y', NODE_H - 6)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '9px').attr('fill', 'var(--ink-faint)')
+    .text('早故')
+
   // Name text
   nodeGroups.append('text')
-    .attr('x', NODE_W/2).attr('y', 24)
+    .attr('x', NODE_W/2).attr('y', d => d._isMergedEarlyDeath ? 28 : 24)
     .attr('text-anchor', 'middle')
-    .attr('font-family', 'var(--font-kai)').attr('font-size', '14px').attr('font-weight', '700')
-    .attr('fill', 'var(--ink-black)')
-    .text(d => '羅' + d.name)
+    .attr('font-family', 'var(--font-kai)')
+    .attr('font-size', d => d._isMergedEarlyDeath ? '11px' : '14px')
+    .attr('font-weight', '700')
+    .attr('fill', d => d._isMergedEarlyDeath ? 'var(--ink-light)' : 'var(--ink-black)')
+    .text(d => d._isMergedEarlyDeath ? d.name : '羅' + d.name)
 
   // Courtesy
   nodeGroups.filter(d => d.courtesy)
