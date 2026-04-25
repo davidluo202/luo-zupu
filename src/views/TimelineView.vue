@@ -5,12 +5,16 @@
 
     <!-- Year slider -->
     <div class="sticky top-14 z-30 py-4 px-4 rounded-2xl mb-8" style="background: var(--paper-aged); backdrop-filter: blur(10px)">
-      <div class="flex items-center gap-4">
-        <span class="text-xs font-bold" style="color: var(--ink-light)">1261</span>
+      <div class="flex items-center gap-3">
+        <button @click="currentYear = Math.max(1261, currentYear - 10)" class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm" style="background: var(--paper-cream); border: 1px solid var(--paper-dark)">◀</button>
+        <button @click="currentYear = Math.max(1261, currentYear - 1)" class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs" style="background: var(--paper-cream); border: 1px solid var(--paper-dark)">-1</button>
+        <span class="text-xs font-bold shrink-0" style="color: var(--ink-light)">1261</span>
         <input type="range" v-model.number="currentYear" min="1261" max="2026" step="1"
-          class="flex-1 h-2 rounded-full appearance-none cursor-pointer"
+          class="flex-1 h-3 rounded-full appearance-none cursor-pointer timeline-slider"
           style="accent-color: var(--gold-bright); background: var(--paper-dark)">
-        <span class="text-xs font-bold" style="color: var(--ink-light)">2026</span>
+        <span class="text-xs font-bold shrink-0" style="color: var(--ink-light)">2026</span>
+        <button @click="currentYear = Math.min(2026, currentYear + 1)" class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs" style="background: var(--paper-cream); border: 1px solid var(--paper-dark)">+1</button>
+        <button @click="currentYear = Math.min(2026, currentYear + 10)" class="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm" style="background: var(--paper-cream); border: 1px solid var(--paper-dark)">▶</button>
       </div>
       <div class="text-center mt-2">
         <span class="ink-title text-3xl font-bold" style="color: var(--gold-bright)">{{ currentYear }}</span>
