@@ -53,7 +53,7 @@
 
     <!-- Ancestors (before the main lineage) -->
     <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
-      <div class="max-w-3xl mx-auto text-center">
+      <div class="max-w-3xl mx-auto page-margin text-center">
         <h2 class="ink-title text-2xl font-bold mb-6 tracking-widest">源 流</h2>
         <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
           <div class="text-xs mb-2 font-bold" style="color: var(--red-seal)">得姓始祖</div>
@@ -88,7 +88,7 @@
 
     <!-- Preface -->
     <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
-      <div class="max-w-3xl mx-auto">
+      <div class="max-w-3xl mx-auto page-margin">
         <h2 class="ink-title text-2xl font-bold text-center mb-6 tracking-widest">前 言</h2>
         <div class="p-6 rounded-2xl ink-body leading-loose text-base" style="background: var(--paper-aged)">
           <p class="mb-4 indent-8">劻正公於周武王三年鎮守宣城有功，（約公元前1048年）後受封於羅，子孫以國為氏，羅姓由此而來。</p>
@@ -101,7 +101,7 @@
 
     <!-- Generation chars -->
     <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
-      <div class="max-w-5xl mx-auto">
+      <div class="max-w-5xl mx-auto page-margin">
         <h2 class="ink-title text-2xl font-bold text-center mb-8 tracking-widest">世代輩分 · 朝代對照</h2>
         <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2">
           <div v-for="(char, gen) in generationChars" :key="gen"

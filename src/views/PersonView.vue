@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-3xl mx-auto px-4 py-8">
+  <div class="max-w-3xl mx-auto page-margin px-4 py-8">
     <button @click="$router.back()" class="mb-6 text-sm ink-body hover:underline" style="color: var(--ink-light)">← 返回</button>
 
     <div v-if="person" class="fade-in-up">
@@ -12,7 +12,7 @@
             <div class="text-xs font-bold mb-1" style="color: var(--gold-dark)">
               {{ person.generation === 0 ? '始祖' : '第' + person.generation + '世' }}
             </div>
-            <h1 class="ink-title text-4xl font-bold mb-2">罗{{ person.name }}</h1>
+            <h1 class="ink-title text-4xl font-bold mb-2" v-html="'羅' + addPinyin(person.name)"></h1>
             <div class="flex flex-wrap gap-3 text-sm" style="color: var(--ink-medium)">
               <span v-if="person.courtesy">字 <b>{{ person.courtesy }}</b></span>
               <span v-if="person.alias">号 <b>{{ person.alias }}</b></span>
@@ -76,7 +76,15 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import { members } from '@/data/genealogy.js'
+import { members, pinyinMap } from '@/data/genealogy.js'
+
+function addPinyin(name) {
+  return name.split('').map(ch => {
+    if (pinyinMap[ch]) return `<ruby>${ch}<rt>${pinyinMap[ch]}</rt></ruby>`
+    return ch
+  }).join('')
+}
+
 
 const route = useRoute()
 const person = computed(() => members.find(m => m.id === route.params.id))

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto page-margin px-4 py-8">
     <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">遷徙地圖</h1>
     <p class="text-center mb-8 text-sm" style="color: var(--ink-light); font-family: var(--font-kai)">
       三千年薪火相傳 · 從受封之地到全球散葉

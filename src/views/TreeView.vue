@@ -60,7 +60,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import * as d3 from 'd3'
-import { members, mainLineage, dynastyMap } from '@/data/genealogy.js'
+import { members, mainLineage, dynastyMap, pinyinMap } from '@/data/genealogy.js'
 
 const treeContainer = ref(null)
 const searchQuery = ref('')

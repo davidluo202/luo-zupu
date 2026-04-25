@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Classical Chinese fonts */
-@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap');
 
 :root {
   --ink-black: #0d0d0d;
@@ -17,8 +17,8 @@
   --red-seal: #c23b22;
   --red-marriage: #d4574a;
   --jade-green: #5a8a6a;
-  --font-kai: 'LXGW WenKai TC', 'LXGW WenKai', 'KaiTi', 'STKaiti', 'BiauKai', serif;
-  --font-song: 'Noto Serif TC', 'Noto Serif SC', 'SimSun', 'STSong', serif;
+  --font-kai: 'Noto Serif TC', 'Noto Serif SC', 'PMingLiU', 'MingLiU', 'SimSun', 'STSong', serif;
+  --font-song: 'Noto Serif TC', 'Noto Serif SC', 'PMingLiU', 'SimSun', 'STSong', serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,6 +29,21 @@ body {
   color: var(--ink-black);
   min-height: 100vh;
 }
+
+/* Page margins for readability */
+.page-margin {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+@media (max-width: 768px) {
+  .page-margin { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+
+/* Ruby annotation for pinyin */
+ruby { ruby-position: over; }
+ruby rt { font-size: 0.55em; color: var(--ink-light); font-weight: 400; letter-spacing: 0; }
 
 /* Paper texture */
 .paper-texture {

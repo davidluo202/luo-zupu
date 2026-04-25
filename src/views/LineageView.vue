@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto page-margin px-4 py-8">
     <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">主脉溯源</h1>
     <p class="text-center mb-8 text-sm" style="color: var(--ink-light); font-family: var(--font-kai)">
       罗新涛直系 · 始祖劻正公至今 · {{ lineageMembers.length }}代传承
