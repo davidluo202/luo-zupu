@@ -22,81 +22,96 @@
 <script setup>
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { PageFlip } from 'page-flip'
-import { members, migrations, mainLineage, dynastyMap, generationChars } from '@/data/genealogy.js'
+import { members, migrations, dynastyMap, generationChars } from '@/data/genealogy.js'
+import { landmarks } from '@/data/landmarks.js'
 
 const bookRef = ref(null)
 const currentPage = ref(0)
 const totalPages = ref(0)
 let pageFlip = null
 
-// Get main lineage members in order
-const mainMembers = mainLineage
-  .map(id => members.find(m => m.id === id))
-  .filter(Boolean)
-
-// Group main lineage by era for story pages
+// Story pages with landmark keys
 const eraStories = [
   {
     title: '源遠流長',
     subtitle: '羅氏得姓之始',
     body: '周武王三年（前1048年），劻正公鎮守宣城有功，受封於羅。子孫以國為氏，是為羅姓之始。歷經三千餘年，薪火相傳，綿延不絕。',
-    decoration: '🏛️',
     era: '西周',
+    landmark: 'xuancheng',
+  },
+  {
+    title: '石壁南遷',
+    subtitle: '客家先民的足跡',
+    body: '福建寧化石壁村，客家人的精神原鄉。宋末戰亂，先民紛紛南遷。我族谷賢公娶九妻，生十八子，子孫散布閩粵贛各地。',
+    era: '宋末',
+    landmark: 'shibi',
   },
   {
     title: '客道興寧',
     subtitle: '小九公開基立業',
     body: '宋理宗景定二年（1261年），始祖小九公（洪德公）自福建寧化石壁村客道廣東，任循州學正。見興寧山水悠揚、土地沃野豐裕，遂擇東廓而立家。娶曾氏、胡氏、黃氏三位夫人，開三大房。',
-    decoration: '🏔️',
     era: '宋末元初',
-  },
-  {
-    title: '三房分立',
-    subtitle: '昇澣·新澣·振澣',
-    body: '二世祖昇澣公（右八房祖）壽至105歲，為貢士、教諭郎大學士。新澣公（左八房祖）任大元學谕。振澣公居中。三房各立，枝繁葉茂，其中左八房為本族主脈。',
-    decoration: '🌿',
-    era: '元朝',
+    landmark: 'xingning',
   },
   {
     title: '八房開枝',
     subtitle: '維公生八子',
-    body: '七世祖維公娶曾氏大孺人，生八子：昱、晟、旻、昊、勗、昺、昂、冕。八子各立一房，是為「左八房」。其中三房旻公為明朝進士，學問最盛。',
-    decoration: '🌳',
+    body: '七世祖維公娶曾氏大孺人，生八子：昱、晟、旻、昊、勗、昺、昂、冕。八子各立一房，是為「左八房」。其中三房旻公為明朝進士，學問最盛。自此興寧羅氏枝繁葉茂，人丁興旺。',
     era: '明朝',
+    landmark: 'xingning',
   },
   {
     title: '少年奇志',
     subtitle: '萬榮公的傳奇',
     body: '十五世萬榮公，幼年喪父成孤兒，卻獨自遠赴揚州，與叔父合股貿易。數年間積累財款，衣錦還鄉，回興寧置產立業。其志氣與膽識，堪為後世楷模。',
-    decoration: '⚡',
-    era: '���末清初',
+    era: '明末清初',
+    landmark: 'yangzhou',
   },
   {
     title: '散葉四方',
-    subtitle: '族人遷徙之路',
-    body: '清代中期，族人漸向外發展：部分移居惠州、惠陽；珠玉公後裔遷四川；新賢移居江西；欽賢下南洋。至民國，錫鎦公後裔再遷贛州。血脈所至，處處生根。',
-    decoration: '🗺️',
+    subtitle: '清代族人遷徙',
+    body: '清代中期，族人漸向外發展：部分移居惠州西湖之畔；珠玉公後裔隨「湖廣填四川」浪潮西遷巴蜀；新賢落戶贛南；欽賢漂洋過海下南洋。血脈所至，處處生根。',
     era: '清朝',
+    landmark: 'sichuan',
   },
   {
-    title: '跨洋新篇',
-    subtitle: '從興寧到世界',
-    body: '二十世紀後半葉，族人腳步跨越重洋。新松家移居紐西蘭，新濤家移居美國。三千年來從受封之地到全球散葉，羅氏血脈在新的土地上繼續書寫傳奇。',
-    decoration: '✈️',
-    era: '現代',
+    title: '穗城求學',
+    subtitle: '捷登公赴穗謀生',
+    body: '解放前，二十四世捷登公離開興寧赴廣州求學謀生。在羊城扎根，娶妻生子，開啟了本支從客家山區走向大城市的新篇章。其兄弟捷金（漢才）則早期移居雲南曲靖，開拓滇東新天地。',
+    era: '民國',
+    landmark: 'guangzhou',
+  },
+  {
+    title: '滇東拓新',
+    subtitle: '捷金公遠赴曲靖',
+    body: '捷金（漢才）公早期離開興寧，遠赴雲南曲靖。曲靖地處雲貴高原，山川壯麗，油菜花海金浪翻涌。捷金公在此落地生根，為羅氏在西南邊陲開闢了新的一脈。',
+    era: '民國',
+    landmark: 'qujing',
+  },
+  {
+    title: '南遷特區',
+    subtitle: '改革開放新浪潮',
+    body: '1980年代，改革開放春風吹遍南粵。捷登公舉家從廣州南遷深圳特區，投身經濟建設大潮。鵬城日新月異，高樓拔地而起，羅氏子孫在此見證了中國最激動人心的時代巨變。',
+    era: '1980年代',
+    landmark: 'shenzhen',
+  },
+  {
+    title: '跨洋南半球',
+    subtitle: '新松家移民紐西蘭',
+    body: '2000年後，二十五世新松家跨越太平洋，移民紐西蘭。南半球的純淨山水、奧克蘭的天際線，成為這一支羅氏新的家園。從客家圍龍屋到南太平洋島國，三千年血脈在地球另一端延續。',
+    era: '2000年代',
+    landmark: 'newzealand',
+  },
+  {
+    title: '赴美新篇',
+    subtitle: '新濤家移居美國',
+    body: '2010年後，二十五世新濤家從深圳移居美國。自由女神像下，羅氏血脈在新大陸繼續書寫傳奇。從周武王受封之地到星條旗下，三千零六十年的薪火，跨越了半個地球。',
+    era: '2010年代',
+    landmark: 'usa',
   },
 ]
 
-// Migration timeline pages
-const migrationPages = migrations.map(m => ({
-  year: m.year,
-  from: m.from,
-  to: m.to,
-  person: m.person,
-  event: m.event,
-}))
-
-// Generation pages (group by pairs)
+// Generation pages (group by 3)
 const genPages = []
 const genKeys = Object.keys(generationChars).map(Number).sort((a, b) => a - b)
 for (let i = 0; i < genKeys.length; i += 3) {
@@ -109,8 +124,13 @@ for (let i = 0; i < genKeys.length; i += 3) {
   })))
 }
 
-function createPageHtml(content, pageClass = '') {
-  return `<div class="book-page-inner ${pageClass}">${content}</div>`
+function createPageHtml(content) {
+  return `<div class="book-page-inner">${content}</div>`
+}
+
+function getLandmarkSvg(key) {
+  const lm = landmarks[key]
+  return lm ? `<div class="landmark-svg">${lm.svg}</div>` : ''
 }
 
 function buildPages() {
@@ -128,12 +148,12 @@ function buildPages() {
     </div>
   `))
 
-  // Story pages
+  // Story pages with landmarks
   for (const story of eraStories) {
     pages.push(createPageHtml(`
       <div class="story-page">
         <div class="story-era">${story.era}</div>
-        <div class="story-deco">${story.decoration}</div>
+        ${getLandmarkSvg(story.landmark)}
         <h2 class="story-title">${story.title}</h2>
         <p class="story-subtitle">${story.subtitle}</p>
         <div class="story-divider"></div>
@@ -153,18 +173,20 @@ function buildPages() {
     </div>
   `))
 
-  // Migration pages (2 per page)
-  for (let i = 0; i < migrationPages.length; i += 2) {
-    const items = migrationPages.slice(i, i + 2)
-    const html = items.map(m => `
-      <div class="migration-card">
-        <div class="migration-year">${m.year}</div>
-        <div class="migration-route">${m.from} → ${m.to}</div>
-        <div class="migration-event">${m.event}</div>
-        <div class="migration-person">—— ${m.person}</div>
+  // Migration pages — 1 per page with landmark
+  for (const m of migrations) {
+    const lmSvg = m.landmark && landmarks[m.landmark] ? `<div class="migration-landmark">${landmarks[m.landmark].svg}</div>` : ''
+    pages.push(createPageHtml(`
+      <div class="migration-detail-page">
+        ${lmSvg}
+        <div class="migration-detail-card">
+          <div class="migration-year">${m.year}</div>
+          <div class="migration-route">${m.from} → ${m.to}</div>
+          <div class="migration-event">${m.event}</div>
+          <div class="migration-person">—— ${m.person}</div>
+        </div>
       </div>
-    `).join('<div class="migration-sep"></div>')
-    pages.push(createPageHtml(`<div class="migration-page">${html}</div>`))
+    `))
   }
 
   // Generations section
@@ -215,7 +237,6 @@ onMounted(async () => {
   const pages = buildPages()
   totalPages.value = pages.length
 
-  // Create page elements
   for (const html of pages) {
     const div = document.createElement('div')
     div.className = 'page-content'
@@ -259,11 +280,9 @@ function nextPage() {
 .book-page {
   background: var(--paper-cream);
 }
-
 .book-container {
   position: relative;
 }
-
 .flip-btn {
   padding: 0.5rem 1.2rem;
   border-radius: 0.75rem;
@@ -293,10 +312,9 @@ function nextPage() {
   font-family: var(--font-kai), serif;
   overflow: hidden;
 }
-
 .book-page-inner {
   height: 100%;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem 1.2rem;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -334,15 +352,8 @@ function nextPage() {
   margin-bottom: 0.5rem;
   font-family: var(--font-song), serif;
 }
-.cover-sub {
-  font-size: 0.8rem;
-  color: #8b7355;
-  margin-bottom: 0.3rem;
-}
-.cover-date {
-  font-size: 0.75rem;
-  color: #a89578;
-}
+.cover-sub { font-size: 0.8rem; color: #8b7355; margin-bottom: 0.3rem; }
+.cover-date { font-size: 0.75rem; color: #a89578; }
 .cover-line {
   width: 60%;
   height: 1px;
@@ -355,9 +366,17 @@ function nextPage() {
   letter-spacing: 0.3rem;
   font-weight: 700;
 }
-.back-cover {
-  justify-content: flex-end;
-  padding-bottom: 3rem;
+.back-cover { justify-content: flex-end; padding-bottom: 3rem; }
+
+/* Landmark SVG */
+.landmark-svg {
+  width: 85%;
+  max-width: 280px;
+  margin: 0 auto 0.6rem;
+}
+.landmark-svg svg {
+  width: 100%;
+  height: auto;
 }
 
 /* Story pages */
@@ -368,45 +387,40 @@ function nextPage() {
   justify-content: center;
   height: 100%;
   text-align: center;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 .story-era {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: #c4a055;
   font-weight: 700;
   letter-spacing: 0.3rem;
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
-}
-.story-deco {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 .story-title {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 900;
   color: #2c1810;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
   font-family: var(--font-song), serif;
 }
 .story-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #8b7355;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 .story-divider {
   width: 3rem;
   height: 2px;
   background: #c4a055;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.6rem;
   border-radius: 1px;
 }
 .story-body {
-  font-size: 0.85rem;
-  line-height: 1.9;
+  font-size: 0.78rem;
+  line-height: 1.85;
   color: #3d2e1f;
   text-align: justify;
-  max-width: 90%;
+  max-width: 95%;
 }
 
 /* Section pages */
@@ -418,10 +432,7 @@ function nextPage() {
   height: 100%;
   text-align: center;
 }
-.section-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
+.section-icon { font-size: 3rem; margin-bottom: 1rem; }
 .section-title {
   font-size: 1.5rem;
   font-weight: 900;
@@ -429,36 +440,41 @@ function nextPage() {
   letter-spacing: 0.3rem;
   font-family: var(--font-song), serif;
 }
-.section-sub {
-  font-size: 0.8rem;
-  color: #8b7355;
-  margin-top: 0.5rem;
-}
+.section-sub { font-size: 0.8rem; color: #8b7355; margin-top: 0.5rem; }
 .section-divider {
   width: 3rem;
   height: 2px;
   background: #c4a055;
   margin: 1rem auto;
 }
-.section-count {
-  font-size: 0.75rem;
-  color: #a89578;
-}
+.section-count { font-size: 0.75rem; color: #a89578; }
 
-/* Migration pages */
-.migration-page {
+/* Migration detail pages (1 per page with landmark) */
+.migration-detail-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   height: 100%;
-  gap: 1rem;
-  padding: 1rem 0;
+  text-align: center;
+  padding: 0.5rem;
 }
-.migration-card {
+.migration-landmark {
+  width: 80%;
+  max-width: 260px;
+  margin-bottom: 1rem;
+}
+.migration-landmark svg {
+  width: 100%;
+  height: auto;
+}
+.migration-detail-card {
+  width: 90%;
   padding: 1rem;
   border-left: 3px solid #c4a055;
   background: rgba(196, 160, 85, 0.06);
   border-radius: 0 0.5rem 0.5rem 0;
+  text-align: left;
 }
 .migration-year {
   font-size: 0.7rem;
@@ -467,7 +483,7 @@ function nextPage() {
   margin-bottom: 0.3rem;
 }
 .migration-route {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 900;
   color: #2c1810;
   margin-bottom: 0.3rem;
@@ -481,12 +497,8 @@ function nextPage() {
 .migration-person {
   font-size: 0.75rem;
   color: #a89578;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
   text-align: right;
-}
-.migration-sep {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #d4c4a0, transparent);
 }
 
 /* Generation pages */
@@ -520,15 +532,8 @@ function nextPage() {
   min-width: 4rem;
   font-family: var(--font-song), serif;
 }
-.gen-dynasty {
-  font-size: 0.7rem;
-  color: #8b7355;
-  flex: 1;
-}
-.gen-count {
-  font-size: 0.65rem;
-  color: #a89578;
-}
+.gen-dynasty { font-size: 0.7rem; color: #8b7355; flex: 1; }
+.gen-count { font-size: 0.65rem; color: #a89578; }
 
 /* Page edge effect */
 .stf__item {

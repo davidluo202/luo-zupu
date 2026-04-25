@@ -539,17 +539,20 @@ export const mainLineage = [
 
 // 迁徙事件
 export const migrations = [
-  { year: '前1048', from: '受封之地', to: '羅國', person: '劻正公', event: '周武王三年建功受封' },
-  { year: '约1280', from: '福建寧化石壁村', to: '廣東興寧', person: '小九公', event: '宋末客道廣東，任循州學正' },
-  { year: '约1648', from: '廣東興寧', to: '揚州', person: '萬荣公', event: '幼年孤兒，独赴揚州与叔合股贸易' },
-  { year: '约1660', from: '揚州', to: '廣東興寧', person: '萬荣公', event: '積累財款，回乡置产' },
-  { year: '清中期', from: '興寧', to: '惠州/惠阳', person: '習詩等', event: '部分後裔移居惠州' },
-  { year: '清中期', from: '興寧', to: '四川', person: '㭏華等', event: '珠玉公後裔移居四川' },
-  { year: '清中期', from: '興寧', to: '江西', person: '新賢', event: '移居江西' },
-  { year: '清中期', from: '興寧', to: '南洋', person: '钦賢', event: '移居南洋' },
-  { year: '民國', from: '興寧', to: '江西赣州', person: '捷龍等', event: '錫镠公後裔移居赣州' },
-  { year: '约1970s', from: '興寧', to: '新西兰', person: '新松', event: '新松家移居紐西蘭' },
-  { year: '约1990s', from: '興寧', to: '美國', person: '新涛', event: '新涛家移居美國' },
+  { year: '前1048', from: '宣城', to: '羅國', person: '劻正公', event: '周武王三年鎮守宣城有功，受封於羅，子孫以國為氏', landmark: 'xuancheng' },
+  { year: '约1280', from: '福建寧化石壁村', to: '廣東興寧', person: '小九公', event: '宋末客道廣東，赴任循州學正，見興寧山水悠揚遂立家', landmark: 'xingning' },
+  { year: '约1648', from: '廣東興寧', to: '揚州', person: '萬榮公', event: '幼年喪父成孤兒，獨赴揚州與叔合股貿易', landmark: 'yangzhou' },
+  { year: '约1660', from: '揚州', to: '廣東興寧', person: '萬榮公', event: '數年間積累財款，衣錦還鄉，回興寧置產立業', landmark: 'xingning' },
+  { year: '清中期', from: '興寧', to: '惠州/惠陽', person: '習詩等', event: '部分後裔移居惠州西湖之畔', landmark: 'huizhou' },
+  { year: '清中期', from: '興寧', to: '四川', person: '㭏華等', event: '珠玉公後裔隨湖廣填四川浪潮西遷', landmark: 'sichuan' },
+  { year: '清中期', from: '興寧', to: '江西贛州', person: '新賢', event: '移居贛南，落戶贛州', landmark: 'ganzhou' },
+  { year: '清中期', from: '興寧', to: '南洋', person: '欽賢', event: '漂洋過海，下南洋謀生', landmark: 'nanyang' },
+  { year: '民國', from: '興寧', to: '江西贛州', person: '捷龍等', event: '錫鎦公後裔移居贛州', landmark: 'ganzhou' },
+  { year: '解放前', from: '興寧', to: '廣州', person: '捷登', event: '赴穗求學謀生，娶妻生子，扎根羊城', landmark: 'guangzhou' },
+  { year: '解放前', from: '興寧', to: '雲南曲靖', person: '捷金（漢才）', event: '早期移居滇東曲靖，開拓新天地', landmark: 'qujing' },
+  { year: '1980s', from: '廣州', to: '深圳', person: '捷登家', event: '改革開放浪潮，舉家南遷特區', landmark: 'shenzhen' },
+  { year: '2000後', from: '深圳', to: '紐西蘭', person: '新松家', event: '跨越太平洋，移民南半球', landmark: 'newzealand' },
+  { year: '2010後', from: '深圳', to: '美國', person: '新濤家', event: '赴美定居，續寫海外新篇', landmark: 'usa' },
 ]
 
 // 世代辈分字
