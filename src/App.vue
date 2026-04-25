@@ -82,6 +82,7 @@ const navLinks = [
   { path: '/', label: '首頁', icon: '🏠' },
   { path: '/tree', label: '族譜', icon: '🌳' },
   { path: '/lineage', label: '溯源', icon: '📜' },
+  { path: '/migration', label: '遷徙', icon: '🗺️' },
   { path: '/timeline', label: '時光', icon: '⏳' },
   { path: '/card', label: '名片', icon: '🪪' },
   { path: '/quiz', label: '問答', icon: '🧠' },
