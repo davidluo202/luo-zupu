@@ -1,5 +1,6 @@
 <template>
-  <div class="min-h-screen paper-texture" :style="{ fontSize: fontSize + 'px' }">
+  <PasswordGate v-if="!authenticated" @authenticated="authenticated = true" />
+  <div v-else class="min-h-screen paper-texture" :style="{ fontSize: fontSize + 'px' }">
     <!-- Corner decorations -->
     <div class="fixed top-0 left-0 w-16 h-16 pointer-events-none z-40 opacity-20">
       <svg viewBox="0 0 60 60" fill="none"><path d="M0 0 L0 50 Q0 0 50 0" stroke="var(--gold-dark)" stroke-width="2" fill="none"/><path d="M0 0 L0 30 Q0 0 30 0" stroke="var(--gold-bright)" stroke-width="1.5" fill="none"/></svg>
@@ -62,7 +63,14 @@
 
 <script setup>
 import { ref } from 'vue'
+import PasswordGate from './components/PasswordGate.vue'
 
+function checkAuth() {
+  const h = localStorage.getItem('zupu_auth')
+  return h === '5776390c'
+}
+
+const authenticated = ref(checkAuth())
 const fontSize = ref(16)
 const mobileMenuOpen = ref(false)
 
