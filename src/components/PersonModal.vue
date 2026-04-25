@@ -2,8 +2,11 @@
   <Teleport to="body">
     <div v-if="person" class="fixed inset-0 z-[100] flex items-center justify-center p-4" @click.self="$emit('close')">
       <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
-      <div class="relative w-full max-w-lg max-h-[85vh] overflow-y-auto rounded-2xl shadow-2xl p-6"
-        style="background: var(--paper-cream); border: 2px solid var(--paper-dark)">
+      <div class="relative w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl scroll-unfurl"
+        style="background: var(--paper-cream); border: 3px solid var(--gold-bright); border-radius: 4px">
+        <!-- Scroll top roller -->
+        <div class="h-2 rounded-t" style="background: linear-gradient(90deg, var(--gold-dark), var(--gold-bright), var(--gold-dark))"></div>
+        <div class="p-6">
         <!-- Close button -->
         <button @click="$emit('close')" class="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-lg hover:bg-[var(--paper-aged)]" style="color: var(--ink-light)">✕</button>
 
@@ -71,6 +74,9 @@
         <div v-if="person.note" class="p-3 rounded-xl text-xs ink-body" style="background: var(--paper-aged); color: var(--ink-light)">
           📝 {{ person.note }}
         </div>
+        </div><!-- end padding div -->
+        <!-- Scroll bottom roller -->
+        <div class="h-2 rounded-b" style="background: linear-gradient(90deg, var(--gold-dark), var(--gold-bright), var(--gold-dark))"></div>
       </div>
     </div>
   </Teleport>

@@ -399,8 +399,8 @@ function buildTree() {
       return `M${d.px},${d.py + NODE_H/2} C${d.px},${midY} ${d.cx},${midY} ${d.cx},${d.cy - NODE_H/2}`
     })
     .attr('fill', 'none')
-    .attr('stroke', d => (mainLineage.includes(d.parentId) && mainLineage.includes(d.childId)) ? 'var(--gold-bright)' : 'var(--paper-dark)')
-    .attr('stroke-width', d => (mainLineage.includes(d.parentId) && mainLineage.includes(d.childId)) ? 2.5 : 1.5)
+    .attr('stroke', d => (mainLineage.includes(d.parentId) && mainLineage.includes(d.childId)) ? 'var(--gold-bright)' : 'var(--ink-faint)')
+    .attr('stroke-width', d => (mainLineage.includes(d.parentId) && mainLineage.includes(d.childId)) ? 2.5 : 1.2)
     .attr('stroke-linecap', 'round')
 
   // Draw nodes
@@ -418,7 +418,12 @@ function buildTree() {
   nodeGroups.append('rect')
     .attr('width', NODE_W).attr('height', NODE_H)
     .attr('rx', 8).attr('ry', 8)
-    .attr('fill', d => d._isMergedEarlyDeath ? 'var(--paper-dark)' : (mainLineage.includes(d.id) ? 'var(--paper-aged)' : 'var(--paper-cream)'))
+    .attr('fill', d => {
+      if (d._isMergedEarlyDeath) return 'var(--paper-dark)'
+      if (d.note === '女') return '#fdf2f8' // light pink for females
+      if (mainLineage.includes(d.id)) return 'var(--paper-aged)'
+      return 'var(--paper-cream)'
+    })
     .attr('stroke', d => d._isMergedEarlyDeath ? 'var(--ink-faint)' : (mainLineage.includes(d.id) ? 'var(--gold-bright)' : 'var(--paper-dark)'))
     .attr('stroke-width', d => mainLineage.includes(d.id) ? 2 : 1)
     .attr('stroke-dasharray', d => d._isMergedEarlyDeath ? '4,2' : null)
