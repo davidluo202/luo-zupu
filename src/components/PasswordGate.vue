@@ -20,10 +20,10 @@
         <p v-if="error" class="text-red-500 text-sm">密碼不正確，請重試</p>
         <button
           type="submit"
-          class="w-full py-3 rounded-lg ink-body text-sm font-bold tracking-wider transition-all hover:opacity-80"
-          style="background: var(--ink-primary); color: var(--paper-cream);"
+          class="w-full py-4 rounded-lg ink-body text-base font-bold tracking-widest transition-all hover:opacity-80"
+          style="background: #4a3728; color: #f5f0e8; border: 2px solid #8b7355; cursor: pointer;"
         >
-          進入族譜
+          確認進入
         </button>
       </form>
     </div>
