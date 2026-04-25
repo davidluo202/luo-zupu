@@ -118,11 +118,13 @@
         <h2 class="ink-title text-2xl font-bold text-center mb-8 tracking-widest">世代輩分 · 朝代對照</h2>
         <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2">
           <div v-for="(char, gen) in generationChars" :key="gen"
-            class="person-card p-2 rounded-lg text-center"
-            style="background: var(--paper-aged)">
+            class="person-card p-2 rounded-lg text-center cursor-pointer"
+            style="background: var(--paper-aged)"
+            @click="$router.push('/generation/' + gen)">
             <div class="text-[10px] mb-0.5 font-bold" style="color: var(--ink-light)">第{{ gen }}世</div>
             <div class="ink-title text-base font-bold" :style="char === '—' ? 'color: var(--ink-faint)' : 'color: var(--gold-dark)'">{{ char === '—' ? '·' : char }}</div>
             <div class="text-[9px] mt-0.5" style="color: var(--ink-faint)">{{ dynastyMap[gen] || '' }}</div>
+            <div class="text-[9px] mt-0.5 font-bold" style="color: var(--ink-medium)">{{ getGenCount(gen) }}人</div>
           </div>
         </div>
       </div>
@@ -152,6 +154,10 @@ onMounted(() => {
   }, { threshold: 0.1 })
   document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el))
 })
+
+function getGenCount(gen) {
+  return members.filter(m => m.generation === parseInt(gen)).length
+}
 
 const stats = [
   { value: '3074年', label: '傳承歷史' },
