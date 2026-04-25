@@ -28,9 +28,13 @@
         </div>
       </div>
     </div>
+
+    <!-- Bottom decoration -->
+    <InkMountains height="150" :opacity="0.5" class="mt-8" />
   </div>
 </template>
 
 <script setup>
+import InkMountains from '@/components/InkMountains.vue'
 import { migrations } from '@/data/genealogy.js'
 </script>

@@ -1,14 +1,20 @@
 <template>
   <div class="min-h-[calc(100vh-56px)] flex flex-col">
-    <!-- Hero section -->
+    <!-- Hero section with ink-wash mountain background -->
     <section class="flex-1 flex flex-col items-center justify-center px-4 py-16 text-center relative overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none opacity-5">
-        <div class="absolute top-10 left-10 w-64 h-64 rounded-full bg-[var(--ink-black)] blur-3xl"></div>
-        <div class="absolute bottom-20 right-20 w-48 h-48 rounded-full bg-[var(--ink-medium)] blur-3xl"></div>
+      <!-- Large ink-wash mountain background at top -->
+      <div class="absolute top-0 left-0 right-0 pointer-events-none">
+        <InkMountains height="250" :opacity="0.6" />
+      </div>
+      <!-- Decorative ink blobs -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-10 left-10 w-64 h-64 rounded-full bg-[var(--ink-black)] blur-3xl opacity-[0.03]"></div>
+        <div class="absolute bottom-20 right-20 w-48 h-48 rounded-full bg-[var(--ink-medium)] blur-3xl opacity-[0.03]"></div>
+        <div class="absolute top-1/3 right-10 w-32 h-32 rounded-full bg-[var(--gold-bright)] blur-3xl opacity-[0.04] gentle-float"></div>
       </div>
 
-      <div class="fade-in-up relative z-10">
-        <div class="mb-8 ink-drip">
+      <div class="fade-in-up relative z-10 mt-32">
+        <div class="mb-8 ink-splash">
           <span class="seal-stamp text-4xl px-6 py-4 inline-block" style="border-width:3px">羅氏</span>
         </div>
 
@@ -85,6 +91,13 @@
         </div>
       </div>
     </section>
+
+    <!-- Cloud divider -->
+    <div class="flex justify-center py-2 opacity-20">
+      <svg width="300" height="40" viewBox="0 0 300 40" fill="none">
+        <path d="M0 20 Q30 5 60 20 Q90 35 120 20 Q150 5 180 20 Q210 35 240 20 Q270 5 300 20" stroke="var(--ink-light)" stroke-width="1" fill="none"/>
+      </svg>
+    </div>
 
     <!-- Preface -->
     <section class="py-12 px-4 border-t scroll-reveal" style="border-color: var(--paper-dark)">
