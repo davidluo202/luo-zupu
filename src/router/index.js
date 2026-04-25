@@ -6,6 +6,9 @@ const routes = [
   { path: '/person/:id', name: 'Person', component: () => import('@/views/PersonView.vue') },
   { path: '/migration', name: 'Migration', component: () => import('@/views/MigrationView.vue') },
   { path: '/lineage', name: 'Lineage', component: () => import('@/views/LineageView.vue') },
+  { path: '/card', name: 'Card', component: () => import('@/views/CardView.vue') },
+  { path: '/timeline', name: 'Timeline', component: () => import('@/views/TimelineView.vue') },
+  { path: '/quiz', name: 'Quiz', component: () => import('@/views/QuizView.vue') },
 ]
 
 export default createRouter({
