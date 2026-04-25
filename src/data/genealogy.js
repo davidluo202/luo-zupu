@@ -47,7 +47,61 @@ export const members = [
     branch: 'right', birthNote: '元成宗元贞元年', birth: '1295',
     title: '贡士，授教谕郎大学士', death: '1400', deathNote: '明惠帝建文二年，寿105',
     note: '按大成谱派名成章，右八房祖',
-    spouses: [{ name: '谢氏', surname: '谢', children: ['hanyin_r','hanchen_r'] }] },
+    spouses: [{ name: '謝氏', surname: '謝', children: ['hanyin_r','hanchen_r'] }] },
+
+  // === 右八房世系 ===
+  // 右三世
+  { id: 'hanyin_r', name: '漢寅', generation: 3, branch: 'right',
+    note: '派名彥興',
+    spouses: [
+      { name: '黃氏', surname: '黃' },
+      { name: '虞氏', surname: '虞', children: ['xiushan_r'] }
+    ] },
+  { id: 'hanchen_r', name: '漢辰', generation: 3, branch: 'right',
+    note: '派名彥典',
+    spouses: [{ name: '張氏', surname: '張', children: ['xiufu_r'] }] },
+
+  // 右四世
+  { id: 'xiushan_r', name: '秀山', generation: 4, branch: 'right',
+    note: '派名伯瑚',
+    spouses: [
+      { name: '謝氏', surname: '謝' },
+      { name: '朱氏', surname: '朱', children: ['mengchu_r'] }
+    ] },
+  { id: 'xiufu_r', name: '秀甫', generation: 4, branch: 'right',
+    note: '派名伯琅',
+    spouses: [{ name: '楊氏', surname: '楊', children: ['wenliang_r'] }] },
+
+  // 右五世
+  { id: 'mengchu_r', name: '孟初', generation: 5, branch: 'right',
+    note: '派名賢',
+    spouses: [{ name: '陳氏', surname: '陳', children: ['cai_r','lun_r'] }] },
+  { id: 'wenliang_r', name: '文亮', generation: 5, branch: 'right',
+    note: '派名公全',
+    spouses: [{ name: '楊氏', surname: '楊', children: ['chenbao_r'] }] },
+
+  // 右六世
+  { id: 'cai_r', name: '綵', generation: 6, branch: 'right',
+    spouses: [{ name: '陳氏', surname: '陳', children: ['huai_r7','yuan_r7'] }] },
+  { id: 'lun_r', name: '綸', generation: 6, branch: 'right',
+    spouses: [{ name: '劉氏', surname: '劉', children: ['huan_r7','jun_r7'] }] },
+  { id: 'chenbao_r', name: '塵保', generation: 6, branch: 'right',
+    spouses: [{ name: '劉氏', surname: '劉', children: ['rou_r7','chong_r7','jiong_r7','lian_r7'] }] },
+
+  // 右七世（上四房+下四房 = 右八房）
+  { id: 'huai_r7', name: '淮', generation: 7, branch: 'right-1', note: '上四房之一' },
+  { id: 'yuan_r7', name: '源', generation: 7, branch: 'right-2', note: '上四房之二' },
+  { id: 'huan_r7', name: '渙', generation: 7, branch: 'right-3', note: '上四房之三' },
+  { id: 'jun_r7', name: '浚', generation: 7, branch: 'right-4', note: '上四房之四' },
+  { id: 'rou_r7', name: '涭', generation: 7, branch: 'right-5', note: '下四房之一' },
+  { id: 'chong_r7', name: '沖', generation: 7, branch: 'right-6', note: '下四房之二' },
+  { id: 'jiong_r7', name: '浻', generation: 7, branch: 'right-7', note: '下四房之三' },
+  { id: 'lian_r7', name: '溓', generation: 7, branch: 'right-8', note: '下四房之四' },
+
+  // === 黃氏所生 振澣（第三房，傳承不明）===
+  { id: 'zhenhan', name: '振澣', generation: 2, branch: 'middle',
+    note: '黃氏所生，傳漢細（三世）→文彥（四世），以後不明',
+    spouses: [] },
 
   // === 左八房世系（本族主脉）===
   { id: 'xinhan', name: '新澣', generation: 2, branch: 'left',
