@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Classical Chinese fonts */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@300;400;700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap');
 
 :root {
   --ink-black: #0d0d0d;
@@ -17,8 +17,8 @@
   --red-seal: #c23b22;
   --red-marriage: #d4574a;
   --jade-green: #5a8a6a;
-  --font-kai: 'Noto Serif TC', 'Noto Serif SC', 'PMingLiU', 'MingLiU', 'SimSun', 'STSong', serif;
-  --font-song: 'Noto Serif TC', 'Noto Serif SC', 'PMingLiU', 'SimSun', 'STSong', serif;
+  --font-kai: 'LXGW WenKai TC', 'LXGW WenKai', 'KaiTi', 'STKaiti', 'BiauKai', serif;
+  --font-song: 'LXGW WenKai TC', 'Noto Serif TC', 'SimSun', 'STSong', serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

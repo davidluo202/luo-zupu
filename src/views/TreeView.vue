@@ -54,6 +54,9 @@
 
     <!-- Tree canvas -->
     <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)"></div>
+
+    <!-- Person detail modal -->
+    <PersonModal :person="modalPerson" @close="modalPerson = null" />
   </div>
 </template>
 
@@ -61,11 +64,13 @@
 import { ref, onMounted, nextTick } from 'vue'
 import * as d3 from 'd3'
 import { members, mainLineage, dynastyMap, pinyinMap } from '@/data/genealogy.js'
+import PersonModal from '@/components/PersonModal.vue'
 
 const treeContainer = ref(null)
 const searchQuery = ref('')
 const searchResults = ref([])
 const selectedPerson = ref(null)
+const modalPerson = ref(null)
 let svg, g, zoom, allNodeEls = [], allNodeData = []
 
 const treeMembers = members.filter(m => m.generation >= 1)
@@ -133,6 +138,7 @@ function focusPerson(m) {
   searchQuery.value = ''
   searchResults.value = []
   selectedPerson.value = m
+  modalPerson.value = m
 
   // Find ancestry path and descendants
   const ancestryPath = findAncestryPath(m.id)
