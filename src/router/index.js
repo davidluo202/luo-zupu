@@ -10,6 +10,7 @@ const routes = [
   { path: '/card', name: 'Card', component: () => import('@/views/CardView.vue') },
   { path: '/timeline', name: 'Timeline', component: () => import('@/views/TimelineView.vue') },
   { path: '/quiz', name: 'Quiz', component: () => import('@/views/QuizView.vue') },
+  { path: '/book', name: 'Book', component: () => import('@/views/BookView.vue') },
 ]
 
 export default createRouter({

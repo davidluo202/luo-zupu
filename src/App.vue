@@ -85,6 +85,7 @@ const navLinks = [
   { path: '/migration', label: '遷徙', icon: '🗺️' },
   { path: '/timeline', label: '時光', icon: '⏳' },
   { path: '/card', label: '名片', icon: '🪪' },
+  { path: '/book', label: '古卷', icon: '📖' },
   { path: '/quiz', label: '問答', icon: '🧠' },
 ]
 </script>

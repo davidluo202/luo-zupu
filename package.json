@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "html-to-image": "^1.11.13",
+    "page-flip": "^2.0.7",
     "vue": "^3.5.32"
   },
   "devDependencies": {
