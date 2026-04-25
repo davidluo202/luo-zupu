@@ -55,7 +55,7 @@
     <!-- Tree canvas with scholar background -->
     <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)">
       <!-- Scholar figure background decoration (left side, above SVG canvas) -->
-      <div class="absolute left-2 bottom-2 pointer-events-none" style="z-index: 5; opacity: 0.12">
+      <div class="absolute left-2 top-2 pointer-events-none" style="z-index: 5; opacity: 0.12">
         <svg width="280" height="400" viewBox="0 0 280 400" fill="none">
           <!-- Scholar sitting -->
           <g transform="translate(80, 100)">
