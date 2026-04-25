@@ -12,7 +12,7 @@
           <span class="seal-stamp text-4xl px-6 py-4 inline-block" style="border-width:3px">羅氏</span>
         </div>
 
-        <h1 class="ink-title text-5xl md:text-7xl font-bold mb-2 tracking-[0.2em]">羅氏族譜</h1>
+        <h1 class="ink-title text-5xl md:text-7xl font-bold mb-2 tracking-[0.3em]" style="letter-spacing: 0.3em">羅氏族譜</h1>
         <p class="ink-title text-xl md:text-2xl mb-4" style="color: var(--ink-medium)">興寧派 · 純端公支系</p>
         <p class="ink-body text-base mb-2" style="color: var(--ink-light)">
           始祖匡正公 · 周武王三年受封 · 公元前1048年
@@ -39,6 +39,41 @@
             style="border-color: var(--gold-bright); color: var(--gold-dark); font-family: var(--font-kai)">
             📜 主脈溯源
           </router-link>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ancestors (before the main lineage) -->
+    <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="ink-title text-2xl font-bold mb-6 tracking-widest">源 流</h2>
+        <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
+          <div class="text-xs mb-2 font-bold" style="color: var(--red-seal)">得姓始祖</div>
+          <div class="ink-title text-3xl font-bold mb-2">匡正公</div>
+          <div class="ink-body text-sm" style="color: var(--ink-medium)">
+            周武王三年（約公元前1048年）鎮守宣城有功，後受封於羅，子孫以國為氏，羅姓由此而來。
+          </div>
+        </div>
+        <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">
+          ⋮ 歷經約2300年，傳八十九世 ⋮
+        </div>
+        <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
+          <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">大成譜第八十九世</div>
+          <div class="ink-title text-3xl font-bold mb-2">谷賢公</div>
+          <div class="ink-body text-sm" style="color: var(--ink-medium)">
+            享壽91歲，娶九妻（饒、程、錢、古、鄭、白、董、蔣、韓），共生十八子。其中饒氏（饒修）生三子：小九、伯七、大五。
+          </div>
+        </div>
+        <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">
+          ⋮ 下傳本譜始祖 ⋮
+        </div>
+        <div class="p-6 rounded-2xl" style="background: var(--paper-aged); border: 2px solid var(--gold-bright)">
+          <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">本譜第一世 · 興寧始祖</div>
+          <div class="ink-title text-3xl font-bold mb-2">小九公（洪德公）</div>
+          <div class="text-xs mb-2" style="color: var(--ink-light)">諱君治 · 字盛齡 · 號洪德 · 大成譜第九十世</div>
+          <div class="ink-body text-sm" style="color: var(--ink-medium)">
+            生於宋理宗景定二年（1261年），原籍福建寧化縣石壁村，宋末赴任廣東循州學正，見興寧山水悠揚、土地沃野豐裕，擇東廓而立家。
+          </div>
         </div>
       </div>
     </section>

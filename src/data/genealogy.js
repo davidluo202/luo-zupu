@@ -14,15 +14,15 @@
 //   note }
 
 export const members = [
-  // === 远祖 ===
-  { id: 'kuangzheng', name: '劻正', generation: 0, branch: 'root',
-    title: '周武王三年建功受封', birth: '前1048年',
-    deeds: '罗氏得姓始祖，周武王三年建功受封',
-    spouses: [], note: '传三子：昌柞、昌世、昌允' },
+  // === 遠祖（本譜之前，用負數世代表示）===
+  { id: 'kuangzheng', name: '匡正', generation: -89, branch: 'ancestor',
+    title: '周武王三年鎮守宣城有功受封', birth: '前1048年',
+    deeds: '羅氏得姓始祖，周武王三年鎮守宣城有功，後受封於羅，子孫以國為氏',
+    spouses: [], note: '傳三子：昌柞、昌世、昌允', isAncestor: true },
 
-  // === 八十九世 谷贤公 ===
-  { id: 'guxian', name: '谷贤', generation: 89, branch: 'root',
-    deeds: '娶九妻，生十八子', death: '享寿91岁',
+  // === 大成譜八十九世 谷賢公（本譜之前一世）===
+  { id: 'guxian', name: '谷賢', generation: -1, branch: 'ancestor',
+    deeds: '娶九妻，生十八子', death: '享壽91歲', isAncestor: true,
     spouses: [
       { name: '饶修', surname: '饶', children: ['xiaojiu','boqi','dawu'] },
       { name: '程氏', surname: '程' }, { name: '钱氏', surname: '钱' },
