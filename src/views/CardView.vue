@@ -73,15 +73,35 @@
       </div>
     </div>
 
-    <p v-if="person" class="text-center mt-6 text-xs" style="color: var(--ink-light)">
-      截圖分享給家族成員 📱
-    </p>
+    <div v-if="person" class="text-center mt-6">
+      <button @click="saveCard" class="px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 text-sm"
+        style="background: var(--gold-bright); color: white">
+        📸 保存名片圖片
+      </button>
+      <p class="mt-2 text-xs" style="color: var(--ink-light)">點擊保存為圖片，分享給家族成員</p>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import { toPng } from 'html-to-image'
 import { members, mainLineage, dynastyMap } from '@/data/genealogy.js'
+
+const cardEl = ref(null)
+
+async function saveCard() {
+  if (!cardEl.value) return
+  try {
+    const dataUrl = await toPng(cardEl.value, { pixelRatio: 3 })
+    const link = document.createElement('a')
+    link.download = `羅氏族譜-${person.value.name}-名片.png`
+    link.href = dataUrl
+    link.click()
+  } catch (e) {
+    alert('保存失敗，請使用截圖功能')
+  }
+}
 
 const selectedId = ref('')
 const treeMembers = members.filter(m => m.generation >= 1)

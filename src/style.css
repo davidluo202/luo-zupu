@@ -77,6 +77,37 @@ ruby rt { font-size: 0.55em; color: var(--ink-light); font-weight: 400; letter-s
 
 .vertical-text { writing-mode: vertical-rl; text-orientation: upright; }
 
+/* Scroll reveal animation */
+.scroll-reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.scroll-reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+
+/* Ink splash animation */
+@keyframes inkSplash {
+  0% { opacity: 0; transform: scale(0.3) rotate(-5deg); filter: blur(4px); }
+  60% { opacity: 1; transform: scale(1.05) rotate(1deg); filter: blur(0); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); }
+}
+.ink-splash { animation: inkSplash 1s ease-out forwards; }
+
+/* Brush stroke reveal */
+@keyframes brushReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.brush-reveal { animation: brushReveal 1.2s ease-out forwards; }
+
+/* Float animation for decorative elements */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.gentle-float { animation: gentleFloat 6s ease-in-out infinite; }
+
 /* Timeline slider - larger thumb */
 .timeline-slider::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;

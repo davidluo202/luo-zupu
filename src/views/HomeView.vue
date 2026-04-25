@@ -52,7 +52,7 @@
     </div>
 
     <!-- Ancestors (before the main lineage) -->
-    <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
+    <section class="py-12 px-4 border-t scroll-reveal" style="border-color: var(--paper-dark)">
       <div class="max-w-3xl mx-auto page-margin text-center">
         <h2 class="ink-title text-2xl font-bold mb-6 tracking-widest">源 流</h2>
         <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
@@ -87,7 +87,7 @@
     </section>
 
     <!-- Preface -->
-    <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
+    <section class="py-12 px-4 border-t scroll-reveal" style="border-color: var(--paper-dark)">
       <div class="max-w-3xl mx-auto page-margin">
         <h2 class="ink-title text-2xl font-bold text-center mb-6 tracking-widest">前 言</h2>
         <div class="p-6 rounded-2xl ink-body leading-loose text-base" style="background: var(--paper-aged)">
@@ -115,6 +115,9 @@
       </div>
     </section>
 
+    <!-- Bottom illustration -->
+    <InkMountains height="180" />
+
     <footer class="py-6 px-4 text-center border-t" style="border-color: var(--paper-dark)">
       <p class="text-sm" style="color: var(--ink-faint); font-family: var(--font-kai)">
         羅氏族譜 · 源遠流長 · 薪火相傳
@@ -124,7 +127,17 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
 import { members, generationChars, dynastyMap } from '@/data/genealogy.js'
+import InkMountains from '@/components/InkMountains.vue'
+
+// Scroll reveal observer
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+  }, { threshold: 0.1 })
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el))
+})
 
 const stats = [
   { value: '3074年', label: '傳承歷史' },
