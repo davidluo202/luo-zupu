@@ -131,6 +131,9 @@
     </section>
 
     <!-- Bottom illustration -->
+    <div class="relative overflow-hidden" style="max-height: 250px">
+      <img src="/cover-bg.jpg" alt="" class="w-full object-cover" style="opacity: 0.12">
+    </div>
     <InkMountains height="180" />
 
     <footer class="py-6 px-4 text-center border-t" style="border-color: var(--paper-dark)">

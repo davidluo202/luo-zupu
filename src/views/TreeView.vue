@@ -54,7 +54,9 @@
 
     <!-- Tree canvas with scholar background -->
     <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)">
-      <!-- Scholar figure background decoration (now rendered inside D3 SVG) -->
+      <!-- Scholar background image -->
+      <img src="/preface-bg.jpg" alt="" class="absolute left-0 top-0 h-full pointer-events-none" style="z-index: 1; opacity: 0.08; object-fit: cover; max-width: 350px">
+      <!-- Hidden scholar SVG (replaced by image) -->
       <div class="hidden">
         <svg width="280" height="400" viewBox="0 0 280 400" fill="none">
           <!-- Scholar sitting -->
