@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/* Classical Chinese fonts */
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@300;400;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
+
+:root {
+  --ink-black: #1a1a1a;
+  --ink-dark: #2d2d2d;
+  --ink-medium: #4a4a4a;
+  --ink-light: #8a8a7a;
+  --ink-faint: #b5b5a5;
+  --paper-cream: #f5f0e8;
+  --paper-aged: #e8e0d0;
+  --paper-dark: #d4c8b0;
+  --gold-bright: #c4a055;
+  --gold-dark: #8b7335;
+  --red-seal: #c23b22;
+  --red-marriage: #d4574a;
+  --jade-green: #5a8a6a;
+  --font-kai: 'LXGW WenKai', 'KaiTi', 'STKaiti', serif;
+  --font-song: 'Noto Serif SC', 'SimSun', 'STSong', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-song);
+  background: var(--paper-cream);
+  color: var(--ink-black);
+  min-height: 100vh;
+}
+
+/* Paper texture */
+.paper-texture {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(139,115,53,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(139,115,53,0.02) 0%, transparent 50%);
+  background-color: var(--paper-cream);
+}
+
+.ink-title { font-family: var(--font-kai); color: var(--ink-black); }
+.ink-body { font-family: var(--font-song); color: var(--ink-dark); line-height: 1.8; }
+
+.seal-stamp {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 2px solid var(--red-seal); color: var(--red-seal);
+  font-family: var(--font-kai); font-weight: 700;
+  padding: 4px 8px; transform: rotate(-3deg); opacity: 0.85;
+}
+
+@keyframes unfurl { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.scroll-unfurl { animation: unfurl 1.5s ease-out forwards; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+
+@keyframes inkDrip { 0% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 1; transform: scale(1); } }
+.ink-drip { animation: inkDrip 0.8s ease-out forwards; }
+
+.person-card { transition: all 0.3s ease; cursor: pointer; }
+.person-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+
+.vertical-text { writing-mode: vertical-rl; text-orientation: upright; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--paper-aged); }
+::-webkit-scrollbar-thumb { background: var(--ink-faint); border-radius: 4px; }
