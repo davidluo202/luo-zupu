@@ -54,8 +54,10 @@
 
     <!-- Tree canvas with scholar background -->
     <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)">
-      <!-- Scholar background image -->
-      <img src="/preface-bg.jpg" alt="" class="absolute left-0 top-0 h-full pointer-events-none" style="z-index: 1; opacity: 0.08; object-fit: cover; max-width: 350px">
+      <!-- Mountain landscape background (cropped left side only, no text) -->
+      <div class="absolute left-0 top-0 h-full pointer-events-none overflow-hidden" style="z-index: 1; opacity: 0.12; width: 280px">
+        <img src="/preface-bg.jpg" alt="" class="h-full" style="object-fit: cover; object-position: left center; width: 200%; max-width: none; clip-path: inset(0 60% 0 0)">
+      </div>
       <!-- Hidden scholar SVG (replaced by image) -->
       <div class="hidden">
         <svg width="280" height="400" viewBox="0 0 280 400" fill="none">
