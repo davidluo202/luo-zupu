@@ -54,12 +54,12 @@
 
     <!-- Tree canvas with scholar background -->
     <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)">
-      <!-- Mountain landscape background (cropped left side only, no text) -->
-      <div class="absolute left-0 top-0 h-full pointer-events-none overflow-hidden" style="z-index: 1; opacity: 0.12; width: 280px">
-        <img src="/preface-bg.jpg" alt="" class="h-full" style="object-fit: cover; object-position: left center; width: 200%; max-width: none; clip-path: inset(0 60% 0 0)">
+      <!-- Mountain landscape background (left side only, single layer) -->
+      <div class="absolute left-0 top-0 h-full pointer-events-none overflow-hidden" style="z-index: 1; opacity: 0.08; width: 220px">
+        <img src="/preface-bg.jpg" alt="" style="height: 100%; width: auto; object-fit: cover; object-position: 0% center;">
       </div>
-      <!-- Hidden scholar SVG (replaced by image) -->
-      <div class="hidden">
+      <!-- Scholar SVG removed, using image instead -->
+      <div class="hidden" style="display:none">
         <svg width="280" height="400" viewBox="0 0 280 400" fill="none">
           <!-- Scholar sitting -->
           <g transform="translate(80, 100)">
@@ -376,19 +376,6 @@ function buildTree() {
     .attr('viewBox', `0 0 ${W} ${H}`)
   zoom = d3.zoom().scaleExtent([0.03, 4]).on('zoom', e => g.attr('transform', e.transform))
   svg.call(zoom)
-
-  // Fixed background decoration (doesn't zoom)
-  const bgGroup = svg.append('g').attr('opacity', 0.1)
-  // Scholar figure
-  bgGroup.append('path').attr('d', 'M60 180 Q40 160 45 130 Q50 110 60 100 Q70 110 75 130 Q80 160 60 180').attr('fill', 'var(--ink-medium)')
-  bgGroup.append('path').attr('d', 'M60 180 Q30 200 20 250 Q25 280 40 300 L80 300 Q95 280 100 250 Q90 200 60 180').attr('fill', 'var(--ink-medium)')
-  bgGroup.append('circle').attr('cx', 60).attr('cy', 90).attr('r', 18).attr('fill', 'var(--ink-medium)')
-  // Book
-  bgGroup.append('rect').attr('x', 35).attr('y', 205).attr('width', 50).attr('height', 35).attr('rx', 2).attr('fill', 'var(--paper-dark)').attr('opacity', 0.8)
-  // Bamboo
-  bgGroup.append('line').attr('x1', 140).attr('y1', 50).attr('x2', 140).attr('y2', H - 20).attr('stroke', 'var(--jade-green)').attr('stroke-width', 3)
-  bgGroup.append('path').attr('d', 'M140 120 L160 100 Q168 92 175 88').attr('stroke', 'var(--jade-green)').attr('stroke-width', 1).attr('fill', 'none')
-  bgGroup.append('path').attr('d', 'M140 200 L120 180 Q112 172 105 168').attr('stroke', 'var(--jade-green)').attr('stroke-width', 1).attr('fill', 'none')
 
   g = svg.append('g')
 
