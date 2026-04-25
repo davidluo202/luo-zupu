@@ -43,6 +43,14 @@
       </div>
     </section>
 
+    <!-- Cloud divider SVG -->
+    <div class="flex justify-center py-2 opacity-20">
+      <svg width="300" height="40" viewBox="0 0 300 40" fill="none">
+        <path d="M0 20 Q30 5 60 20 Q90 35 120 20 Q150 5 180 20 Q210 35 240 20 Q270 5 300 20" stroke="var(--ink-light)" stroke-width="1" fill="none"/>
+        <path d="M20 25 Q50 10 80 25 Q110 40 140 25 Q170 10 200 25 Q230 40 260 25 Q280 15 300 25" stroke="var(--ink-faint)" stroke-width="0.5" fill="none"/>
+      </svg>
+    </div>
+
     <!-- Ancestors (before the main lineage) -->
     <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
       <div class="max-w-3xl mx-auto text-center">
@@ -94,14 +102,14 @@
     <!-- Generation chars -->
     <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
       <div class="max-w-5xl mx-auto">
-        <h2 class="ink-title text-2xl font-bold text-center mb-8 tracking-widest">世代輩分</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+        <h2 class="ink-title text-2xl font-bold text-center mb-8 tracking-widest">世代輩分 · 朝代對照</h2>
+        <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2">
           <div v-for="(char, gen) in generationChars" :key="gen"
-            class="person-card p-3 rounded-xl text-center"
+            class="person-card p-2 rounded-lg text-center"
             style="background: var(--paper-aged)">
-            <div class="text-xs mb-1" style="color: var(--ink-light)">第{{ gen }}世</div>
-            <div class="ink-title text-lg font-bold" style="color: var(--gold-dark)">{{ char }}</div>
-            <div class="text-xs mt-1" style="color: var(--ink-faint)">輩分字</div>
+            <div class="text-[10px] mb-0.5 font-bold" style="color: var(--ink-light)">第{{ gen }}世</div>
+            <div class="ink-title text-base font-bold" :style="char === '—' ? 'color: var(--ink-faint)' : 'color: var(--gold-dark)'">{{ char === '—' ? '·' : char }}</div>
+            <div class="text-[9px] mt-0.5" style="color: var(--ink-faint)">{{ dynastyMap[gen] || '' }}</div>
           </div>
         </div>
       </div>
@@ -116,7 +124,7 @@
 </template>
 
 <script setup>
-import { members, generationChars } from '@/data/genealogy.js'
+import { members, generationChars, dynastyMap } from '@/data/genealogy.js'
 
 const stats = [
   { value: '3074年', label: '傳承歷史' },

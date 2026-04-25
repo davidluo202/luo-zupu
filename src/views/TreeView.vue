@@ -60,7 +60,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import * as d3 from 'd3'
-import { members, mainLineage } from '@/data/genealogy.js'
+import { members, mainLineage, dynastyMap } from '@/data/genealogy.js'
 
 const treeContainer = ref(null)
 const searchQuery = ref('')
@@ -260,7 +260,7 @@ function buildTree() {
       .attr('text-anchor', 'end')
       .attr('font-family', 'var(--font-kai)').attr('font-size', '11px')
       .attr('fill', 'var(--gold-dark)').attr('font-weight', '700')
-      .text(`第${gen}世`)
+      .text(`第${gen}世 ${dynastyMap[gen] || ''}`)
   })
 
   // Draw links
