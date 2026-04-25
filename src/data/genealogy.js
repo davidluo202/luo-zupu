@@ -469,6 +469,17 @@ export const members = [
   { id: 'yueyang', name: '月陽', generation: 25, branch: 'left-3-bo' },
   { id: 'dongyang', name: '東陽', generation: 25, branch: 'left-3-bo' },
 
+  // 二十五世（女兒 - 捷文後裔）
+  { id: 'meiling', name: '梅玲', generation: 25, branch: 'left-3', note: '女' },
+  { id: 'qiaoling', name: '巧玲', generation: 25, branch: 'left-3', note: '女' },
+
+  // 二十五世（女兒 - 捷金後裔）
+  { id: 'qiuling', name: '秋玲', generation: 25, branch: 'left-3', birth: '1963-08-27', note: '女' },
+  { id: 'qiumei', name: '秋玫', generation: 25, branch: 'left-3', birth: '1976-10-31', note: '女' },
+
+  // 二十五世（女兒 - 捷夫後裔）
+  { id: 'congling', name: '聰玲', generation: 25, branch: 'left-3', birth: '1976-10-22', note: '女' },
+
   // 二十五世（主脈）
   { id: 'xinqiang', name: '新強', generation: 25, branch: 'left-3',
     birth: '1959-08-16',
