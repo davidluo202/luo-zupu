@@ -52,8 +52,48 @@
       </div>
     </div>
 
-    <!-- Tree canvas -->
-    <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)"></div>
+    <!-- Tree canvas with scholar background -->
+    <div ref="treeContainer" class="flex-1 overflow-hidden relative" style="background: var(--paper-cream)">
+      <!-- Scholar figure background decoration (left side) -->
+      <div class="absolute left-0 bottom-0 pointer-events-none z-0 opacity-[0.08]">
+        <svg width="280" height="400" viewBox="0 0 280 400" fill="none">
+          <!-- Scholar sitting -->
+          <g transform="translate(80, 100)">
+            <!-- Body/robe -->
+            <path d="M0 80 Q-20 60 -15 30 Q-10 10 0 0 Q10 10 15 30 Q20 60 0 80" fill="var(--ink-medium)"/>
+            <path d="M0 80 Q-30 100 -40 150 Q-35 180 -20 200 L20 200 Q35 180 40 150 Q30 100 0 80" fill="var(--ink-medium)"/>
+            <!-- Head -->
+            <circle cx="0" cy="-10" r="18" fill="var(--ink-medium)"/>
+            <!-- Hair bun -->
+            <ellipse cx="0" cy="-28" rx="8" ry="10" fill="var(--ink-dark)"/>
+            <!-- Arms holding book -->
+            <path d="M-15 100 Q-40 90 -50 100 Q-45 110 -30 115" fill="var(--ink-medium)"/>
+            <path d="M15 100 Q40 90 50 100 Q45 110 30 115" fill="var(--ink-medium)"/>
+            <!-- Book -->
+            <rect x="-25" y="105" width="50" height="35" rx="2" fill="var(--paper-dark)" opacity="0.8"/>
+            <line x1="-15" y1="115" x2="15" y2="115" stroke="var(--ink-faint)" stroke-width="0.8"/>
+            <line x1="-15" y1="122" x2="12" y2="122" stroke="var(--ink-faint)" stroke-width="0.8"/>
+            <line x1="-15" y1="129" x2="10" y2="129" stroke="var(--ink-faint)" stroke-width="0.8"/>
+          </g>
+          <!-- Books stack -->
+          <g transform="translate(160, 280)" opacity="0.8">
+            <rect x="0" y="0" width="45" height="8" rx="1" fill="var(--ink-light)"/>
+            <rect x="-3" y="10" width="50" height="8" rx="1" fill="var(--ink-medium)"/>
+            <rect x="2" y="20" width="42" height="8" rx="1" fill="var(--ink-light)"/>
+          </g>
+          <!-- Bamboo -->
+          <g transform="translate(220, 50)">
+            <line x1="0" y1="0" x2="0" y2="340" stroke="var(--jade-green)" stroke-width="3"/>
+            <path d="M0 60 L15 45 Q22 38 28 34" stroke="var(--jade-green)" stroke-width="1" fill="none"/>
+            <path d="M0 60 L12 52 Q18 50 24 48" stroke="var(--jade-green)" stroke-width="1" fill="none"/>
+            <path d="M0 140 L-15 125 Q-22 118 -28 114" stroke="var(--jade-green)" stroke-width="1" fill="none"/>
+            <path d="M0 220 L18 205 Q24 198 30 194" stroke="var(--jade-green)" stroke-width="1" fill="none"/>
+          </g>
+          <!-- Mountains -->
+          <path d="M0 400 L0 350 Q40 310 100 340 Q140 300 200 330 Q240 310 280 340 L280 400 Z" fill="var(--ink-faint)" opacity="0.3"/>
+        </svg>
+      </div>
+    </div>
 
     <!-- Person detail modal -->
     <PersonModal :person="modalPerson" @close="modalPerson = null" />
