@@ -4,11 +4,11 @@
 @import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai:wght@300;400;700&family=Noto+Serif+SC:wght@400;600;700;900&display=swap');
 
 :root {
-  --ink-black: #1a1a1a;
-  --ink-dark: #2d2d2d;
-  --ink-medium: #4a4a4a;
-  --ink-light: #8a8a7a;
-  --ink-faint: #b5b5a5;
+  --ink-black: #0d0d0d;
+  --ink-dark: #1a1a1a;
+  --ink-medium: #333333;
+  --ink-light: #5a5a50;
+  --ink-faint: #8a8a7a;
   --paper-cream: #f5f0e8;
   --paper-aged: #e8e0d0;
   --paper-dark: #d4c8b0;
@@ -24,7 +24,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  font-family: var(--font-song);
+  font-family: var(--font-kai);
   background: var(--paper-cream);
   color: var(--ink-black);
   min-height: 100vh;
@@ -39,7 +39,7 @@ body {
 }
 
 .ink-title { font-family: var(--font-kai); color: var(--ink-black); }
-.ink-body { font-family: var(--font-song); color: var(--ink-dark); line-height: 1.8; }
+.ink-body { font-family: var(--font-kai); color: var(--ink-dark); line-height: 1.8; }
 
 .seal-stamp {
   display: inline-flex; align-items: center; justify-content: center;

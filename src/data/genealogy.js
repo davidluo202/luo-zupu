@@ -15,7 +15,7 @@
 
 export const members = [
   // === 遠祖（本譜之前，用負數世代表示）===
-  { id: 'kuangzheng', name: '匡正', generation: -89, branch: 'ancestor',
+  { id: 'kuangzheng', name: '劻正', generation: -89, branch: 'ancestor',
     title: '周武王三年鎮守宣城有功受封', birth: '前1048年',
     deeds: '羅氏得姓始祖，周武王三年鎮守宣城有功，後受封於羅，子孫以國為氏',
     spouses: [], note: '傳三子：昌柞、昌世、昌允', isAncestor: true },
@@ -328,7 +328,32 @@ export const members = [
       death: '1968-04-01', deathNote: '享年92岁',
       children: ['chongrui','chongshou','chongxie','chongzhang','chongyu','chongfan','chongshan'] }] },
 
-  // 二十三世（锡钧后裔）
+  // 二十三世（錫薰公後裔）
+  { id: 'yinghuai', name: '崇耀', courtesy: '應懷', generation: 23, branch: 'left-3-bo',
+    spouses: [{ name: '曾氏', surname: '曾' }],
+    note: '娶曾氏生二女，立嗣捷茂（字益群）' },
+  { id: 'yingchang', name: '崇基', courtesy: '應昌', generation: 23, branch: 'left-3-bo' },
+  { id: 'yingxiang_xx', name: '崇善', courtesy: '應祥', generation: 23, branch: 'left-3-bo',
+    spouses: [{ name: '陳氏', surname: '陳' }],
+    note: '立嗣捷森，移居江西贛州五雲橋鄉下' },
+  { id: 'yingheng', name: '崇鍵', courtesy: '應衡', generation: 23, branch: 'left-3-bo',
+    spouses: [{ name: '陳氏', surname: '陳' }],
+    note: '生四子：銘慶、捷森（過繼應祥）、捷運、捷元' },
+  { id: 'yingjian', name: '崇㥁', courtesy: '應堅', generation: 23, branch: 'left-3-bo' },
+  { id: 'yingchun', name: '崇鑣', courtesy: '應春', generation: 23, branch: 'left-3-bo',
+    spouses: [{ name: '曾氏', surname: '曾' }], note: '無後裔' },
+  { id: 'yingshen', name: '崇漢', courtesy: '應燊', generation: 23, branch: 'left-3-bo',
+    note: '早故，陳氏（祖籍佛山）所生' },
+
+  // 二十三世（錫鎦公後裔）
+  { id: 'chongan', name: '崇安', courtesy: '應增', generation: 23, branch: 'left-3-bo',
+    spouses: [{ name: '劉福英', surname: '劉' }],
+    note: '生五子：捷龍(1930)、捷升(1936)、捷桂(1939)、捷揚(1943)、捷淦(1948)，多移居江西贛州' },
+  { id: 'chongxun', name: '崇訓', courtesy: '應連', generation: 23, branch: 'left-3-bo',
+    spouses: [{ name: '楊氏', surname: '楊' }],
+    note: '未生子女，立嗣，移居江西' },
+
+  // 二十三世（錫鈞後裔）
   { id: 'chongrui', name: '崇瑞', courtesy: '应粦', generation: 23, branch: 'left-3',
     note: '早故，娶赖氏未生子女' },
   { id: 'chongshou', name: '崇寿', courtesy: '应麒', generation: 23, branch: 'left-3',

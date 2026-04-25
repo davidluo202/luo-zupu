@@ -15,7 +15,7 @@
         <h1 class="ink-title text-5xl md:text-7xl font-bold mb-2 tracking-[0.3em]" style="letter-spacing: 0.3em">羅氏族譜</h1>
         <p class="ink-title text-xl md:text-2xl mb-4" style="color: var(--ink-medium)">興寧派 · 純端公支系</p>
         <p class="ink-body text-base mb-2" style="color: var(--ink-light)">
-          始祖匡正公 · 周武王三年受封 · 公元前1048年
+          始祖劻正公 · 周武王三年受封 · 公元前1048年
         </p>
         <p class="ink-body text-sm mb-8" style="color: var(--ink-faint)">
           福建寧化 → 廣東興寧 · 傳承三千餘年 · 二十六世 · 重修印刷本
@@ -57,7 +57,7 @@
         <h2 class="ink-title text-2xl font-bold mb-6 tracking-widest">源 流</h2>
         <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
           <div class="text-xs mb-2 font-bold" style="color: var(--red-seal)">得姓始祖</div>
-          <div class="ink-title text-3xl font-bold mb-2">匡正公</div>
+          <div class="ink-title text-3xl font-bold mb-2">劻正公</div>
           <div class="ink-body text-sm" style="color: var(--ink-medium)">
             周武王三年（約公元前1048年）鎮守宣城有功，後受封於羅，子孫以國為氏，羅姓由此而來。
           </div>
@@ -91,10 +91,10 @@
       <div class="max-w-3xl mx-auto">
         <h2 class="ink-title text-2xl font-bold text-center mb-6 tracking-widest">前 言</h2>
         <div class="p-6 rounded-2xl ink-body leading-loose text-base" style="background: var(--paper-aged)">
-          <p class="mb-4 indent-8">匡正公於周武王三年鎮守宣城有功，（約公元前1048年）後受封於羅，子孫以國為氏，羅姓由此而來。</p>
+          <p class="mb-4 indent-8">劻正公於周武王三年鎮守宣城有功，（約公元前1048年）後受封於羅，子孫以國為氏，羅姓由此而來。</p>
           <p class="mb-4 indent-8">本族譜根據祖輩第二十二世手抄本搜集整理重新編寫，主要收錄「小九公」之後，「純端公」派列代始祖之字號及簡歷，以便後人了解祖輩之祖章。</p>
-          <p class="mb-4 indent-8">族譜派語源於北宋初期清徽學士顥公修《大成譜》時所定，四十字，每代派八字，俗稱「老八句」。清康熙辛丑年（公曆1721年）重修《大成譜》，形成「新派語」，俗稱「新八句」，湖南、江西、廣東多沿用此新派語。</p>
-          <p class="indent-8">故原族譜稱《大成譜》或「老八句」，現族譜稱「新八句」或「新派語」。自「新」字輩之後，族中未再統一使用派語，各支後裔多依個人意願命名，不再拘於字輩。</p>
+          <p class="mb-4 indent-8">族譜派語源於北宋初期清徽學士顥公修《大成譜》時所定，四十字，每代派八字，俗稱「老八旬」。清康熙辛丑年（公曆1721年）重修《大成譜》，形成「新派語」，俗稱「新八旬」，湖南、江西、廣東多沿用此新派語。</p>
+          <p class="indent-8">故原族譜稱《大成譜》或「老八旬」，現族譜稱「新八旬」或「新派語」。自「新」字輩之後，族中未再統一使用派語，各支後裔多依個人意願命名，不再拘於字輩。</p>
         </div>
       </div>
     </section>
