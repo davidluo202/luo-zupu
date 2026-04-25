@@ -64,6 +64,7 @@
 import { ref, onMounted, nextTick } from 'vue'
 import * as d3 from 'd3'
 import { members, mainLineage, dynastyMap, pinyinMap } from '@/data/genealogy.js'
+import { toTraditional } from '@/data/simplifiedMap.js'
 import PersonModal from '@/components/PersonModal.vue'
 
 const treeContainer = ref(null)
@@ -129,8 +130,11 @@ function findDescendants(personId) {
 function onSearch() {
   const q = searchQuery.value.trim()
   if (!q) { searchResults.value = []; return }
+  const qt = toTraditional(q)
   searchResults.value = treeMembers.filter(m =>
-    m.name.includes(q) || (m.courtesy && m.courtesy.includes(q)) || (m.alias && m.alias.includes(q))
+    m.name.includes(q) || m.name.includes(qt) ||
+    (m.courtesy && (m.courtesy.includes(q) || m.courtesy.includes(qt))) ||
+    (m.alias && (m.alias.includes(q) || m.alias.includes(qt)))
   ).slice(0, 8)
 }
 
