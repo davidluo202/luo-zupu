@@ -149,8 +149,67 @@ export const members = [
   { id: 'ang8', name: '昂', generation: 8, branch: 'left-7',
     spouses: [{ name: '鄧氏', surname: '鄧', children: ['biao9','pei9','zhuang9'] }] },
   { id: 'mian8', name: '冕', generation: 8, branch: 'left-8',
-    spouses: [{ name: '朱氏', surname: '朱', children: [] }],
-    note: '生四子：䄎、𫌀、䘺、䄝' },
+    spouses: [{ name: '朱氏', surname: '朱', children: ['qi9m','si9m','fu9m','ji9m'] }] },
+
+  // 九世（昱公後裔）
+  { id: 'zan9', name: '禶', generation: 9, branch: 'left-1',
+    note: '禶(zǎn)' },
+
+  // 九世（晟公後裔）
+  { id: 'gun9', name: '袞', generation: 9, branch: 'left-2',
+    note: '袞(gǔn)' },
+  { id: 'qiu9', name: '裘', generation: 9, branch: 'left-2',
+    note: '裘(qiú)' },
+
+  // 九世（昊公後裔）
+  { id: 'hu9', name: '祜', generation: 9, branch: 'left-4',
+    note: '祜(hù)' },
+  { id: 'jin9', name: '衿', generation: 9, branch: 'left-4',
+    note: '衿(jīn)' },
+  { id: 'xiang9', name: '襄', generation: 9, branch: 'left-4',
+    note: '襄(xiāng)' },
+  { id: 'you9', name: '祐', generation: 9, branch: 'left-4',
+    note: '祐(yòu)' },
+
+  // 九世（勗公後裔）
+  { id: 'ju9', name: '裾', generation: 9, branch: 'left-5',
+    note: '裾(jū)' },
+  { id: 'pi9', name: '䘛', generation: 9, branch: 'left-5',
+    note: '䘛(pī)' },
+  { id: 'tan9', name: '袒', generation: 9, branch: 'left-5',
+    note: '袒(tǎn)' },
+  { id: 'tang9', name: '禟', generation: 9, branch: 'left-5',
+    note: '禟(táng)' },
+
+  // 九世（昺公後裔）
+  { id: 'xia9', name: '祫', generation: 9, branch: 'left-6',
+    note: '祫(xiá)' },
+  { id: 'qu9', name: '祛', generation: 9, branch: 'left-6',
+    note: '祛(qū)' },
+  { id: 'zhuan9', name: '襈', generation: 9, branch: 'left-6',
+    note: '襈(zhuàn)' },
+  { id: 'si9b', name: '祀', generation: 9, branch: 'left-6',
+    note: '祀(sì)' },
+  { id: 'ru9', name: '襦', generation: 9, branch: 'left-6',
+    note: '襦(rú)' },
+
+  // 九世（昂公後裔）
+  { id: 'biao9', name: '表', generation: 9, branch: 'left-7',
+    note: '表(biǎo)' },
+  { id: 'pei9', name: '裴', generation: 9, branch: 'left-7',
+    note: '裴(péi)' },
+  { id: 'zhuang9', name: '裝', generation: 9, branch: 'left-7',
+    note: '裝(zhuāng)' },
+
+  // 九世（冕公後裔）
+  { id: 'qi9m', name: '䄎', generation: 9, branch: 'left-8',
+    note: '䄎(qí)' },
+  { id: 'si9m', name: '𫌀', generation: 9, branch: 'left-8',
+    note: '𫌀(sī)' },
+  { id: 'fu9m', name: '䘺', generation: 9, branch: 'left-8',
+    note: '䘺(fú)' },
+  { id: 'ji9m', name: '䄝', generation: 9, branch: 'left-8',
+    note: '䄝(jì)' },
 
   // 九世（旻公後裔，本房主脉）
   { id: 'si9', name: '榹', generation: 9, branch: 'left-3',
@@ -280,7 +339,7 @@ export const members = [
     spouses: [{ name: '莊氏', surname: '莊', birth: '1783', death: '1833' }] },
   { id: 'kehua', name: '科華', generation: 20, branch: 'left-3-bo',
     birth: '1785', birthNote: '乾隆五十年五月初一',
-    note: '娶賴氏後續胡氏，二子亦賢和世賢早故，以梓華公第三子启明承嗣',
+    note: '娶賴氏後續胡氏，二子亦賢和世賢早故，以梓華公第三子啟明承嗣',
     spouses: [{ name: '賴氏', surname: '賴' }, { name: '胡氏', surname: '胡' }] },
   { id: 'zihua', name: '梓華', alias: '楚田', generation: 20, branch: 'left-3',
     birth: '1789', birthNote: '乾隆五十四年九月初三',
@@ -290,11 +349,11 @@ export const members = [
       children: ['qixian','liexian','qiming'] }] },
 
   // 二十一世
-  { id: 'qixian', name: '启賢', generation: 21, branch: 'left-3-bo',
+  { id: 'qixian', name: '啟賢', generation: 21, branch: 'left-3-bo',
     birth: '1811', birthNote: '嘉慶十六年八月初七', death: '1875', deathNote: '光绪元年',
     spouses: [{ name: '曾氏', surname: '曾' }] },
   { id: 'liexian', name: '烈賢', generation: 21, branch: 'left-3-bo', note: '早故' },
-  { id: 'qiming', name: '启明', courtesy: '宝珣', alias: '萝石', generation: 21,
+  { id: 'qiming', name: '啟明', courtesy: '宝珣', alias: '萝石', generation: 21,
     branch: 'left-3',
     birth: '1829', birthNote: '道光九年十二月二十日', death: '1897', deathNote: '光绪二十三年丁酉年',
     deeds: '穎悟過人，讀書有獨特見解，二十七歲游泮，咸丰五年（1855年）科试及第获秀才，常为村民办事，深得信賴，威信极高，德高望重',
@@ -501,7 +560,7 @@ export const members = [
     birth: '1970-08-21', note: '移居紐西蘭',
     spouses: [{ name: '張鐘尹', surname: '張', birth: '1974-05-01',
       children: ['yueheng','yuewen','yuesheng'] }] },
-  { id: 'xintao', name: '新涛', generation: 25, branch: 'left-3',
+  { id: 'xintao', name: '新濤', generation: 25, branch: 'left-3',
     birth: '1972-05-20', note: '移居美國',
     spouses: [{ name: '範冰', surname: '範', birth: '1973-09-21',
       children: ['derui','dezhi'] }] },
@@ -513,11 +572,11 @@ export const members = [
     spouses: [{ name: '羅宇慈', surname: '羅' }] },
 
   // 二十六世
-  { id: 'huidong', name: '汇東', generation: 26, branch: 'left-3',
+  { id: 'huidong', name: '匯東', generation: 26, branch: 'left-3',
     birth: '1989-06-05',
     spouses: [{ name: '劉怡琪', surname: '劉', birth: '1992-08-27',
       children: ['jiayu','jialing'] }] },
-  { id: 'huijun', name: '汇君', generation: 26, branch: 'left-3',
+  { id: 'huijun', name: '匯君', generation: 26, branch: 'left-3',
     birth: '1991-05-27', note: '女' },
   { id: 'yueheng', name: '悦姮', generation: 26, branch: 'left-3',
     birth: '2001-10-19', note: '女' },
@@ -542,7 +601,7 @@ export const members = [
     birth: '2025-08-05', note: '女' },
 ]
 
-// 主脉路径（新涛直系）
+// 主脉路径（新濤直系）
 export const mainLineage = [
   'kuangzheng', 'guxian', 'xiaojiu', 'xinhan', 'handong', 'yingwu',
   'wenli', 'zuxian', 'wei', 'min8', 'xi9', 'wenshen', 'changhuai',
@@ -611,9 +670,12 @@ export const pinyinMap = {
   '綵': 'cǎi', '綸': 'lún', '涭': 'shòu', '浻': 'jiǒng', '溓': 'lián',
   '瑀': 'yǔ', '濬': 'jùn', '㭏': 'guì', '棆': 'lún', '𣏌': 'qǐ',
   '鍹': 'xuān', '䃿': 'què',
-  '禶': 'zǎn', '袞': 'gǔn', '祜': 'hù', '衿': 'jīn',
-  '裾': 'jū', '䘛': 'pī', '祫': 'xiá', '祛': 'qū',
-  '襈': 'zhuàn', '襦': 'rú', '裴': 'péi',
+  '禶': 'zǎn', '袞': 'gǔn', '祜': 'hù', '衿': 'jīn', '襄': 'xiāng', '祐': 'yòu',
+  '裾': 'jū', '䘛': 'pī', '袒': 'tǎn', '禟': 'táng',
+  '祫': 'xiá', '祛': 'qū', '祀': 'sì',
+  '襈': 'zhuàn', '襦': 'rú', '裴': 'péi', '裝': 'zhuāng', '表': 'biǎo', '裘': 'qiú',
+  '䄎': 'qí', '𫌀': 'sī', '䘺': 'fú', '䄝': 'jì',
+  '濤': 'tāo', '匯': 'huì', '啟': 'qǐ',
   '瑎': 'xié', '璋': 'zhāng', '璠': 'fán', '鎦': 'liú',
   '薰': 'xūn', '鑣': 'biāo', '㥁': 'dé',
   '昶': 'chǎng', '曜': 'yào',
