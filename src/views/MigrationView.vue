@@ -11,14 +11,14 @@
       <div v-for="(m, i) in migrations" :key="i"
         class="relative pl-16 mb-8 fade-in-up" :style="{ animationDelay: i * 0.1 + 's' }">
         <!-- Year -->
-        <div class="absolute left-0 top-4 text-xs font-bold text-right" style="color: var(--gold-dark); width: 3rem">
-          {{ m.year }}
+        <div class="absolute left-0 top-4 text-xs font-bold text-right" style="color: var(--gold-dark); width: 3.5rem">
+          {{ isEn ? (m.yearEn || m.year) : m.year }}
         </div>
 
         <!-- Card -->
         <div class="p-4 rounded-xl" style="background: var(--paper-aged)">
-          <div class="ink-title text-lg font-bold mb-1">{{ m.from }} → {{ m.to }}</div>
-          <div class="text-sm mb-2" style="color: var(--ink-medium)">{{ m.event }}</div>
+          <div class="ink-title text-lg font-bold mb-1">{{ isEn ? (m.fromEn || m.from) : m.from }} → {{ isEn ? (m.toEn || m.to) : m.to }}</div>
+          <div class="text-sm mb-2" style="color: var(--ink-medium)">{{ isEn ? (m.eventEn || m.event) : m.event }}</div>
           <div class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Key Figure: ' : '相關人物：' }}{{ m.person }}</div>
         </div>
       </div>

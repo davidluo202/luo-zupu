@@ -222,9 +222,9 @@ function buildPages() {
       <div class="migration-detail-page">
         ${lmSvg}
         <div class="migration-detail-card">
-          <div class="migration-year">${m.year}</div>
-          <div class="migration-route">${m.from} → ${m.to}</div>
-          <div class="migration-event">${m.event}</div>
+          <div class="migration-year">${en ? (m.yearEn || m.year) : m.year}</div>
+          <div class="migration-route">${en ? (m.fromEn || m.from) : m.from} → ${en ? (m.toEn || m.to) : m.to}</div>
+          <div class="migration-event">${en ? (m.eventEn || m.event) : m.event}</div>
           <div class="migration-person">—— ${m.person}</div>
         </div>
       </div>
