@@ -137,6 +137,9 @@ const landmarkImages = {
   newzealand: '/landmarks/newzealand.jpg',
   shibi: '/landmarks/shibi.jpg',
   xingning: '/landmarks/xingning.jpg',
+  xuancheng: '/landmarks/xuancheng.jpg',
+  huizhou: '/landmarks/huizhou.jpg',
+  ganzhou: '/landmarks/ganzhou.jpg',
 }
 
 function getLandmarkSvg(key) {
