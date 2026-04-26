@@ -132,6 +132,11 @@ function createPageHtml(content) {
 const landmarkImages = {
   guangzhou: '/landmarks/guangzhou.jpg',
   shenzhen: '/landmarks/shenzhen.jpg',
+  qujing: '/landmarks/qujing.jpg',
+  usa: '/landmarks/usa.jpg',
+  newzealand: '/landmarks/newzealand.jpg',
+  shibi: '/landmarks/shibi.jpg',
+  xingning: '/landmarks/xingning.jpg',
 }
 
 function getLandmarkSvg(key) {
