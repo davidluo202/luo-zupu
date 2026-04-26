@@ -142,6 +142,7 @@ const landmarkImages = {
   ganzhou: '/landmarks/ganzhou.jpg',
   sichuan: '/landmarks/sichuan.jpg',
   yangzhou: '/landmarks/yangzhou.jpg',
+  nanyang: '/landmarks/nanyang.jpg',
 }
 
 function getLandmarkSvg(key) {
