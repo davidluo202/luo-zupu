@@ -427,13 +427,23 @@ function buildTree() {
     .attr('rx', 8).attr('ry', 8)
     .attr('fill', d => {
       if (d._isMergedEarlyDeath) return 'var(--paper-dark)'
-      if (d.note === '女') return '#fdf2f8' // light pink for females
+      if (d.note === '女') return '#fdf2f8'
       if (mainLineage.includes(d.id)) return 'var(--paper-aged)'
       return 'var(--paper-cream)'
     })
-    .attr('stroke', d => d._isMergedEarlyDeath ? 'var(--ink-faint)' : (mainLineage.includes(d.id) ? 'var(--gold-bright)' : 'var(--paper-dark)'))
-    .attr('stroke-width', d => mainLineage.includes(d.id) ? 2 : 1)
+    .attr('stroke', d => {
+      if (d._isMergedEarlyDeath) return 'var(--ink-faint)'
+      if (d.note === '女') return '#e891a8'
+      if (mainLineage.includes(d.id)) return 'var(--gold-bright)'
+      return 'var(--paper-dark)'
+    })
+    .attr('stroke-width', d => {
+      if (d.note === '女') return 2
+      return mainLineage.includes(d.id) ? 2 : 1
+    })
     .attr('stroke-dasharray', d => d._isMergedEarlyDeath ? '4,2' : null)
+    .attr('rx', d => d.note === '女' ? 16 : 8)
+    .attr('ry', d => d.note === '女' ? 16 : 8)
     .attr('filter', 'drop-shadow(0 1px 3px rgba(0,0,0,0.06))')
     .attr('opacity', d => d._isMergedEarlyDeath ? 0.6 : 1)
 
