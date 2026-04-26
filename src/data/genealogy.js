@@ -496,7 +496,7 @@ export const members = [
     spouses: [{ name: '吳秋瓊', surname: '吳', birth: '1965-09-10',
       children: ['huidong','huijun'] }] },
   { id: 'xinhai', name: '新海', generation: 25, branch: 'left-3',
-    spouses: [{ name: '黃瑞娟', surname: '黃', children: ['jianxin','xin25'] }] },
+    spouses: [{ name: '黃瑞娟', surname: '黃', children: ['jianxin','xin25','luoxin26','jianxin26'] }] },
   { id: 'xinsong', name: '新松', generation: 25, branch: 'left-3',
     birth: '1970-08-21', note: '移居紐西蘭',
     spouses: [{ name: '張鐘尹', surname: '張', birth: '1974-05-01',
@@ -530,6 +530,10 @@ export const members = [
   { id: 'dezhi', name: '德智', generation: 26, branch: 'left-3',
     birth: '2004-01-10', note: '双胞胎' },
   { id: 'yaosong', name: '曜松', generation: 26, branch: 'left-3', birth: '1999-11-16' },
+  { id: 'luoxin26', name: '欣', generation: 26, branch: 'left-3',
+    birth: '2001-04-05', note: '女' },
+  { id: 'jianxin26', name: '健鑫', generation: 26, branch: 'left-3',
+    birth: '2008-10-25', note: '女' },
 
   // 二十七世
   { id: 'jiayu', name: '佳钰', generation: 27, branch: 'left-3',

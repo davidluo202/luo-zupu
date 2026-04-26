@@ -49,6 +49,20 @@
       </div>
     </section>
 
+    <!-- Birthday ticker -->
+    <div v-if="upcomingBirthdays.length" class="birthday-ticker border-t border-b" style="border-color: var(--gold-bright); background: linear-gradient(90deg, var(--paper-aged), var(--paper-cream), var(--paper-aged))">
+      <div class="ticker-inner">
+        <span class="ticker-label">🎂 近期生日</span>
+        <span v-for="(b, i) in [...upcomingBirthdays, ...upcomingBirthdays]" :key="i" class="ticker-item">
+          <span class="ticker-name">羅{{ b.name }}</span>
+          <span class="ticker-date">{{ b.monthDay }}</span>
+          <span v-if="b.daysUntil === 0" class="ticker-today">今天！</span>
+          <span v-else class="ticker-days">{{ b.daysUntil }}天後</span>
+          <span class="ticker-sep">·</span>
+        </span>
+      </div>
+    </div>
+
     <!-- Cloud divider SVG -->
     <div class="flex justify-center py-2 opacity-20">
       <svg width="300" height="40" viewBox="0 0 300 40" fill="none">
@@ -145,8 +159,40 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { members, generationChars, dynastyMap } from '@/data/genealogy.js'
+
+// Birthday reminder: 24世及之後，未來15天內生日的成員
+function getUpcomingBirthdays() {
+  const today = new Date()
+  const results = []
+  for (const m of members) {
+    if (m.generation < 24 || !m.birth) continue
+    if (m.death) continue // skip deceased
+    const birthStr = String(m.birth)
+    const match = birthStr.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
+    if (!match) continue
+    const bMonth = parseInt(match[2])
+    const bDay = parseInt(match[3])
+    // Check if birthday falls within next 15 days
+    for (let d = 0; d <= 15; d++) {
+      const check = new Date(today)
+      check.setDate(check.getDate() + d)
+      if (check.getMonth() + 1 === bMonth && check.getDate() === bDay) {
+        results.push({
+          name: m.name,
+          monthDay: `${bMonth}月${bDay}日`,
+          daysUntil: d,
+        })
+        break
+      }
+    }
+  }
+  results.sort((a, b) => a.daysUntil - b.daysUntil)
+  return results
+}
+
+const upcomingBirthdays = ref(getUpcomingBirthdays())
 import InkMountains from '@/components/InkMountains.vue'
 import ScholarDecor from '@/components/ScholarDecor.vue'
 
@@ -166,6 +212,56 @@ const stats = [
   { value: '3074年', label: '傳承歷史' },
   { value: '26世', label: '世代延續' },
   { value: members.length + '人', label: '錄入人物' },
-  { value: '11次', label: '重大遷徙' },
+  { value: '14次', label: '重大遷徙' },
 ]
 </script>
+
+<style scoped>
+.birthday-ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0.6rem 0;
+}
+.ticker-inner {
+  display: inline-block;
+  animation: ticker-scroll 30s linear infinite;
+}
+.ticker-label {
+  font-family: var(--font-kai);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--gold-dark);
+  margin-right: 1.5rem;
+}
+.ticker-item {
+  font-family: var(--font-kai);
+  font-size: 0.82rem;
+  color: var(--ink-medium);
+}
+.ticker-name {
+  font-weight: 700;
+  color: var(--ink-primary);
+}
+.ticker-date {
+  margin-left: 0.3rem;
+  color: var(--ink-light);
+}
+.ticker-today {
+  margin-left: 0.3rem;
+  color: var(--red-seal);
+  font-weight: 700;
+}
+.ticker-days {
+  margin-left: 0.3rem;
+  color: var(--gold-dark);
+  font-size: 0.75rem;
+}
+.ticker-sep {
+  margin: 0 1rem;
+  color: var(--ink-faint);
+}
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+</style>
