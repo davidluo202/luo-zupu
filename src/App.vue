@@ -40,20 +40,20 @@
       </div>
 
       <!-- Mobile dropdown menu -->
-      <div v-if="mobileMenuOpen" class="md:hidden border-t px-4 py-3 space-y-1" style="border-color: var(--paper-dark); background: var(--paper-cream)">
+      <div v-if="mobileMenuOpen" class="md:hidden border-t px-5 py-4 space-y-1" style="border-color: var(--paper-dark); background: var(--paper-cream)">
         <router-link v-for="link in navLinks" :key="link.path" :to="link.path"
           @click="mobileMenuOpen = false"
-          class="block px-4 py-2.5 text-sm ink-body no-underline rounded-lg transition-all"
+          class="block px-5 py-4 text-lg ink-body no-underline rounded-xl transition-all"
           :class="$route.path === link.path ? 'bg-[var(--paper-aged)] font-bold' : 'hover:bg-[var(--paper-aged)]'">
           {{ link.icon }} {{ isEn ? link.labelEn : link.label }}
         </router-link>
-        <div class="flex items-center gap-2 px-4 py-2 border-t mt-2 pt-2" style="border-color: var(--paper-dark)">
-          <button @click="toggleLang" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
+        <div class="flex items-center gap-3 px-5 py-3 border-t mt-3 pt-3" style="border-color: var(--paper-dark)">
+          <button @click="toggleLang" class="px-4 py-2.5 rounded-xl text-sm font-bold bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
             {{ isEn ? '切換中文' : 'English' }}
           </button>
-          <span class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Font' : '字體' }}</span>
-          <button @click="changeFontSize(-1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold bg-[var(--paper-aged)]">A-</button>
-          <button @click="changeFontSize(1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold bg-[var(--paper-aged)]">A+</button>
+          <span class="text-sm" style="color: var(--ink-light)">{{ isEn ? 'Font' : '字體' }}</span>
+          <button @click="changeFontSize(-1)" class="w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold bg-[var(--paper-aged)]">A-</button>
+          <button @click="changeFontSize(1)" class="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold bg-[var(--paper-aged)]">A+</button>
         </div>
       </div>
     </nav>
