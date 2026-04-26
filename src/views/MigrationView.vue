@@ -7,16 +7,11 @@
 
     <!-- Timeline -->
     <div class="relative">
-      <div class="absolute left-8 top-0 bottom-0 w-0.5" style="background: var(--gold-bright); opacity: 0.3"></div>
 
       <div v-for="(m, i) in migrations" :key="i"
-        class="relative pl-20 mb-8 fade-in-up" :style="{ animationDelay: i * 0.1 + 's' }">
-        <!-- Dot -->
-        <div class="absolute left-6 top-3 w-5 h-5 rounded-full border-2"
-          style="background: var(--gold-bright); border-color: var(--paper-cream)"></div>
-
+        class="relative pl-16 mb-8 fade-in-up" :style="{ animationDelay: i * 0.1 + 's' }">
         <!-- Year -->
-        <div class="absolute left-0 top-3 text-xs font-bold" style="color: var(--gold-dark)">
+        <div class="absolute left-0 top-4 text-xs font-bold text-right" style="color: var(--gold-dark); width: 3rem">
           {{ m.year }}
         </div>
 
