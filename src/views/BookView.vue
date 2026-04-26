@@ -140,6 +140,8 @@ const landmarkImages = {
   xuancheng: '/landmarks/xuancheng.jpg',
   huizhou: '/landmarks/huizhou.jpg',
   ganzhou: '/landmarks/ganzhou.jpg',
+  sichuan: '/landmarks/sichuan.jpg',
+  yangzhou: '/landmarks/yangzhou.jpg',
 }
 
 function getLandmarkSvg(key) {
