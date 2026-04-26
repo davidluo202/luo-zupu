@@ -174,10 +174,14 @@ function findDescendants(personId) {
   return desc
 }
 
+function stripLuo(s) { return s.replace(/^[罗羅]/, '') }
+
 function onSearch() {
-  const q = searchQuery.value.trim()
+  const raw = searchQuery.value.trim()
+  if (!raw) { searchResults.value = []; return }
+  const q = stripLuo(raw)
+  const qt = stripLuo(toTraditional(raw))
   if (!q) { searchResults.value = []; return }
-  const qt = toTraditional(q)
   searchResults.value = treeMembers.filter(m =>
     m.name.includes(q) || m.name.includes(qt) ||
     (m.courtesy && (m.courtesy.includes(q) || m.courtesy.includes(qt))) ||
