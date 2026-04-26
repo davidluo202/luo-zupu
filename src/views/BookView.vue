@@ -128,7 +128,16 @@ function createPageHtml(content) {
   return `<div class="book-page-inner">${content}</div>`
 }
 
+// Map of landmark keys to real image files (when available)
+const landmarkImages = {
+  guangzhou: '/landmarks/guangzhou.jpg',
+  shenzhen: '/landmarks/shenzhen.jpg',
+}
+
 function getLandmarkSvg(key) {
+  if (landmarkImages[key]) {
+    return `<div class="landmark-img"><img src="${landmarkImages[key]}" alt="${key}"></div>`
+  }
   const lm = landmarks[key]
   return lm ? `<div class="landmark-svg">${lm.svg}</div>` : ''
 }
@@ -175,7 +184,12 @@ function buildPages() {
 
   // Migration pages — 1 per page with landmark
   for (const m of migrations) {
-    const lmSvg = m.landmark && landmarks[m.landmark] ? `<div class="migration-landmark">${landmarks[m.landmark].svg}</div>` : ''
+    let lmSvg = ''
+    if (m.landmark && landmarkImages[m.landmark]) {
+      lmSvg = `<div class="migration-landmark"><img src="${landmarkImages[m.landmark]}" alt="${m.landmark}"></div>`
+    } else if (m.landmark && landmarks[m.landmark]) {
+      lmSvg = `<div class="migration-landmark">${landmarks[m.landmark].svg}</div>`
+    }
     pages.push(createPageHtml(`
       <div class="migration-detail-page">
         ${lmSvg}
@@ -378,6 +392,20 @@ function nextPage() {
   width: 100%;
   height: auto;
 }
+/* Landmark real images */
+.landmark-img {
+  width: 92%;
+  max-width: 320px;
+  margin: 0 auto 0.6rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.landmark-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.85;
+}
 
 /* Story pages */
 .story-page {
@@ -460,13 +488,16 @@ function nextPage() {
   padding: 0.5rem;
 }
 .migration-landmark {
-  width: 80%;
-  max-width: 260px;
+  width: 85%;
+  max-width: 280px;
   margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
-.migration-landmark svg {
+.migration-landmark svg, .migration-landmark img {
   width: 100%;
   height: auto;
+  display: block;
 }
 .migration-detail-card {
   width: 90%;
