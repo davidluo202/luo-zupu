@@ -35,7 +35,7 @@ export const members = [
   { id: 'xiaojiu', name: '君治', courtesy: '盛齡', alias: '洪德', generation: 1,
     branch: 'main', birth: '1261-11-01', birthNote: '宋理宗景定二年辛酉十月初八卯时',
     title: '宋朝循州學正', note: '按《《大成譜》》为四十九世派，又称小九公',
-    deeds: '原籍福建寧化县石壁村，宋末客道廣東興寧，赴任循州學正，见興寧山水悠揚、土地沃野豐裕，择東廓而立家',
+    deeds: '原籍福建寧化县石壁村，宋末客道廣東興寧，赴任循州（今廣東龍川、和平、興寧、五華、連平等縣市地）學正，见興寧山水悠揚、土地沃野豐裕，择東廓而立家',
     spouses: [
       { name: '曾氏', surname: '曾', note: '大孺人', children: ['shenghan'] },
       { name: '胡氏', surname: '胡', note: '大孺人', children: ['xinhan'] },
@@ -614,7 +614,7 @@ export const mainLineage = [
 export const migrations = [
   { year: '前1048', from: '宣城', to: '羅國', person: '劻正公', event: '周武王三年鎮守宣城有功，受封於羅，子孫以國為氏', landmark: 'xuancheng',
     yearEn: '1048 BC', fromEn: 'Xuancheng', toEn: 'State of Luo', eventEn: 'Defended Xuancheng for King Wu of Zhou, enfeoffed at Luo — origin of the Luo surname' },
-  { year: '约1280', from: '福建寧化石壁村', to: '廣東興寧', person: '小九公', event: '宋末客道廣東，赴任循州學正，見興寧山水悠揚遂立家', landmark: 'xingning',
+  { year: '约1280', from: '福建寧化石壁村', to: '廣東興寧', person: '小九公', event: '宋末客道廣東，赴任循州（今龍川、和平、興寧、五華、連平等地）學正，見興寧山水悠揚遂立家', landmark: 'xingning',
     yearEn: 'c.1280', fromEn: 'Shibi Village, Fujian', toEn: 'Xingning, Guangdong', eventEn: 'Traveled to Guangdong in late Song, served as Education Commissioner; settled in Xingning' },
   { year: '约1648', from: '廣東興寧', to: '揚州', person: '萬榮公', event: '幼年喪父成孤兒，獨赴揚州與叔合股貿易', landmark: 'yangzhou',
     yearEn: 'c.1648', fromEn: 'Xingning, Guangdong', toEn: 'Yangzhou', eventEn: 'Orphaned young, traveled alone to Yangzhou to trade with his uncle' },

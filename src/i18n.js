@@ -50,7 +50,7 @@ export const home = {
   gen1Label: { zh: '本譜第一世 · 興寧始祖', en: '1st Generation · Xingning Founding Ancestor' },
   gen1Name: { zh: '小九公（洪德公）', en: 'Xiaojiu (Hongde)' },
   gen1Sub: { zh: '諱君治 · 字盛齡 · 號洪德 · 大成譜第九十世', en: 'Given name Junzhi · Courtesy name Shengling · Art name Hongde · 90th of Grand Genealogy' },
-  gen1Desc: { zh: '生於宋理宗景定二年（1261年），原籍福建寧化縣石壁村，宋末赴任廣東循州學正，見興寧山水悠揚、土地沃野豐裕，擇東廓而立家。', en: 'Born in 1261 (Song Dynasty). Originally from Shibi Village, Ninghua, Fujian. Appointed as Education Commissioner of Xunzhou in late Song Dynasty. Seeing the beautiful mountains and fertile lands of Xingning, he chose to settle here.' },
+  gen1Desc: { zh: '生於宋理宗景定二年（1261年），原籍福建寧化縣石壁村，宋末赴任廣東循州（今龍川、和平、興寧、五華、連平等縣市地）學正，見興寧山水悠揚、土地沃野豐裕，擇東廓而立家。', en: 'Born in 1261 (Song Dynasty). Originally from Shibi Village, Ninghua, Fujian. Appointed as Education Commissioner of Xunzhou (present-day Longchuan, Heping, Xingning, Wuhua, Lianping and surrounding areas in Guangdong) in late Song Dynasty. Seeing the beautiful mountains and fertile lands of Xingning, he chose to settle here.' },
   spanYears: { zh: '⋮ 歷經約2300年，傳八十九世 ⋮', en: '⋮ Spanning ~2300 years, 89 generations ⋮' },
   toGen1: { zh: '⋮ 下傳本譜始祖 ⋮', en: '⋮ Down to our founding ancestor ⋮' },
   sectionPreface: { zh: '前 言', en: 'Preface' },
