@@ -1,11 +1,11 @@
 <template>
   <div class="book-page min-h-screen flex flex-col items-center py-6 px-2">
-    <h1 class="ink-title text-2xl font-bold tracking-widest mb-4">族譜古卷</h1>
+    <h1 class="ink-title text-2xl font-bold tracking-widest mb-4">{{ isEn ? 'Ancient Scroll' : '族譜古卷' }}</h1>
 
     <!-- Page indicator -->
     <div class="text-xs mb-3" style="color: var(--ink-light); font-family: var(--font-kai)">
-      第 {{ currentPage + 1 }} / {{ totalPages }} 頁
-      <span class="ml-2 opacity-60">← 左右滑動翻頁 →</span>
+      {{ isEn ? `Page ${currentPage + 1} / ${totalPages}` : `第 ${currentPage + 1} / ${totalPages} 頁` }}
+      <span class="ml-2 opacity-60">{{ isEn ? '← Swipe to flip →' : '← 左右滑動翻頁 →' }}</span>
     </div>
 
     <!-- Flipbook container -->
@@ -13,8 +13,8 @@
 
     <!-- Navigation buttons -->
     <div class="flex items-center gap-6 mt-4">
-      <button @click="prevPage" class="flip-btn" :disabled="currentPage <= 0">◀ 上一頁</button>
-      <button @click="nextPage" class="flip-btn" :disabled="currentPage >= totalPages - 1">下一頁 ▶</button>
+      <button @click="prevPage" class="flip-btn" :disabled="currentPage <= 0">{{ isEn ? '◀ Prev' : '◀ 上一頁' }}</button>
+      <button @click="nextPage" class="flip-btn" :disabled="currentPage >= totalPages - 1">{{ isEn ? 'Next ▶' : '下一頁 ▶' }}</button>
     </div>
   </div>
 </template>
@@ -24,92 +24,107 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import { PageFlip } from 'page-flip'
 import { members, migrations, dynastyMap, generationChars } from '@/data/genealogy.js'
 import { landmarks } from '@/data/landmarks.js'
+import { useLang } from '@/i18n.js'
+
+const { isEn, t } = useLang()
 
 const bookRef = ref(null)
 const currentPage = ref(0)
 const totalPages = ref(0)
 let pageFlip = null
 
-// Story pages with landmark keys
-const eraStories = [
+// Story pages with landmark keys - bilingual
+const eraStoriesData = [
   {
-    title: '源遠流長',
-    subtitle: '羅氏得姓之始',
-    body: '周武王三年（前1048年），劻正公鎮守宣城有功，受封於羅。子孫以國為氏，是為羅姓之始。歷經三千餘年，薪火相傳，綿延不絕。',
-    era: '西周',
+    title: { zh: '源遠流長', en: 'Deep Roots' },
+    subtitle: { zh: '羅氏得姓之始', en: 'Origin of the Luo Surname' },
+    body: { zh: '周武王三年（前1048年），劻正公鎮守宣城有功，受封於羅。子孫以國為氏，是為羅姓之始。歷經三千餘年，薪火相傳，綿延不絕。', en: 'In the 3rd year of King Wu of Zhou (1048 BC), Kuangzheng defended Xuancheng with distinction and was enfeoffed at Luo. His descendants adopted the state name as their surname. Over 3000 years, the flame has been passed down without end.' },
+    era: { zh: '西周', en: 'Western Zhou' },
     landmark: 'xuancheng',
   },
   {
-    title: '石壁南遷',
-    subtitle: '客家先民的足跡',
-    body: '福建寧化石壁村，客家人的精神原鄉。宋末戰亂，先民紛紛南遷。我族谷賢公娶九妻，生十八子，子孫散布閩粵贛各地。',
-    era: '宋末',
+    title: { zh: '石壁南遷', en: 'Southward from Shibi' },
+    subtitle: { zh: '客家先民的足跡', en: 'Footsteps of Hakka Ancestors' },
+    body: { zh: '福建寧化石壁村，客家人的精神原鄉。宋末戰亂，先民紛紛南遷。我族谷賢公娶九妻，生十八子，子孫散布閩粵贛各地。', en: 'Shibi Village in Ninghua, Fujian is the spiritual homeland of the Hakka. During the wars at the end of the Song Dynasty, ancestors migrated south. Guxian married nine wives and fathered eighteen sons, with descendants scattered across Fujian, Guangdong, and Jiangxi.' },
+    era: { zh: '宋末', en: 'Late Song' },
     landmark: 'shibi',
   },
   {
-    title: '客道興寧',
-    subtitle: '小九公開基立業',
-    body: '宋理宗景定二年（1261年），始祖小九公（洪德公）自福建寧化石壁村客道廣東，任循州學正。見興寧山水悠揚、土地沃野豐裕，遂擇東廓而立家。娶曾氏、胡氏、黃氏三位夫人，開三大房。',
-    era: '宋末元初',
+    title: { zh: '客道興寧', en: 'Settling in Xingning' },
+    subtitle: { zh: '小九公開基立業', en: 'Xiaojiu Founds the Lineage' },
+    body: { zh: '宋理宗景定二年（1261年），始祖小九公（洪德公）自福建寧化石壁村客道廣東，任循州學正。見興寧山水悠揚、土地沃野豐裕，遂擇東廓而立家。娶曾氏、胡氏、黃氏三位夫人，開三大房。', en: 'In 1261, founding ancestor Xiaojiu (Hongde) traveled from Shibi Village, Fujian to Guangdong as Education Commissioner of Xunzhou. Seeing the beautiful mountains and fertile lands of Xingning, he settled here. He married three wives (Zeng, Hu, Huang), founding three major branches.' },
+    era: { zh: '宋末元初', en: 'Late Song / Early Yuan' },
     landmark: 'xingning',
   },
   {
-    title: '八房開枝',
-    subtitle: '維公生八子',
-    body: '七世祖維公娶曾氏大孺人，生八子：昱、晟、旻、昊、勗、昺、昂、冕。八子各立一房，是為「左八房」。其中三房旻公為明朝進士，學問最盛。自此興寧羅氏枝繁葉茂，人丁興旺。',
-    era: '明朝',
+    title: { zh: '八房開枝', en: 'Eight Branches Flourish' },
+    subtitle: { zh: '維公生八子', en: 'Wei Fathers Eight Sons' },
+    body: { zh: '七世祖維公娶曾氏大孺人，生八子：昱、晟、旻、昊、勗、昺、昂、冕。八子各立一房，是為「左八房」。其中三房旻公為明朝進士，學問最盛。自此興寧羅氏枝繁葉茂，人丁興旺。', en: '7th-generation ancestor Wei married Lady Zeng and fathered eight sons, each founding a branch — the "Left Eight Houses." Among them, the 3rd son Min became a Ming Dynasty Jinshi (top scholar). From then on, the Xingning Luo clan flourished.' },
+    era: { zh: '明朝', en: 'Ming Dynasty' },
     landmark: 'xingning',
   },
   {
-    title: '少年奇志',
-    subtitle: '萬榮公的傳奇',
-    body: '十五世萬榮公，幼年喪父成孤兒，卻獨自遠赴揚州，與叔父合股貿易。數年間積累財款，衣錦還鄉，回興寧置產立業。其志氣與膽識，堪為後世楷模。',
-    era: '明末清初',
+    title: { zh: '少年奇志', en: 'A Youth\'s Ambition' },
+    subtitle: { zh: '萬榮公的傳奇', en: 'The Legend of Wanrong' },
+    body: { zh: '十五世萬榮公，幼年喪父成孤兒，卻獨自遠赴揚州，與叔父合股貿易。數年間積累財款，衣錦還鄉，回興寧置產立業。其志氣與膽識，堪為後世楷模。', en: '15th-generation Wanrong, orphaned young, traveled alone to Yangzhou and partnered with his uncle in trade. Within years he amassed wealth, returned home in glory, and established his estate in Xingning — a model of ambition for generations.' },
+    era: { zh: '明末清初', en: 'Late Ming / Early Qing' },
     landmark: 'yangzhou',
   },
   {
-    title: '散葉四方',
-    subtitle: '清代族人遷徙',
-    body: '清代中期，族人漸向外發展：部分移居惠州西湖之畔；珠玉公後裔隨「湖廣填四川」浪潮西遷巴蜀；新賢落戶贛南；欽賢漂洋過海下南洋。血脈所至，處處生根。',
-    era: '清朝',
+    title: { zh: '散葉四方', en: 'Spreading Far and Wide' },
+    subtitle: { zh: '清代族人遷徙', en: 'Qing Dynasty Migrations' },
+    body: { zh: '清代中期，族人漸向外發展：部分移居惠州西湖之畔；珠玉公後裔隨「湖廣填四川」浪潮西遷巴蜀；新賢落戶贛南；欽賢漂洋過海下南洋。血脈所至，處處生根。', en: 'In the mid-Qing, clan members spread outward: some to Huizhou by the West Lake; descendants of Zhuyu joined the great westward migration to Sichuan; Xinxian settled in southern Jiangxi; Qinxian sailed to Southeast Asia. Wherever the blood flows, roots take hold.' },
+    era: { zh: '清朝', en: 'Qing Dynasty' },
     landmark: 'sichuan',
   },
   {
-    title: '穗城求學',
-    subtitle: '捷登公赴穗謀生',
-    body: '解放前，二十四世捷登公離開興寧赴廣州求學謀生。在羊城扎根，娶妻生子，開啟了本支從客家山區走向大城市的新篇章。其兄弟捷金（漢才）則早期移居雲南曲靖，開拓滇東新天地。',
-    era: '民國',
+    title: { zh: '穗城求學', en: 'Studying in Guangzhou' },
+    subtitle: { zh: '捷登公赴穗謀生', en: 'Jiedeng Moves to the City' },
+    body: { zh: '解放前，二十四世捷登公離開興寧赴廣州求學謀生。在羊城扎根，娶妻生子，開啟了本支從客家山區走向大城市的新篇章。其兄弟捷金（漢才）則早期移居雲南曲靖，開拓滇東新天地。', en: 'Before Liberation, 24th-generation Jiedeng left Xingning for Guangzhou to study and make a living. He put down roots in the city, married, and opened a new chapter — from Hakka mountains to metropolis. His brother Jiejin (Hancai) moved to Qujing, Yunnan.' },
+    era: { zh: '民國', en: 'Republic Era' },
     landmark: 'guangzhou',
   },
   {
-    title: '滇東拓新',
-    subtitle: '捷金公遠赴曲靖',
-    body: '捷金（漢才）公早期離開興寧，遠赴雲南曲靖。曲靖地處雲貴高原，山川壯麗，油菜花海金浪翻涌。捷金公在此落地生根，為羅氏在西南邊陲開闢了新的一脈。',
-    era: '民國',
+    title: { zh: '滇東拓新', en: 'Pioneering in Eastern Yunnan' },
+    subtitle: { zh: '捷金公遠赴曲靖', en: 'Jiejin Journeys to Qujing' },
+    body: { zh: '捷金（漢才）公早期離開興寧，遠赴雲南曲靖。曲靖地處雲貴高原，山川壯麗，油菜花海金浪翻涌。捷金公在此落地生根，為羅氏在西南邊陲開闢了新的一脈。', en: 'Jiejin (Hancai) left Xingning for Qujing, Yunnan. Situated on the Yunnan-Guizhou Plateau with majestic mountains and golden rapeseed fields, Qujing became home to a new Luo branch on the southwestern frontier.' },
+    era: { zh: '民國', en: 'Republic Era' },
     landmark: 'qujing',
   },
   {
-    title: '南遷特區',
-    subtitle: '改革開放新浪潮',
-    body: '1980年代，改革開放春風吹遍南粵。捷登公舉家從廣州南遷深圳特區，投身經濟建設大潮。鵬城日新月異，高樓拔地而起，羅氏子孫在此見證了中國最激動人心的時代巨變。',
-    era: '1980年代',
+    title: { zh: '南遷特區', en: 'Moving to the Special Zone' },
+    subtitle: { zh: '改革開放新浪潮', en: 'Reform and Opening Up' },
+    body: { zh: '1980年代，改革開放春風吹遍南粵。捷登公舉家從廣州南遷深圳特區，投身經濟建設大潮。鵬城日新月異，高樓拔地而起，羅氏子孫在此見證了中國最激動人心的時代巨變。', en: 'In the 1980s, the winds of reform swept southern China. Jiedeng moved his family from Guangzhou to the Shenzhen Special Economic Zone. The city transformed daily, skyscrapers rising — the Luo descendants witnessed China\'s most thrilling era of change.' },
+    era: { zh: '1980年代', en: '1980s' },
     landmark: 'shenzhen',
   },
   {
-    title: '跨洋南半球',
-    subtitle: '新松家移民紐西蘭',
-    body: '2000年後，二十五世新松家跨越太平洋，移民紐西蘭。南半球的純淨山水、奧克蘭的天際線，成為這一支羅氏新的家園。從客家圍龍屋到南太平洋島國，三千年血脈在地球另一端延續。',
-    era: '2000年代',
+    title: { zh: '跨洋南半球', en: 'Across the Pacific South' },
+    subtitle: { zh: '新松家移民紐西蘭', en: 'Xinsong\'s Family Emigrates to New Zealand' },
+    body: { zh: '2000年後，二十五世新松家跨越太平洋，移民紐西蘭。南半球的純淨山水、奧克蘭的天際線，成為這一支羅氏新的家園。從客家圍龍屋到南太平洋島國，三千年血脈在地球另一端延續。', en: 'After 2000, 25th-generation Xinsong\'s family crossed the Pacific to New Zealand. The pristine landscapes and Auckland skyline became their new home. From Hakka roundhouses to the South Pacific — 3000 years of heritage continuing on the other side of the globe.' },
+    era: { zh: '2000年代', en: '2000s' },
     landmark: 'newzealand',
   },
   {
-    title: '赴美新篇',
-    subtitle: '新濤家移居美國',
-    body: '2010年後，二十五世新濤家從深圳移居美國。自由女神像下，羅氏血脈在新大陸繼續書寫傳奇。從周武王受封之地到星條旗下，三千零六十年的薪火，跨越了半個地球。',
-    era: '2010年代',
+    title: { zh: '赴美新篇', en: 'A New Chapter in America' },
+    subtitle: { zh: '新濤家移居美國', en: 'Xintao\'s Family Moves to the USA' },
+    body: { zh: '2010年後，二十五世新濤家從深圳移居美國。自由女神像下，羅氏血脈在新大陸繼續書寫傳奇。從周武王受封之地到星條旗下，三千零六十年的薪火，跨越了半個地球。', en: 'After 2010, 25th-generation Xintao\'s family moved from Shenzhen to America. Under the Statue of Liberty, the Luo bloodline continues writing its legend. From King Wu\'s enfeoffment to the Stars and Stripes — 3060 years of flame, spanning half the globe.' },
+    era: { zh: '2010年代', en: '2010s' },
     landmark: 'usa',
   },
 ]
+
+// Resolve stories based on current language
+function getEraStories() {
+  const en = isEn.value
+  return eraStoriesData.map(s => ({
+    title: en ? s.title.en : s.title.zh,
+    subtitle: en ? s.subtitle.en : s.subtitle.zh,
+    body: en ? s.body.en : s.body.zh,
+    era: en ? s.era.en : s.era.zh,
+    landmark: s.landmark,
+  }))
+}
 
 // Generation pages (group by 3)
 const genPages = []
@@ -155,16 +170,18 @@ function getLandmarkSvg(key) {
 
 function buildPages() {
   const pages = []
+  const en = isEn.value
+  const eraStories = getEraStories()
 
   // Cover
   pages.push(createPageHtml(`
     <div class="cover-page">
       <div class="cover-seal">羅</div>
-      <h1 class="cover-title">羅氏族譜</h1>
-      <p class="cover-sub">興寧始祖小九公 至 二十六世</p>
-      <p class="cover-date">始於宋末景定二年（1261）</p>
+      <h1 class="cover-title">${en ? 'Luo Clan Genealogy' : '羅氏族譜'}</h1>
+      <p class="cover-sub">${en ? 'From Ancestor Xiaojiu to the 26th Generation' : '興寧始祖小九公 至 二十六世'}</p>
+      <p class="cover-date">${en ? 'Since 1261 (Late Song Dynasty)' : '始於宋末景定二年（1261）'}</p>
       <div class="cover-line"></div>
-      <p class="cover-motto">源遠流長 · 薪火相傳</p>
+      <p class="cover-motto">${en ? 'Deep Roots · Eternal Legacy' : '源遠流長 · 薪火相傳'}</p>
     </div>
   `))
 
@@ -186,10 +203,10 @@ function buildPages() {
   pages.push(createPageHtml(`
     <div class="section-page">
       <div class="section-icon">🗺️</div>
-      <h2 class="section-title">遷徙足跡</h2>
-      <p class="section-sub">三千年行路 · 從受封之地到全球散葉</p>
+      <h2 class="section-title">${en ? 'Migration Trail' : '遷徙足跡'}</h2>
+      <p class="section-sub">${en ? '3000 Years of Journey · From Enfeoffment to Global Diaspora' : '三千年行路 · 從受封之地到全球散葉'}</p>
       <div class="section-divider"></div>
-      <p class="section-count">${migrations.length} 次重要遷徙</p>
+      <p class="section-count">${en ? migrations.length + ' Major Migrations' : migrations.length + ' 次重要遷徙'}</p>
     </div>
   `))
 
@@ -218,10 +235,10 @@ function buildPages() {
   pages.push(createPageHtml(`
     <div class="section-page">
       <div class="section-icon">📜</div>
-      <h2 class="section-title">世代輩分</h2>
-      <p class="section-sub">二十六世傳承字輩</p>
+      <h2 class="section-title">${en ? 'Generations' : '世代輩分'}</h2>
+      <p class="section-sub">${en ? '26 Generations of Heritage' : '二十六世傳承字輩'}</p>
       <div class="section-divider"></div>
-      <p class="section-count">${members.length}+ 族人記載</p>
+      <p class="section-count">${en ? members.length + '+ Clan Members Recorded' : members.length + '+ 族人記載'}</p>
     </div>
   `))
 
@@ -229,10 +246,10 @@ function buildPages() {
   for (const chunk of genPages) {
     const html = chunk.map(g => `
       <div class="gen-card">
-        <div class="gen-num">第${g.gen}世</div>
-        <div class="gen-char">${g.char === '—' ? '（無固定）' : g.char}</div>
+        <div class="gen-num">${en ? 'Gen ' + g.gen : '第' + g.gen + '世'}</div>
+        <div class="gen-char">${g.char === '—' ? (en ? '(No fixed char)' : '（無固定）') : g.char}</div>
         <div class="gen-dynasty">${g.dynasty}</div>
-        <div class="gen-count">${g.count} 人記載</div>
+        <div class="gen-count">${en ? g.count + ' recorded' : g.count + ' 人記載'}</div>
       </div>
     `).join('')
     pages.push(createPageHtml(`<div class="gen-page">${html}</div>`))
@@ -242,8 +259,8 @@ function buildPages() {
   pages.push(createPageHtml(`
     <div class="cover-page back-cover">
       <div class="cover-line"></div>
-      <p class="cover-motto">飲水思源 · 慎終追遠</p>
-      <p class="cover-date" style="margin-top: 2rem">羅氏族譜數字版</p>
+      <p class="cover-motto">${en ? 'Remember Our Roots · Honor Our Ancestors' : '飲水思源 · 慎終追遠'}</p>
+      <p class="cover-date" style="margin-top: 2rem">${en ? 'Luo Clan Genealogy Digital Edition' : '羅氏族譜數字版'}</p>
       <p class="cover-sub">genealogy.luozupu.com</p>
     </div>
   `))

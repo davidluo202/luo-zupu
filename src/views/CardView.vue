@@ -1,13 +1,13 @@
 <template>
   <div class="page-margin max-w-3xl mx-auto px-4 py-8">
-    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">族譜名片</h1>
-    <p class="text-center mb-8 text-sm" style="color: var(--ink-light)">選擇您的名字，生成專屬族譜身份卡</p>
+    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">{{ isEn ? 'Clan Card' : '族譜名片' }}</h1>
+    <p class="text-center mb-8 text-sm" style="color: var(--ink-light)">{{ isEn ? 'Select your name to generate a personal clan identity card' : '選擇您的名字，生成專屬族譜身份卡' }}</p>
 
     <!-- Select person -->
     <div class="max-w-sm mx-auto mb-8">
       <select v-model="selectedId" class="w-full px-4 py-3 rounded-xl border-2 text-base ink-body"
         style="background: var(--paper-aged); border-color: var(--paper-dark)">
-        <option value="">— 請選擇您的名字 —</option>
+        <option value="">{{ isEn ? '— Select your name —' : '— 請選擇您的名字 —' }}</option>
         <option v-for="m in selectableMembers" :key="m.id" :value="m.id">
           羅{{ m.name }}（第{{ m.generation }}世）
         </option>
@@ -20,11 +20,11 @@
       <!-- Card header -->
       <div class="p-6 text-center relative" style="background: linear-gradient(180deg, var(--paper-aged), var(--paper-cream))">
         <div class="absolute top-3 left-3 seal-stamp text-sm px-1.5 py-0.5" style="border-width:1.5px">羅氏</div>
-        <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">興寧羅氏 · 純端公支系</div>
+        <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">{{ isEn ? 'Xingning Luo Clan · Chunduan Lineage' : '興寧羅氏 · 純端公支系' }}</div>
         <div class="ink-title text-4xl font-bold mb-1">羅{{ person.name }}</div>
         <div class="flex justify-center gap-3 text-sm" style="color: var(--ink-medium)">
-          <span v-if="person.courtesy">字 {{ person.courtesy }}</span>
-          <span v-if="person.alias">號 {{ person.alias }}</span>
+          <span v-if="person.courtesy">{{ isEn ? 'Courtesy: ' : '字 ' }}{{ person.courtesy }}</span>
+          <span v-if="person.alias">{{ isEn ? 'Art Name: ' : '號 ' }}{{ person.alias }}</span>
         </div>
         <div class="mt-2 inline-block px-3 py-1 rounded-full text-xs font-bold"
           style="background: var(--gold-bright); color: white">
@@ -34,7 +34,7 @@
 
       <!-- Ancestry chain -->
       <div class="px-6 py-4 border-t" style="border-color: var(--paper-dark)">
-        <div class="text-xs font-bold mb-3" style="color: var(--gold-dark)">📜 直系血脈</div>
+        <div class="text-xs font-bold mb-3" style="color: var(--gold-dark)">{{ isEn ? '📜 Direct Lineage' : '📜 直系血脈' }}</div>
         <div class="flex flex-wrap items-center gap-1 text-xs ink-body">
           <template v-for="(a, i) in ancestryChain" :key="a.id">
             <span v-if="i > 0" style="color: var(--ink-faint)">→</span>
@@ -49,15 +49,15 @@
       <div class="px-6 py-4 border-t grid grid-cols-3 gap-3 text-center" style="border-color: var(--paper-dark)">
         <div>
           <div class="ink-title text-lg font-bold" style="color: var(--gold-bright)">{{ person.generation }}</div>
-          <div class="text-xs" style="color: var(--ink-light)">世代</div>
+          <div class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Generation' : '世代' }}</div>
         </div>
         <div>
           <div class="ink-title text-lg font-bold" style="color: var(--gold-bright)">{{ ancestryChain.length }}</div>
-          <div class="text-xs" style="color: var(--ink-light)">傳承代數</div>
+          <div class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Lineage Depth' : '傳承代數' }}</div>
         </div>
         <div>
           <div class="ink-title text-lg font-bold" style="color: var(--gold-bright)">{{ yearsSpan }}</div>
-          <div class="text-xs" style="color: var(--ink-light)">傳承年數</div>
+          <div class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Years Span' : '傳承年數' }}</div>
         </div>
       </div>
 
@@ -76,9 +76,9 @@
     <div v-if="person" class="text-center mt-6">
       <button @click="saveCard" class="px-6 py-3 rounded-xl font-bold transition-all hover:scale-105 text-sm"
         style="background: var(--gold-bright); color: white">
-        📸 保存名片圖片
+        {{ isEn ? '📸 Save Card Image' : '📸 保存名片圖片' }}
       </button>
-      <p class="mt-2 text-xs" style="color: var(--ink-light)">點擊保存為圖片，分享給家族成員</p>
+      <p class="mt-2 text-xs" style="color: var(--ink-light)">{{ isEn ? 'Save as image and share with family' : '點擊保存為圖片，分享給家族成員' }}</p>
     </div>
   </div>
 </template>
@@ -87,6 +87,9 @@
 import { ref, computed } from 'vue'
 import { toPng } from 'html-to-image'
 import { members, mainLineage, dynastyMap } from '@/data/genealogy.js'
+import { useLang } from '@/i18n.js'
+
+const { isEn, t } = useLang()
 
 const cardEl = ref(null)
 
@@ -99,7 +102,7 @@ async function saveCard() {
     link.href = dataUrl
     link.click()
   } catch (e) {
-    alert('保存失敗，請使用截圖功能')
+    alert(isEn.value ? 'Save failed, please use screenshot' : '保存失敗，請使用截圖功能')
   }
 }
 

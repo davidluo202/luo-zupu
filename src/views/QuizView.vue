@@ -1,7 +1,7 @@
 <template>
   <div class="page-margin max-w-3xl mx-auto px-4 py-8">
-    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">祖先知多少</h1>
-    <p class="text-center mb-8 text-sm" style="color: var(--ink-light)">考考你對家族歷史的了解</p>
+    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">{{ isEn ? 'Ancestry Quiz' : '祖先知多少' }}</h1>
+    <p class="text-center mb-8 text-sm" style="color: var(--ink-light)">{{ isEn ? 'Test your knowledge of family history' : '考考你對家族歷史的了解' }}</p>
 
     <!-- Quiz in progress -->
     <div v-if="!finished">
@@ -15,7 +15,7 @@
 
       <!-- Question -->
       <div class="p-6 rounded-2xl mb-6 fade-in-up" style="background: var(--paper-aged)">
-        <div class="text-xs font-bold mb-3" style="color: var(--gold-dark)">第 {{ currentQ + 1 }} 題</div>
+        <div class="text-xs font-bold mb-3" style="color: var(--gold-dark)">{{ isEn ? `Question ${currentQ + 1}` : `第 ${currentQ + 1} 題` }}</div>
         <h2 class="ink-title text-xl font-bold mb-6">{{ questions[currentQ].question }}</h2>
 
         <div class="space-y-3">
@@ -33,7 +33,7 @@
         <div v-if="answered !== null" class="mt-4 p-4 rounded-xl text-sm ink-body fade-in-up"
           :style="answered === questions[currentQ].correct ? 'background: rgba(90,138,106,0.1); border: 1px solid var(--jade-green)' : 'background: rgba(194,59,34,0.1); border: 1px solid var(--red-seal)'">
           <div class="font-bold mb-1" :style="answered === questions[currentQ].correct ? 'color: var(--jade-green)' : 'color: var(--red-seal)'">
-            {{ answered === questions[currentQ].correct ? '✅ 答對了！' : '❌ 答錯了' }}
+            {{ answered === questions[currentQ].correct ? (isEn ? '✅ Correct!' : '✅ 答對了！') : (isEn ? '❌ Wrong' : '❌ 答錯了') }}
           </div>
           <div style="color: var(--ink-medium)">{{ questions[currentQ].explanation }}</div>
         </div>
@@ -43,7 +43,7 @@
       <div v-if="answered !== null" class="text-center">
         <button @click="nextQuestion" class="px-8 py-3 rounded-xl font-bold transition-all hover:scale-105"
           style="background: var(--gold-bright); color: white">
-          {{ currentQ < questions.length - 1 ? '下一題 →' : '查看結果' }}
+          {{ currentQ < questions.length - 1 ? (isEn ? 'Next →' : '下一題 →') : (isEn ? 'View Results' : '查看結果') }}
         </button>
       </div>
     </div>
@@ -63,7 +63,7 @@
       </div>
       <button @click="restart" class="px-8 py-3 rounded-xl font-bold transition-all hover:scale-105"
         style="background: var(--ink-black); color: white">
-        🔄 再試一次
+        {{ isEn ? '🔄 Try Again' : '🔄 再試一次' }}
       </button>
     </div>
   </div>
@@ -71,6 +71,9 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useLang } from '@/i18n.js'
+
+const { isEn, t } = useLang()
 
 const questions = [
   {
@@ -150,6 +153,12 @@ const scoreEmoji = computed(() => {
 })
 const scoreMessage = computed(() => {
   const pct = score.value / questions.length
+  if (isEn.value) {
+    if (pct >= 0.9) return 'Genealogy Expert! You know the family history inside out'
+    if (pct >= 0.7) return 'Great job! Deep knowledge of family history'
+    if (pct >= 0.5) return 'Passed! Consider reading the genealogy more'
+    return 'Keep studying! Go check the genealogy'
+  }
   if (pct >= 0.9) return '族譜專家！對家族歷史瞭如指掌'
   if (pct >= 0.7) return '很不錯！對家族歷史有深入了解'
   if (pct >= 0.5) return '及格了！建議多翻閱族譜'

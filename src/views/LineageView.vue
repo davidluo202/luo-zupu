@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-4xl mx-auto page-margin px-4 py-8">
-    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">主脈溯源</h1>
+    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">{{ isEn ? 'Trace Lineage' : '主脈溯源' }}</h1>
 
     <!-- Person selector -->
     <div class="max-w-md mx-auto mb-6">
       <div class="relative">
-        <input v-model="searchQuery" @input="onSearch" :placeholder="selectedPerson ? '' : '輸入人名選擇溯源對象...'"
+        <input v-model="searchQuery" @input="onSearch" :placeholder="selectedPerson ? '' : (isEn ? 'Search by name...' : '輸入人名選擇溯源對象...')"
           class="w-full px-4 py-3 rounded-xl border-2 text-sm ink-body text-center"
           style="background: var(--paper-aged); border-color: var(--paper-dark)">
         <div v-if="searchResults.length" class="absolute z-50 w-full mt-1 rounded-xl shadow-lg overflow-hidden border"
@@ -15,15 +15,18 @@
             style="border-color: var(--paper-dark)"
             onmouseover="this.style.background='var(--paper-aged)'" onmouseout="this.style.background='var(--paper-cream)'">
             <span class="font-bold">羅{{ m.name }}</span>
-            <span v-if="m.courtesy" class="ml-1" style="color: var(--ink-light)">字{{ m.courtesy }}</span>
-            <span class="ml-2 text-xs" style="color: var(--gold-dark)">第{{ m.generation }}世</span>
+            <span v-if="m.courtesy" class="ml-1" style="color: var(--ink-light)">{{ isEn ? 'Courtesy: ' : '字' }}{{ m.courtesy }}</span>
+            <span class="ml-2 text-xs" style="color: var(--gold-dark)">{{ isEn ? 'Gen ' + m.generation : '第' + m.generation + '世' }}</span>
           </button>
         </div>
       </div>
     </div>
 
     <p class="text-center mb-8 text-sm" style="color: var(--ink-light)">
-      {{ selectedPerson ? '羅' + selectedPerson.name + '直系' : '羅新濤直系' }} · 始祖小九公至今 · {{ lineageMembers.length }}代傳承
+      {{ isEn
+        ? (selectedPerson ? 'Luo ' + selectedPerson.name + ' Direct Line' : 'Luo Xintao Direct Line') + ' · From Ancestor Xiaojiu · ' + lineageMembers.length + ' Generations'
+        : (selectedPerson ? '羅' + selectedPerson.name + '直系' : '羅新濤直系') + ' · 始祖小九公至今 · ' + lineageMembers.length + '代傳承'
+      }}
     </p>
 
     <!-- Vertical scroll lineage -->
@@ -42,18 +45,18 @@
 
             <div class="inline-block px-2 py-0.5 rounded text-xs mb-2 font-bold"
               :style="m.generation < 0 ? 'background: var(--red-seal); color: white' : 'background: var(--gold-bright); color: white'">
-              {{ m.generation < 0 ? '遠祖' : '第' + m.generation + '世' }}
+              {{ m.generation < 0 ? (isEn ? 'Ancient' : '遠祖') : (isEn ? 'Gen ' + m.generation : '第' + m.generation + '世') }}
             </div>
 
             <div class="ink-title text-2xl font-bold mb-1">
               羅{{ m.name }}
-              <span v-if="m.courtesy" class="text-sm font-normal" style="color: var(--ink-light)">字{{ m.courtesy }}</span>
+              <span v-if="m.courtesy" class="text-sm font-normal" style="color: var(--ink-light)">{{ isEn ? 'Courtesy: ' : '字' }}{{ m.courtesy }}</span>
             </div>
 
             <div v-if="m.alias || m.posthumous" class="text-xs mb-2" style="color: var(--ink-light)">
-              <span v-if="m.alias">號{{ m.alias }}</span>
+              <span v-if="m.alias">{{ isEn ? 'Art Name: ' : '號' }}{{ m.alias }}</span>
               <span v-if="m.alias && m.posthumous"> · </span>
-              <span v-if="m.posthumous">謚{{ m.posthumous }}</span>
+              <span v-if="m.posthumous">{{ isEn ? 'Posthumous: ' : '謚' }}{{ m.posthumous }}</span>
             </div>
 
             <div v-if="m.birth || m.death" class="text-xs mb-2" style="color: var(--ink-medium)">
@@ -66,7 +69,7 @@
 
             <div v-if="m.spouses?.length" class="text-xs mb-2" style="color: var(--red-marriage)">
               <span v-for="(s, si) in m.spouses" :key="si">
-                {{ si > 0 ? '、' : '配 ' }}{{ s.name }}
+                {{ si > 0 ? '、' : (isEn ? 'Spouse: ' : '配 ') }}{{ s.name }}
               </span>
             </div>
 
@@ -84,6 +87,9 @@
 import { ref, computed } from 'vue'
 import { members, mainLineage } from '@/data/genealogy.js'
 import { toTraditional } from '@/data/simplifiedMap.js'
+import { useLang } from '@/i18n.js'
+
+const { isEn, t } = useLang()
 
 const treeMembers = members.filter(m => m.generation >= 1)
 const searchQuery = ref('')
@@ -144,9 +150,9 @@ const lineageMembers = computed(() => {
 
 function formatDate(m) {
   let s = ''
-  if (m.birth) s += '生 ' + m.birth
+  if (m.birth) s += (isEn.value ? 'Born ' : '生 ') + m.birth
   if (m.birthNote) s += '（' + m.birthNote + '）'
-  if (m.death) s += (s ? ' · ' : '') + '卒 ' + m.death
+  if (m.death) s += (s ? ' · ' : '') + (isEn.value ? 'Died ' : '卒 ') + m.death
   return s
 }
 </script>

@@ -3,7 +3,7 @@
     <!-- Top bar -->
     <div class="flex items-center gap-3 px-4 py-3 border-b" style="border-color: var(--paper-dark); background: var(--paper-aged)">
       <div class="flex-1 max-w-sm relative">
-        <input v-model="searchQuery" @input="onSearch" placeholder="輸入人名搜索定位..."
+        <input v-model="searchQuery" @input="onSearch" :placeholder="isEn ? 'Search by name...' : '輸入人名搜索定位...'"
           class="w-full pl-9 pr-4 py-2 text-sm rounded-xl border ink-body"
           style="background: var(--paper-cream); border-color: var(--paper-dark); font-family: var(--font-kai)">
         <span class="absolute left-3 top-2.5 text-sm" style="color: var(--ink-faint)">🔍</span>
@@ -14,14 +14,14 @@
             style="border-color: var(--paper-dark)"
             onmouseover="this.style.background='var(--paper-aged)'" onmouseout="this.style.background='var(--paper-cream)'">
             <span class="font-bold" style="font-family: var(--font-kai)">羅{{ m.name }}</span>
-            <span v-if="m.courtesy" class="ml-1" style="color: var(--ink-light)">字{{ m.courtesy }}</span>
-            <span class="ml-2 text-xs" style="color: var(--gold-dark)">第{{ m.generation }}世</span>
+            <span v-if="m.courtesy" class="ml-1" style="color: var(--ink-light)">{{ isEn ? 'Courtesy: ' : '字' }}{{ m.courtesy }}</span>
+            <span class="ml-2 text-xs" style="color: var(--gold-dark)">{{ isEn ? 'Gen ' + m.generation : '第' + m.generation + '世' }}</span>
           </button>
         </div>
       </div>
       <button @click="resetView" class="px-3 py-2 text-xs rounded-xl font-bold"
         style="background: var(--paper-cream); border: 1px solid var(--paper-dark); font-family: var(--font-kai)">
-        🎯 全覽
+        {{ isEn ? '🎯 Overview' : '🎯 全覽' }}
       </button>
     </div>
 
@@ -33,19 +33,19 @@
         <div class="flex-1 min-w-0">
           <div class="flex items-baseline gap-2 flex-wrap">
             <span class="ink-title text-xl font-bold">羅{{ selectedPerson.name }}</span>
-            <span v-if="selectedPerson.courtesy" class="text-sm" style="color: var(--ink-light)">字{{ selectedPerson.courtesy }}</span>
-            <span v-if="selectedPerson.alias" class="text-sm" style="color: var(--ink-light)">號{{ selectedPerson.alias }}</span>
-            <span v-if="selectedPerson.posthumous" class="text-sm" style="color: var(--red-seal)">謚{{ selectedPerson.posthumous }}</span>
-            <span class="text-xs px-2 py-0.5 rounded font-bold" style="background: var(--gold-bright); color: white">第{{ selectedPerson.generation }}世</span>
+            <span v-if="selectedPerson.courtesy" class="text-sm" style="color: var(--ink-light)">{{ isEn ? 'Courtesy: ' : '字' }}{{ selectedPerson.courtesy }}</span>
+            <span v-if="selectedPerson.alias" class="text-sm" style="color: var(--ink-light)">{{ isEn ? 'Art Name: ' : '號' }}{{ selectedPerson.alias }}</span>
+            <span v-if="selectedPerson.posthumous" class="text-sm" style="color: var(--red-seal)">{{ isEn ? 'Posthumous: ' : '謚' }}{{ selectedPerson.posthumous }}</span>
+            <span class="text-xs px-2 py-0.5 rounded font-bold" style="background: var(--gold-bright); color: white">{{ isEn ? 'Gen ' + selectedPerson.generation : '第' + selectedPerson.generation + '世' }}</span>
           </div>
           <div class="text-xs mt-1 flex flex-wrap gap-3" style="color: var(--ink-medium)">
-            <span v-if="selectedPerson.birth">生 {{ selectedPerson.birth }}</span>
-            <span v-if="selectedPerson.death">卒 {{ selectedPerson.death }}</span>
+            <span v-if="selectedPerson.birth">{{ isEn ? 'Born ' : '生 ' }}{{ selectedPerson.birth }}</span>
+            <span v-if="selectedPerson.death">{{ isEn ? 'Died ' : '卒 ' }}{{ selectedPerson.death }}</span>
             <span v-if="selectedPerson.title" style="color: var(--jade-green)">🏛️ {{ selectedPerson.title }}</span>
           </div>
           <div v-if="selectedPerson.deeds" class="text-xs mt-1 ink-body" style="color: var(--ink-medium)">{{ selectedPerson.deeds }}</div>
           <div v-if="selectedPerson.spouses?.length" class="text-xs mt-1" style="color: var(--red-marriage)">
-            配偶：{{ selectedPerson.spouses.map(s => s.name).join('、') }}
+            {{ isEn ? 'Spouse: ' : '配偶：' }}{{ selectedPerson.spouses.map(s => s.name).join('、') }}
           </div>
         </div>
         <button @click="selectedPerson = null" class="text-sm shrink-0" style="color: var(--ink-faint)">✕</button>
@@ -110,6 +110,9 @@ import * as d3 from 'd3'
 import { members, mainLineage, dynastyMap, pinyinMap } from '@/data/genealogy.js'
 import { toTraditional } from '@/data/simplifiedMap.js'
 import PersonModal from '@/components/PersonModal.vue'
+import { useLang } from '@/i18n.js'
+
+const { isEn, t } = useLang()
 
 const treeContainer = ref(null)
 const searchQuery = ref('')
@@ -387,7 +390,7 @@ function buildTree() {
       .attr('text-anchor', 'end')
       .attr('font-family', 'var(--font-kai)').attr('font-size', '11px')
       .attr('fill', 'var(--gold-dark)').attr('font-weight', '700')
-      .text(`第${gen}世 ${dynastyMap[gen] || ''}`)
+      .text(isEn.value ? `Gen ${gen} ${dynastyMap[gen] || ''}` : `第${gen}世 ${dynastyMap[gen] || ''}`)
   })
 
   // Draw links

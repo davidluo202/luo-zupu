@@ -1,8 +1,8 @@
 <template>
   <div class="max-w-4xl mx-auto page-margin px-4 py-8">
-    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">遷徙地圖</h1>
+    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">{{ isEn ? 'Migration Map' : '遷徙地圖' }}</h1>
     <p class="text-center mb-8 text-sm" style="color: var(--ink-light); font-family: var(--font-kai)">
-      三千年薪火相傳 · 從受封之地到全球散葉
+      {{ isEn ? '3000 Years of Heritage · From Enfeoffment to Global Diaspora' : '三千年薪火相傳 · 從受封之地到全球散葉' }}
     </p>
 
     <!-- Timeline -->
@@ -24,7 +24,7 @@
         <div class="p-4 rounded-xl" style="background: var(--paper-aged)">
           <div class="ink-title text-lg font-bold mb-1">{{ m.from }} → {{ m.to }}</div>
           <div class="text-sm mb-2" style="color: var(--ink-medium)">{{ m.event }}</div>
-          <div class="text-xs" style="color: var(--ink-light)">相關人物：{{ m.person }}</div>
+          <div class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Key Figure: ' : '相關人物：' }}{{ m.person }}</div>
         </div>
       </div>
     </div>
@@ -37,4 +37,7 @@
 <script setup>
 import InkMountains from '@/components/InkMountains.vue'
 import { migrations } from '@/data/genealogy.js'
+import { useLang } from '@/i18n.js'
+
+const { isEn, t } = useLang()
 </script>

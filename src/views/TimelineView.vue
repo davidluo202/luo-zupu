@@ -1,7 +1,7 @@
 <template>
   <div class="page-margin max-w-4xl mx-auto px-4 py-8">
-    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">族譜時光機</h1>
-    <p class="text-center mb-6 text-sm" style="color: var(--ink-light)">拖動滑塊穿越時空，見證家族歷史</p>
+    <h1 class="ink-title text-3xl font-bold text-center mb-2 tracking-widest">{{ isEn ? 'Timeline Explorer' : '族譜時光機' }}</h1>
+    <p class="text-center mb-6 text-sm" style="color: var(--ink-light)">{{ isEn ? 'Drag the slider to travel through time and witness family history' : '拖動滑塊穿越時空，見證家族歷史' }}</p>
 
     <!-- Year slider -->
     <div class="sticky top-14 z-30 py-4 px-4 rounded-2xl mb-8" style="background: var(--paper-aged); backdrop-filter: blur(10px)">
@@ -21,7 +21,7 @@
         <span class="ml-2 text-sm font-bold" style="color: var(--ink-medium)">{{ currentDynasty }}</span>
       </div>
       <div class="text-center mt-1 text-xs" style="color: var(--ink-light)">
-        現存 {{ aliveCount }} 人 · 已故 {{ deadCount }} 人 · 未出生 {{ unbornCount }} 人
+        {{ isEn ? `Living ${aliveCount} · Deceased ${deadCount} · Unborn ${unbornCount}` : `現存 ${aliveCount} 人 · 已故 ${deadCount} 人 · 未出生 ${unbornCount} 人` }}
       </div>
     </div>
 
@@ -35,15 +35,15 @@
         <div class="flex-1 min-w-0">
           <div class="flex items-baseline gap-2 flex-wrap">
             <span class="ink-title text-lg font-bold">羅{{ m.name }}</span>
-            <span v-if="m.courtesy" class="text-xs" style="color: var(--ink-light)">字{{ m.courtesy }}</span>
+            <span v-if="m.courtesy" class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Courtesy: ' : '字' }}{{ m.courtesy }}</span>
             <span class="text-xs px-2 py-0.5 rounded font-bold" style="background: var(--gold-bright); color: white">
-              第{{ m.generation }}世
+              {{ isEn ? 'Gen ' + m.generation : '第' + m.generation + '世' }}
             </span>
           </div>
           <div class="text-xs mt-1" style="color: var(--ink-medium)">
-            <span v-if="getBirthYear(m)">生於 {{ m.birth }}</span>
-            <span v-if="getDeathYear(m)"> · 卒於 {{ m.death }}</span>
-            <span v-if="isAlive(m)" style="color: var(--jade-green)"> · 在世（{{ currentYear - getBirthYear(m) }}歲）</span>
+            <span v-if="getBirthYear(m)">{{ isEn ? 'Born ' : '生於 ' }}{{ m.birth }}</span>
+            <span v-if="getDeathYear(m)"> · {{ isEn ? 'Died ' : '卒於 ' }}{{ m.death }}</span>
+            <span v-if="isAlive(m)" style="color: var(--jade-green)"> · {{ isEn ? `Alive (age ${currentYear - getBirthYear(m)})` : `在世（${currentYear - getBirthYear(m)}歲）` }}</span>
           </div>
           <div v-if="m.title" class="text-xs mt-1" style="color: var(--jade-green)">🏛️ {{ m.title }}</div>
           <div v-if="m.deeds" class="text-xs mt-1" style="color: var(--ink-faint)">
@@ -53,7 +53,7 @@
       </div>
 
       <div v-if="!visibleMembers.length" class="text-center py-12 ink-body" style="color: var(--ink-faint)">
-        這個年代尚無族人記載
+        {{ isEn ? 'No clan members recorded in this era' : '這個年代尚無族人記載' }}
       </div>
     </div>
   </div>
@@ -62,6 +62,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { members } from '@/data/genealogy.js'
+import { useLang } from '@/i18n.js'
+
+const { isEn, t } = useLang()
 
 const currentYear = ref(2026)
 const treeMembers = members.filter(m => m.generation >= 1)
@@ -126,6 +129,14 @@ const unbornCount = computed(() => treeMembers.filter(m => { const b = getBirthY
 
 const currentDynasty = computed(() => {
   const y = currentYear.value
+  if (isEn.value) {
+    if (y < 1279) return 'Southern Song'
+    if (y < 1368) return 'Yuan Dynasty'
+    if (y < 1644) return 'Ming Dynasty'
+    if (y < 1912) return 'Qing Dynasty'
+    if (y < 1949) return 'Republic of China'
+    return 'Modern Era'
+  }
   if (y < 1279) return '南宋'
   if (y < 1368) return '元朝'
   if (y < 1644) return '明朝'
