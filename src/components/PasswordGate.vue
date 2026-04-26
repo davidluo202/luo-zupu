@@ -4,26 +4,26 @@
       <!-- Seal -->
       <div class="seal-stamp text-4xl w-20 h-20 mx-auto mb-6 flex items-center justify-center">羅</div>
 
-      <h1 class="ink-title text-2xl font-bold tracking-widest mb-2">羅氏族譜</h1>
-      <p class="ink-body text-sm mb-8" style="color: var(--ink-light)">請輸入密碼以進入</p>
+      <h1 class="ink-title text-2xl font-bold tracking-widest mb-2">{{ t(G.title) }}</h1>
+      <p class="ink-body text-sm mb-8" style="color: var(--ink-light)">{{ t(G.prompt) }}</p>
 
       <form @submit.prevent="checkPassword" class="space-y-4">
         <input
           v-model="password"
           type="password"
-          placeholder="請輸入密碼"
+          :placeholder="t(G.placeholder)"
           class="w-full px-4 py-3 rounded-lg border text-center ink-body text-lg tracking-wider"
           :class="error ? 'border-red-400 shake' : ''"
           style="background: var(--paper-cream); border-color: var(--paper-dark); outline: none;"
           autofocus
         />
-        <p v-if="error" class="text-red-500 text-sm">密碼不正確，請重試</p>
+        <p v-if="error" class="text-red-500 text-sm">{{ t(G.error) }}</p>
         <button
           type="submit"
           class="w-full py-4 rounded-lg ink-body text-base font-bold tracking-widest transition-all hover:opacity-80"
           style="background: #4a3728; color: #f5f0e8; border: 2px solid #8b7355; cursor: pointer;"
         >
-          確認進入
+          {{ t(G.submit) }}
         </button>
       </form>
     </div>
@@ -32,6 +32,10 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useLang, gate as G } from '@/i18n.js'
+
+const { isEn } = useLang()
+const t = (obj) => isEn.value ? obj.en : obj.zh
 
 const emit = defineEmits(['authenticated'])
 

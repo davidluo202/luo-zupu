@@ -14,7 +14,7 @@
       <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <router-link to="/" class="flex items-center gap-3 no-underline">
           <span class="seal-stamp text-lg px-2 py-1 hover:rotate-[-8deg] transition-transform cursor-pointer">羅</span>
-          <span class="ink-title text-xl font-bold tracking-widest hidden sm:inline">羅氏族譜</span>
+          <span class="ink-title text-xl font-bold tracking-widest hidden sm:inline">{{ isEn ? 'Luo Genealogy' : '羅氏族譜' }}</span>
         </router-link>
 
         <!-- Desktop nav -->
@@ -22,9 +22,12 @@
           <router-link v-for="link in navLinks" :key="link.path" :to="link.path"
             class="px-3 py-1.5 text-sm ink-body no-underline rounded-lg transition-all hover:bg-[var(--paper-aged)]"
             :class="$route.path === link.path ? 'bg-[var(--paper-aged)] font-bold' : ''">
-            {{ link.icon }} {{ link.label }}
+            {{ link.icon }} {{ isEn ? link.labelEn : link.label }}
           </router-link>
           <div class="flex items-center gap-0.5 ml-2 pl-2 border-l" style="border-color: var(--paper-dark)">
+            <button @click="toggleLang" class="px-2 py-1 rounded-lg text-xs font-bold transition-all hover:bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
+              {{ isEn ? '中文' : 'EN' }}
+            </button>
             <button @click="changeFontSize(-1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold transition-all hover:bg-[var(--paper-aged)]">A-</button>
             <button @click="changeFontSize(1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold transition-all hover:bg-[var(--paper-aged)]">A+</button>
           </div>
@@ -42,10 +45,13 @@
           @click="mobileMenuOpen = false"
           class="block px-4 py-2.5 text-sm ink-body no-underline rounded-lg transition-all"
           :class="$route.path === link.path ? 'bg-[var(--paper-aged)] font-bold' : 'hover:bg-[var(--paper-aged)]'">
-          {{ link.icon }} {{ link.label }}
+          {{ link.icon }} {{ isEn ? link.labelEn : link.label }}
         </router-link>
         <div class="flex items-center gap-2 px-4 py-2 border-t mt-2 pt-2" style="border-color: var(--paper-dark)">
-          <span class="text-xs" style="color: var(--ink-light)">字體大小</span>
+          <button @click="toggleLang" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
+            {{ isEn ? '切換中文' : 'English' }}
+          </button>
+          <span class="text-xs" style="color: var(--ink-light)">{{ isEn ? 'Font' : '字體' }}</span>
           <button @click="changeFontSize(-1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold bg-[var(--paper-aged)]">A-</button>
           <button @click="changeFontSize(1)" class="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold bg-[var(--paper-aged)]">A+</button>
         </div>
@@ -64,6 +70,9 @@
 <script setup>
 import { ref } from 'vue'
 import PasswordGate from './components/PasswordGate.vue'
+import { useLang } from './i18n.js'
+
+const { isEn, toggleLang } = useLang()
 
 function checkAuth() {
   const h = localStorage.getItem('zupu_auth')
@@ -79,14 +88,14 @@ function changeFontSize(delta) {
 }
 
 const navLinks = [
-  { path: '/', label: '首頁', icon: '🏠' },
-  { path: '/tree', label: '族譜', icon: '🌳' },
-  { path: '/lineage', label: '溯源', icon: '📜' },
-  { path: '/migration', label: '遷徙', icon: '🗺️' },
-  { path: '/timeline', label: '時光', icon: '⏳' },
-  { path: '/card', label: '名片', icon: '🪪' },
-  { path: '/book', label: '古卷', icon: '📖' },
-  { path: '/quiz', label: '問答', icon: '🧠' },
+  { path: '/', label: '首頁', labelEn: 'Home', icon: '🏠' },
+  { path: '/tree', label: '族譜', labelEn: 'Tree', icon: '🌳' },
+  { path: '/lineage', label: '溯源', labelEn: 'Lineage', icon: '📜' },
+  { path: '/migration', label: '遷徙', labelEn: 'Migration', icon: '🗺️' },
+  { path: '/timeline', label: '時光', labelEn: 'Timeline', icon: '⏳' },
+  { path: '/card', label: '名片', labelEn: 'Card', icon: '🪪' },
+  { path: '/book', label: '古卷', labelEn: 'Book', icon: '📖' },
+  { path: '/quiz', label: '問答', labelEn: 'Quiz', icon: '🧠' },
 ]
 </script>
 

@@ -18,19 +18,15 @@
           <span class="seal-stamp text-4xl px-6 py-4 inline-block" style="border-width:3px">羅氏</span>
         </div>
 
-        <h1 class="ink-title text-5xl md:text-7xl font-bold mb-2 tracking-[0.3em]" style="letter-spacing: 0.3em">羅氏族譜</h1>
-        <p class="ink-title text-xl md:text-2xl mb-4" style="color: var(--ink-medium)">興寧派 · 純端公支系</p>
-        <p class="ink-body text-base mb-2" style="color: var(--ink-light)">
-          始祖劻正公 · 周武王三年受封 · 公元前1048年
-        </p>
-        <p class="ink-body text-sm mb-8" style="color: var(--ink-faint)">
-          福建寧化 → 廣東興寧 · 傳承三千餘年 · 二十六世 · 重修印刷本
-        </p>
+        <h1 class="ink-title text-5xl md:text-7xl font-bold mb-2 tracking-[0.3em]" style="letter-spacing: 0.3em">{{ t(H.title) }}</h1>
+        <p class="ink-title text-xl md:text-2xl mb-4" style="color: var(--ink-medium)">{{ t(H.subtitle) }}</p>
+        <p class="ink-body text-base mb-2" style="color: var(--ink-light)">{{ t(H.ancestor) }}</p>
+        <p class="ink-body text-sm mb-8" style="color: var(--ink-faint)">{{ t(H.history) }}</p>
 
         <div class="flex gap-8 justify-center mb-12 flex-wrap">
-          <div v-for="stat in stats" :key="stat.label" class="text-center">
+          <div v-for="stat in stats" :key="stat.zh" class="text-center">
             <div class="ink-title text-3xl font-bold" style="color: var(--gold-bright)">{{ stat.value }}</div>
-            <div class="ink-body text-sm mt-1" style="color: var(--ink-light)">{{ stat.label }}</div>
+            <div class="ink-body text-sm mt-1" style="color: var(--ink-light)">{{ t(stat) }}</div>
           </div>
         </div>
 
@@ -38,12 +34,12 @@
           <router-link to="/tree"
             class="px-8 py-3 rounded-xl text-white font-bold tracking-wider transition-all hover:scale-105"
             style="background: var(--ink-black); font-family: var(--font-kai)">
-            🌳 瀏覽族譜
+            {{ t(H.browseTree) }}
           </router-link>
           <router-link to="/lineage"
             class="px-8 py-3 rounded-xl font-bold tracking-wider transition-all hover:scale-105 border-2"
             style="border-color: var(--gold-bright); color: var(--gold-dark); font-family: var(--font-kai)">
-            📜 主脈溯源
+            {{ t(H.traceLineage) }}
           </router-link>
         </div>
       </div>
@@ -52,12 +48,12 @@
     <!-- Birthday ticker -->
     <div v-if="upcomingBirthdays.length" class="birthday-ticker border-t border-b" style="border-color: var(--gold-bright); background: linear-gradient(90deg, var(--paper-aged), var(--paper-cream), var(--paper-aged))">
       <div class="ticker-inner">
-        <span class="ticker-label">🎂 近期生日</span>
+        <span class="ticker-label">{{ t(H.birthdayLabel) }}</span>
         <span v-for="(b, i) in [...upcomingBirthdays, ...upcomingBirthdays]" :key="i" class="ticker-item">
           <span class="ticker-name">羅{{ b.name }}</span>
           <span class="ticker-date">{{ b.monthDay }}</span>
-          <span v-if="b.daysUntil === 0" class="ticker-today">今天！</span>
-          <span v-else class="ticker-days">{{ b.daysUntil }}天後</span>
+          <span v-if="b.daysUntil === 0" class="ticker-today">{{ t(H.birthdayToday) }}</span>
+          <span v-else class="ticker-days">{{ b.daysUntil }}{{ t(H.birthdayDaysAfter) }}</span>
           <span class="ticker-sep">·</span>
         </span>
       </div>
@@ -74,34 +70,24 @@
     <!-- Ancestors (before the main lineage) -->
     <section class="py-12 px-4 border-t scroll-reveal" style="border-color: var(--paper-dark)">
       <div class="max-w-3xl mx-auto page-margin text-center">
-        <h2 class="ink-title text-2xl font-bold mb-6 tracking-widest">源 流</h2>
+        <h2 class="ink-title text-2xl font-bold mb-6 tracking-widest">{{ t(H.sectionOrigin) }}</h2>
         <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
-          <div class="text-xs mb-2 font-bold" style="color: var(--red-seal)">得姓始祖</div>
+          <div class="text-xs mb-2 font-bold" style="color: var(--red-seal)">{{ t(H.originAncestor) }}</div>
           <div class="ink-title text-3xl font-bold mb-2">劻正公</div>
-          <div class="ink-body text-sm" style="color: var(--ink-medium)">
-            周武王三年（約公元前1048年）鎮守宣城有功，後受封於羅，子孫以國為氏，羅姓由此而來。
-          </div>
+          <div class="ink-body text-sm" style="color: var(--ink-medium)">{{ t(H.originAncestorDesc) }}</div>
         </div>
-        <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">
-          ⋮ 歷經約2300年，傳八十九世 ⋮
-        </div>
+        <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">{{ t(H.spanYears) }}</div>
         <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
-          <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">大成譜第八十九世</div>
+          <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">{{ t(H.gen89) }}</div>
           <div class="ink-title text-3xl font-bold mb-2">谷賢公</div>
-          <div class="ink-body text-sm" style="color: var(--ink-medium)">
-            享壽91歲，娶九妻（饒、程、錢、古、鄭、白、董、蔣、韓），共生十八子。其中饒氏（饒修）生三子：小九、伯七、大五。
-          </div>
+          <div class="ink-body text-sm" style="color: var(--ink-medium)">{{ t(H.gen89Desc) }}</div>
         </div>
-        <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">
-          ⋮ 下傳本譜始祖 ⋮
-        </div>
+        <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">{{ t(H.toGen1) }}</div>
         <div class="p-6 rounded-2xl" style="background: var(--paper-aged); border: 2px solid var(--gold-bright)">
-          <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">本譜第一世 · 興寧始祖</div>
-          <div class="ink-title text-3xl font-bold mb-2">小九公（洪德公）</div>
-          <div class="text-xs mb-2" style="color: var(--ink-light)">諱君治 · 字盛齡 · 號洪德 · 大成譜第九十世</div>
-          <div class="ink-body text-sm" style="color: var(--ink-medium)">
-            生於宋理宗景定二年（1261年），原籍福建寧化縣石壁村，宋末赴任廣東循州學正，見興寧山水悠揚、土地沃野豐裕，擇東廓而立家。
-          </div>
+          <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">{{ t(H.gen1Label) }}</div>
+          <div class="ink-title text-3xl font-bold mb-2">{{ t(H.gen1Name) }}</div>
+          <div class="text-xs mb-2" style="color: var(--ink-light)">{{ t(H.gen1Sub) }}</div>
+          <div class="ink-body text-sm" style="color: var(--ink-medium)">{{ t(H.gen1Desc) }}</div>
         </div>
       </div>
     </section>
@@ -116,12 +102,12 @@
     <!-- Preface -->
     <section class="py-12 px-4 border-t scroll-reveal" style="border-color: var(--paper-dark)">
       <div class="max-w-3xl mx-auto page-margin">
-        <h2 class="ink-title text-2xl font-bold text-center mb-6 tracking-widest">前 言</h2>
+        <h2 class="ink-title text-2xl font-bold text-center mb-6 tracking-widest">{{ t(H.sectionPreface) }}</h2>
         <div class="p-6 rounded-2xl ink-body leading-loose text-base" style="background: var(--paper-aged)">
-          <p class="mb-4 indent-8">劻正公於周武王三年鎮守宣城有功，（約公元前1048年）後受封於羅，子孫以國為氏，羅姓由此而來。</p>
-          <p class="mb-4 indent-8">本族譜根據祖輩第二十二世手抄本搜集整理重新編寫，主要收錄「小九公」之後，「純端公」派列代始祖之字號及簡歷，以便後人了解祖輩之祖章。</p>
-          <p class="mb-4 indent-8">族譜派語源於北宋初期清徽學士顥公修《大成譜》時所定，四十字，每代派八字，俗稱「老八旬」。清康熙辛丑年（公曆1721年）重修《大成譜》，形成「新派語」，俗稱「新八旬」，湖南、江西、廣東多沿用此新派語。</p>
-          <p class="indent-8">故原族譜稱《大成譜》或「老八旬」，現族譜稱「新八旬」或「新派語」。自「新」字輩之後，族中未再統一使用派語，各支後裔多依個人意願命名，不再拘於字輩。</p>
+          <p class="mb-4 indent-8">{{ t(H.prefaceP1) }}</p>
+          <p class="mb-4 indent-8">{{ t(H.prefaceP2) }}</p>
+          <p class="mb-4 indent-8">{{ t(H.prefaceP3) }}</p>
+          <p class="indent-8">{{ t(H.prefaceP4) }}</p>
         </div>
       </div>
     </section>
@@ -129,16 +115,16 @@
     <!-- Generation chars -->
     <section class="py-12 px-4 border-t" style="border-color: var(--paper-dark)">
       <div class="max-w-5xl mx-auto page-margin">
-        <h2 class="ink-title text-2xl font-bold text-center mb-8 tracking-widest">世代輩分 · 朝代對照</h2>
+        <h2 class="ink-title text-2xl font-bold text-center mb-8 tracking-widest">{{ t(H.sectionGeneration) }}</h2>
         <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2">
           <div v-for="(char, gen) in generationChars" :key="gen"
             class="person-card p-2 rounded-lg text-center cursor-pointer"
             style="background: var(--paper-aged)"
             @click="$router.push('/generation/' + gen)">
-            <div class="text-[10px] mb-0.5 font-bold" style="color: var(--ink-light)">第{{ gen }}世</div>
+            <div class="text-[10px] mb-0.5 font-bold" style="color: var(--ink-light)">{{ isEn ? 'Gen ' + gen : '第' + gen + '世' }}</div>
             <div class="ink-title text-base font-bold" :style="char === '—' ? 'color: var(--ink-faint)' : 'color: var(--gold-dark)'">{{ char === '—' ? '·' : char }}</div>
             <div class="text-[9px] mt-0.5" style="color: var(--ink-faint)">{{ dynastyMap[gen] || '' }}</div>
-            <div class="text-[9px] mt-0.5 font-bold" style="color: var(--ink-medium)">{{ getGenCount(gen) }}人</div>
+            <div class="text-[9px] mt-0.5 font-bold" style="color: var(--ink-medium)">{{ getGenCount(gen) }}{{ isEn ? ' ppl' : '人' }}</div>
           </div>
         </div>
       </div>
@@ -151,9 +137,7 @@
     <InkMountains height="180" />
 
     <footer class="py-6 px-4 text-center border-t" style="border-color: var(--paper-dark)">
-      <p class="text-sm" style="color: var(--ink-faint); font-family: var(--font-kai)">
-        羅氏族譜 · 源遠流長 · 薪火相傳
-      </p>
+      <p class="text-sm" style="color: var(--ink-faint); font-family: var(--font-kai)">{{ t(H.footer) }}</p>
     </footer>
   </div>
 </template>
@@ -161,29 +145,30 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { members, generationChars, dynastyMap } from '@/data/genealogy.js'
+import { useLang, home as H } from '@/i18n.js'
+import InkMountains from '@/components/InkMountains.vue'
+import ScholarDecor from '@/components/ScholarDecor.vue'
 
-// Birthday reminder: 24世及之後，未來15天內生日的成員
+const { isEn } = useLang()
+const t = (obj) => isEn.value ? obj.en : obj.zh
+
+// Birthday reminder: 24世及之後，未來30天內生日的成員
 function getUpcomingBirthdays() {
   const today = new Date()
   const results = []
   for (const m of members) {
     if (m.generation < 24 || !m.birth) continue
-    if (m.death || m.is_deceased) continue // skip deceased
+    if (m.death || m.is_deceased) continue
     const birthStr = String(m.birth)
     const match = birthStr.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
     if (!match) continue
     const bMonth = parseInt(match[2])
     const bDay = parseInt(match[3])
-    // Check if birthday falls within next 15 days
     for (let d = 0; d <= 30; d++) {
       const check = new Date(today)
       check.setDate(check.getDate() + d)
       if (check.getMonth() + 1 === bMonth && check.getDate() === bDay) {
-        results.push({
-          name: m.name,
-          monthDay: `${bMonth}月${bDay}日`,
-          daysUntil: d,
-        })
+        results.push({ name: m.name, monthDay: `${bMonth}月${bDay}日`, daysUntil: d })
         break
       }
     }
@@ -193,8 +178,6 @@ function getUpcomingBirthdays() {
 }
 
 const upcomingBirthdays = ref(getUpcomingBirthdays())
-import InkMountains from '@/components/InkMountains.vue'
-import ScholarDecor from '@/components/ScholarDecor.vue'
 
 // Scroll reveal observer
 onMounted(() => {
@@ -209,10 +192,10 @@ function getGenCount(gen) {
 }
 
 const stats = [
-  { value: '3074年', label: '傳承歷史' },
-  { value: '26世', label: '世代延續' },
-  { value: members.length + '人', label: '錄入人物' },
-  { value: '14次', label: '重大遷徙' },
+  { value: '3074年', zh: '傳承歷史', en: 'Heritage' },
+  { value: '26世', zh: '世代延續', en: 'Generations' },
+  { value: members.length + '人', zh: '錄入人物', en: 'Recorded' },
+  { value: '14次', zh: '重大遷徙', en: 'Migrations' },
 ]
 </script>
 
@@ -238,28 +221,11 @@ const stats = [
   font-size: 0.82rem;
   color: var(--ink-medium);
 }
-.ticker-name {
-  font-weight: 700;
-  color: var(--ink-primary);
-}
-.ticker-date {
-  margin-left: 0.3rem;
-  color: var(--ink-light);
-}
-.ticker-today {
-  margin-left: 0.3rem;
-  color: var(--red-seal);
-  font-weight: 700;
-}
-.ticker-days {
-  margin-left: 0.3rem;
-  color: var(--gold-dark);
-  font-size: 0.75rem;
-}
-.ticker-sep {
-  margin: 0 1rem;
-  color: var(--ink-faint);
-}
+.ticker-name { font-weight: 700; color: var(--ink-primary); }
+.ticker-date { margin-left: 0.3rem; color: var(--ink-light); }
+.ticker-today { margin-left: 0.3rem; color: var(--red-seal); font-weight: 700; }
+.ticker-days { margin-left: 0.3rem; color: var(--gold-dark); font-size: 0.75rem; }
+.ticker-sep { margin: 0 1rem; color: var(--ink-faint); }
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
