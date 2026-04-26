@@ -168,14 +168,14 @@ function getUpcomingBirthdays() {
   const results = []
   for (const m of members) {
     if (m.generation < 24 || !m.birth) continue
-    if (m.death) continue // skip deceased
+    if (m.death || m.is_deceased) continue // skip deceased
     const birthStr = String(m.birth)
     const match = birthStr.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
     if (!match) continue
     const bMonth = parseInt(match[2])
     const bDay = parseInt(match[3])
     // Check if birthday falls within next 15 days
-    for (let d = 0; d <= 15; d++) {
+    for (let d = 0; d <= 30; d++) {
       const check = new Date(today)
       check.setDate(check.getDate() + d)
       if (check.getMonth() + 1 === bMonth && check.getDate() === bDay) {
