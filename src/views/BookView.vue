@@ -89,7 +89,7 @@ const eraStoriesData = [
     subtitle: { zh: '捷金公負笈滇省', en: 'Jiejin Devotes His Life to Yunnan' },
     body: { zh: '捷金（漢才）公早歲辭粵赴滇求學，畢其一生，盡瘁滇省水電建設與醫療衛生事業。遍歷六郎洞、綠水河、開遠諸地，襄建以禮河、羅平大寨、魯布格電站，功在桑梓。及至退休，仍眷念滇地山水人情，遂定居曲靖，安享桑榆。德範昭垂，後世當效。', en: 'Jiejin (Hancai) left Guangdong as a young man to study in Yunnan, and devoted his entire life to hydropower construction and healthcare in the province. He served across Liulangdong, Lüshuihe, Kaiyuan and other areas, contributing to the construction of Yilihe, Luoping Dazhai, and Lubuge power stations. After retirement, he remained in Qujing, cherishing the land and people of Yunnan. His virtue and dedication stand as an example for generations to come.' },
     era: { zh: '1959年', en: '1959' },
-    landmark: 'qujing',
+    landmark: 'qujing_story',
   },
   {
     title: { zh: '南遷特區', en: 'Moving to the Special Zone' },
@@ -147,7 +147,8 @@ function createPageHtml(content) {
 const landmarkImages = {
   guangzhou: '/landmarks/guangzhou.jpg',
   shenzhen: '/landmarks/shenzhen.jpg',
-  qujing: '/landmarks/qujing.jpg',
+  qujing: '/landmarks/qujing_landscape.jpg',
+  qujing_story: '/landmarks/qujing.jpg',
   usa: '/landmarks/usa.jpg',
   newzealand: '/landmarks/newzealand.jpg',
   shibi: '/landmarks/shibi.jpg',
