@@ -1,6 +1,6 @@
 <template>
   <PasswordGate v-if="!authenticated" @authenticated="authenticated = true" />
-  <div v-else class="min-h-screen paper-texture" :style="{ fontSize: fontSize + 'px' }">
+  <div v-else class="min-h-screen paper-texture" :style="{ '--base-font-size': fontSize + 'px', fontSize: fontSize + 'px' }">
     <!-- Corner decorations -->
     <div class="fixed top-0 left-0 w-16 h-16 pointer-events-none z-40 opacity-20">
       <svg viewBox="0 0 60 60" fill="none"><path d="M0 0 L0 50 Q0 0 50 0" stroke="var(--gold-dark)" stroke-width="2" fill="none"/><path d="M0 0 L0 30 Q0 0 30 0" stroke="var(--gold-bright)" stroke-width="1.5" fill="none"/></svg>
@@ -11,25 +11,25 @@
 
     <!-- Top navigation bar -->
     <nav class="sticky top-0 z-50 backdrop-blur-md bg-[var(--paper-cream)]/90 border-b border-[var(--paper-dark)]">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <router-link to="/" class="flex items-center gap-3 no-underline">
-          <span class="seal-stamp text-xl px-3 py-1.5 hover:rotate-[-8deg] transition-transform cursor-pointer">羅</span>
-          <span class="ink-title text-2xl font-bold tracking-widest hidden sm:inline">{{ isEn ? 'Luo Genealogy' : '羅氏族譜' }}</span>
+      <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-center gap-8">
+        <router-link to="/" class="flex items-center gap-4 no-underline shrink-0">
+          <span class="seal-stamp text-2xl px-3 py-2 hover:rotate-[-8deg] transition-transform cursor-pointer">羅</span>
+          <span class="ink-title text-3xl font-bold tracking-widest hidden sm:inline">{{ isEn ? 'Luo Genealogy' : '羅氏族譜' }}</span>
         </router-link>
 
         <!-- Desktop nav -->
-        <div class="hidden md:flex items-center gap-2">
+        <div class="hidden md:flex items-center gap-3 flex-wrap justify-center">
           <router-link v-for="link in navLinks" :key="link.path" :to="link.path"
-            class="px-4 py-2 text-base ink-body no-underline rounded-xl transition-all hover:bg-[var(--paper-aged)]"
+            class="px-5 py-2.5 text-lg ink-body no-underline rounded-xl transition-all hover:bg-[var(--paper-aged)]"
             :class="$route.path === link.path ? 'bg-[var(--paper-aged)] font-bold' : ''">
             {{ link.icon }} {{ isEn ? link.labelEn : link.label }}
           </router-link>
-          <div class="flex items-center gap-1 ml-3 pl-3 border-l" style="border-color: var(--paper-dark)">
-            <button @click="toggleLang" class="px-3 py-1.5 rounded-xl text-sm font-bold transition-all hover:bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
+          <div class="flex items-center gap-2 ml-4 pl-4 border-l" style="border-color: var(--paper-dark)">
+            <button @click="toggleLang" class="px-4 py-2 rounded-xl text-base font-bold transition-all hover:bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
               {{ isEn ? '中文' : 'EN' }}
             </button>
-            <button @click="changeFontSize(-1)" class="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold transition-all hover:bg-[var(--paper-aged)]">A-</button>
-            <button @click="changeFontSize(1)" class="w-8 h-8 rounded-xl flex items-center justify-center text-base font-bold transition-all hover:bg-[var(--paper-aged)]">A+</button>
+            <button @click="changeFontSize(-2)" class="w-10 h-10 rounded-xl flex items-center justify-center text-base font-bold transition-all hover:bg-[var(--paper-aged)]">A-</button>
+            <button @click="changeFontSize(2)" class="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold transition-all hover:bg-[var(--paper-aged)]">A+</button>
           </div>
         </div>
 
@@ -84,7 +84,9 @@ const fontSize = ref(16)
 const mobileMenuOpen = ref(false)
 
 function changeFontSize(delta) {
-  fontSize.value = Math.max(12, Math.min(24, fontSize.value + delta))
+  fontSize.value = Math.max(12, Math.min(28, fontSize.value + delta))
+  // Also update html root font-size so rem-based sizes scale
+  document.documentElement.style.fontSize = fontSize.value + 'px'
 }
 
 const navLinks = [
