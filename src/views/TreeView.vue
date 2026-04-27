@@ -302,7 +302,7 @@ function buildTree() {
   // Create merged nodes for early-death groups
   const mergedNodes = []
   for (const [pid, eds] of earlyDeathByParent) {
-    if (eds.length >= 1) {
+    if (eds.length >= 2) {
       const firstEd = eds[0]
       mergedNodes.push({
         id: '_ed_' + pid,
@@ -417,6 +417,11 @@ function buildTree() {
     .attr('transform', d => `translate(${d.x - NODE_W/2}, ${d.y - NODE_H/2})`)
     .attr('cursor', 'pointer')
     .on('click', (e, d) => {
+      if (d._isMergedEarlyDeath) {
+        // For merged early-death nodes, just select without focus/highlight
+        selectedPerson.value = d
+        return
+      }
       selectedPerson.value = d
       focusPerson(d)
     })
@@ -427,7 +432,7 @@ function buildTree() {
     .attr('rx', 8).attr('ry', 8)
     .attr('fill', d => {
       if (d._isMergedEarlyDeath) return 'var(--paper-dark)'
-      if (d.note === '女') return '#fce4ec'
+      if (d.note === '女') return '#f8bbd0'
       if (mainLineage.includes(d.id)) return 'var(--paper-aged)'
       return 'var(--paper-cream)'
     })
