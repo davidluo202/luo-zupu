@@ -11,25 +11,25 @@
 
     <!-- Top navigation bar -->
     <nav class="sticky top-0 z-50 backdrop-blur-md bg-[var(--paper-cream)]/90 border-b border-[var(--paper-dark)]">
-      <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <router-link to="/" class="flex items-center gap-3 no-underline">
-          <span class="seal-stamp text-lg px-2 py-1 hover:rotate-[-8deg] transition-transform cursor-pointer">羅</span>
-          <span class="ink-title text-xl font-bold tracking-widest hidden sm:inline">{{ isEn ? 'Luo Genealogy' : '羅氏族譜' }}</span>
+          <span class="seal-stamp text-xl px-3 py-1.5 hover:rotate-[-8deg] transition-transform cursor-pointer">羅</span>
+          <span class="ink-title text-2xl font-bold tracking-widest hidden sm:inline">{{ isEn ? 'Luo Genealogy' : '羅氏族譜' }}</span>
         </router-link>
 
         <!-- Desktop nav -->
-        <div class="hidden md:flex items-center gap-1">
+        <div class="hidden md:flex items-center gap-2">
           <router-link v-for="link in navLinks" :key="link.path" :to="link.path"
-            class="px-3 py-1.5 text-sm ink-body no-underline rounded-lg transition-all hover:bg-[var(--paper-aged)]"
+            class="px-4 py-2 text-base ink-body no-underline rounded-xl transition-all hover:bg-[var(--paper-aged)]"
             :class="$route.path === link.path ? 'bg-[var(--paper-aged)] font-bold' : ''">
             {{ link.icon }} {{ isEn ? link.labelEn : link.label }}
           </router-link>
-          <div class="flex items-center gap-0.5 ml-2 pl-2 border-l" style="border-color: var(--paper-dark)">
-            <button @click="toggleLang" class="px-2 py-1 rounded-lg text-xs font-bold transition-all hover:bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
+          <div class="flex items-center gap-1 ml-3 pl-3 border-l" style="border-color: var(--paper-dark)">
+            <button @click="toggleLang" class="px-3 py-1.5 rounded-xl text-sm font-bold transition-all hover:bg-[var(--paper-aged)]" style="color: var(--gold-dark)">
               {{ isEn ? '中文' : 'EN' }}
             </button>
-            <button @click="changeFontSize(-1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold transition-all hover:bg-[var(--paper-aged)]">A-</button>
-            <button @click="changeFontSize(1)" class="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold transition-all hover:bg-[var(--paper-aged)]">A+</button>
+            <button @click="changeFontSize(-1)" class="w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold transition-all hover:bg-[var(--paper-aged)]">A-</button>
+            <button @click="changeFontSize(1)" class="w-8 h-8 rounded-xl flex items-center justify-center text-base font-bold transition-all hover:bg-[var(--paper-aged)]">A+</button>
           </div>
         </div>
 
