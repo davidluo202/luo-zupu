@@ -86,9 +86,9 @@ const eraStoriesData = [
   },
   {
     title: { zh: '滇東拓新', en: 'Pioneering in Eastern Yunnan' },
-    subtitle: { zh: '捷金公遠赴曲靖', en: 'Jiejin Journeys to Qujing' },
-    body: { zh: '捷金（漢才）公早期離開興寧，遠赴雲南曲靖。曲靖地處雲貴高原，山川壯麗，油菜花海金浪翻涌。捷金公在此落地生根，為羅氏在西南邊陲開闢了新的一脈。', en: 'Jiejin (Hancai) left Xingning for Qujing, Yunnan. Situated on the Yunnan-Guizhou Plateau with majestic mountains and golden rapeseed fields, Qujing became home to a new Luo branch on the southwestern frontier.' },
-    era: { zh: '民國', en: 'Republic Era' },
+    subtitle: { zh: '捷金公負笈滇省', en: 'Jiejin Devotes His Life to Yunnan' },
+    body: { zh: '捷金（漢才）公早歲辭粵赴滇求學，畢其一生，盡瘁滇省水電建設與醫療衛生事業。遍歷六郎洞、綠水河、開遠諸地，襄建以禮河、羅平大寨、魯布格電站，功在桑梓。及至退休，仍眷念滇地山水人情，遂定居曲靖，安享桑榆。德範昭垂，後世當效。', en: 'Jiejin (Hancai) left Guangdong as a young man to study in Yunnan, and devoted his entire life to hydropower construction and healthcare in the province. He served across Liulangdong, Lüshuihe, Kaiyuan and other areas, contributing to the construction of Yilihe, Luoping Dazhai, and Lubuge power stations. After retirement, he remained in Qujing, cherishing the land and people of Yunnan. His virtue and dedication stand as an example for generations to come.' },
+    era: { zh: '1959年', en: '1959' },
     landmark: 'qujing',
   },
   {
