@@ -80,8 +80,8 @@ const eraStoriesData = [
   {
     title: { zh: '穗城求學', en: 'Studying in Guangzhou' },
     subtitle: { zh: '捷登公赴穗謀生', en: 'Jiedeng Moves to the City' },
-    body: { zh: '解放前，二十四世捷登公離開興寧赴廣州求學謀生。在羊城扎根，娶妻生子，開啟了本支從客家山區走向大城市的新篇章。其兄弟捷金（漢才）則早期移居雲南曲靖，開拓滇東新天地。', en: 'Before Liberation, 24th-generation Jiedeng left Xingning for Guangzhou to study and make a living. He put down roots in the city, married, and opened a new chapter — from Hakka mountains to metropolis. His brother Jiejin (Hancai) moved to Qujing, Yunnan.' },
-    era: { zh: '民國', en: 'Republic Era' },
+    body: { zh: '解放初期，二十四世捷登公離開興寧赴廣州求學謀生。在羊城扎根，娶妻生子，開啟了本支從客家山區走向大城市的新篇章。其兄弟捷金（漢才）則於1959年負笈雲南，畢生盡瘁滇省水電建設與醫療衛生事業。', en: 'In the early 1950s, 24th-generation Jiedeng left Xingning for Guangzhou to study and make a living. He put down roots in the city, married, and opened a new chapter — from Hakka mountains to metropolis. His brother Jiejin (Hancai) went to Yunnan in 1959, devoting his life to hydropower and healthcare.' },
+    era: { zh: '解放初期', en: 'Early 1950s' },
     landmark: 'guangzhou',
   },
   {
