@@ -130,6 +130,27 @@
       </div>
     </section>
 
+    <!-- Old Eight Decades (老八旬) -->
+    <section class="py-12 px-4 border-t scroll-reveal" style="border-color: var(--paper-dark)">
+      <div class="max-w-3xl mx-auto page-margin">
+        <h2 class="ink-title text-2xl font-bold text-center mb-6 tracking-widest">{{ isEn ? 'Grand Genealogy Generation Names' : '大成譜派語（老八旬）' }}</h2>
+        <div class="p-6 rounded-2xl ink-body leading-loose" style="background: var(--paper-aged)">
+          <p class="text-center text-lg mb-4 tracking-widest" style="color: var(--gold-dark); font-family: var(--font-song)">
+            盛應實用君，成彥伯公叔<br>
+            以之懋憲光，秉興克允福<br>
+            亨運會時來，賢嗣序昭穆<br>
+            富有本日新，德業世常錄
+          </p>
+          <p class="text-xs text-center mb-2" style="color: var(--ink-light)">
+            {{ isEn ? 'Established by Luo Sheng (43rd generation from Zhu Gong) during the Southern Song Dynasty. 40 characters, 8 per generation cycle — known as the "Old Eight Decades" (老八旬).' : '南宋吏部侍郎羅盛（自珠公43世起）所定，四十字，每代派八字，俗稱「老八旬」。' }}
+          </p>
+          <p class="text-xs text-center" style="color: var(--ink-faint)">
+            {{ isEn ? 'In 1721 (Kangxi era), the Grand Genealogy was revised, creating the "New Eight Decades" (新八旬), widely adopted in Hunan, Jiangxi, and Guangdong.' : '清康熙辛丑年（1721年）重修《大成譜》，形成「新派語」（新八旬），湖南、江西、廣東多沿用此新派語。' }}
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- Bottom illustration -->
     <div class="relative overflow-hidden" style="max-height: 250px">
       <img src="/cover-bg.jpg" alt="" class="w-full object-cover" style="opacity: 0.12">
