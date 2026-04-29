@@ -79,7 +79,7 @@
         <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">{{ t(H.spanYears) }}</div>
         <div class="p-6 rounded-2xl mb-4" style="background: var(--paper-aged)">
           <div class="text-xs mb-2 font-bold" style="color: var(--gold-dark)">{{ t(H.gen89) }}</div>
-          <div class="ink-title text-3xl font-bold mb-2">谷賢公</div>
+          <div class="ink-title text-3xl font-bold mb-2">洪德公</div>
           <div class="ink-body text-sm" style="color: var(--ink-medium)">{{ t(H.gen89Desc) }}</div>
         </div>
         <div class="text-center my-4 ink-title text-sm" style="color: var(--ink-faint)">{{ t(H.toGen1) }}</div>

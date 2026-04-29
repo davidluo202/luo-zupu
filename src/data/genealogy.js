@@ -20,22 +20,30 @@ export const members = [
     deeds: '羅氏得姓始祖，周武王三年鎮守宣城有功，後受封於羅，子孫以國為氏',
     spouses: [], note: '傳三子：昌柞、昌世、昌允', isAncestor: true },
 
-  // === 《大成譜》八十九世 谷賢公（本譜之前一世）===
-  { id: 'guxian', name: '谷賢', generation: -1, branch: 'ancestor',
-    deeds: '娶九妻，生十八子', death: '享壽91歲', isAncestor: true,
+  // === 豫章羅氏第四十六世 洪德公（本譜之前一世）===
+  // 據《族譜錄·豫章羅氏四十六世洪德公》、《羅氏家園·廣東興寧東門羅氏源流考》
+  // 注：原族譜記為「谷賢公」，經考證與洪德公為同一人
+  { id: 'guxian', name: '洪德', courtesy: '必元', alias: '北谷', generation: -1, branch: 'ancestor',
+    birth: '1215', birthNote: '宋寧宗嘉定八年',
+    death: '1309', deathNote: '元武宗至大二年，享壽95歲',
+    title: '宋朝散大夫',
+    deeds: '諱用格，字必元，號北谷。原族譜記為「谷賢公」。原籍福建寧化石壁村，娶九妻（錢、程、古、董、鄭、饒、白、蔣、韓），共生十八子一女。後裔遍布閩粵贛各地。據《族譜錄》及《羅氏家園》記載。',
+    isAncestor: true,
     spouses: [
-      { name: '饒修', surname: '饶', children: ['xiaojiu','boqi','dawu'] },
-      { name: '程氏', surname: '程' }, { name: '錢氏', surname: '錢' },
-      { name: '古氏', surname: '古' }, { name: '鄭氏', surname: '鄭' },
-      { name: '白氏', surname: '白' }, { name: '董氏', surname: '董' },
-      { name: '蔣氏', surname: '蒋' }, { name: '韓氏', surname: '韓' },
+      { name: '饒氏', surname: '饒', children: ['xiaojiu','boqi','dawu'] },
+      { name: '錢氏', surname: '錢' }, { name: '程氏', surname: '程' },
+      { name: '古氏', surname: '古' }, { name: '董氏', surname: '董' },
+      { name: '鄭氏', surname: '鄭' }, { name: '白氏', surname: '白' },
+      { name: '蔣氏', surname: '蔣' }, { name: '韓氏', surname: '韓' },
     ] },
 
-  // === 始祖 小九公（洪德公）一世 ===
-  { id: 'xiaojiu', name: '君治', courtesy: '盛齡', alias: '洪德', generation: 1,
+  // === 豫章羅氏第四十七世 小九公（興寧始祖）一世 ===
+  // 據《查譜網·興寧東門羅氏族譜》、《羅建平·興寧縣洪德小九公系》
+  { id: 'xiaojiu', name: '君姿', courtesy: '盛齡', generation: 1,
     branch: 'main', birth: '1261-11-01', birthNote: '宋理宗景定二年辛酉十月初八卯时',
-    title: '宋朝循州學正', note: '按《《大成譜》》为四十九世派，又称小九公',
-    deeds: '原籍福建寧化县石壁村，宋末客道廣東興寧，赴任循州（今廣東龍川、和平、興寧、五華、連平等縣市地）學正，见興寧山水悠揚、土地沃野豐裕，择東廓而立家',
+    title: '宋朝循州學正',
+    note: '洪德公十八子之一，行第小九，又稱小九公。按《大成譜》為豫章羅氏第四十七世。筑「九廳十八井」以紀念父親洪德公九妻十八子。',
+    deeds: '原籍福建寧化縣石壁村，宋末以貢生任廣東循州（今龍川、和平、興寧、五華、連平等縣市地）學正，解組後道經興寧，見山水悠揚、土地沃野豐裕，遂築居縣城東郊，為興寧東門羅氏開基祖。據《羅氏家園·廣東興寧東門羅氏源流考》記載。',
     spouses: [
       { name: '曾氏', surname: '曾', note: '大孺人', children: ['shenghan'] },
       { name: '胡氏', surname: '胡', note: '大孺人', children: ['xinhan'] },
