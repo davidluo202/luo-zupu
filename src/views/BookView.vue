@@ -45,7 +45,7 @@ const eraStoriesData = [
   {
     title: { zh: '石壁南遷', en: 'Southward from Shibi' },
     subtitle: { zh: '客家先民的足跡', en: 'Footsteps of Hakka Ancestors' },
-    body: { zh: '福建寧化石壁村，客家人的精神原鄉。宋末戰亂，先民紛紛南遷。我族谷賢公娶九妻，生十八子，子孫散布閩粵贛各地。', en: 'Shibi Village in Ninghua, Fujian is the spiritual homeland of the Hakka. During the wars at the end of the Song Dynasty, ancestors migrated south. Guxian married nine wives and fathered eighteen sons, with descendants scattered across Fujian, Guangdong, and Jiangxi.' },
+    body: { zh: '福建寧化石壁村（今三明市寧化縣石壁鎮），客家人的精神原鄉。宋末戰亂，先民紛紛南遷。我族洪德公娶九妻，生十八子，子孫散布閩粵贛各地。', en: 'Shibi Village in Ninghua, Fujian (present-day Shibi Town, Ninghua County, Sanming City — the spiritual homeland of the Hakka people). During the wars at the end of the Song Dynasty, ancestors migrated south. Hongde married nine wives and fathered eighteen sons, with descendants scattered across Fujian, Guangdong, and Jiangxi.' },
     era: { zh: '宋末', en: 'Late Song' },
     landmark: 'shibi',
   },

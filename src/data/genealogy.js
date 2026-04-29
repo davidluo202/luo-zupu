@@ -27,7 +27,7 @@ export const members = [
     birth: '1215', birthNote: '宋寧宗嘉定八年',
     death: '1309', deathNote: '元武宗至大二年，享壽95歲',
     title: '宋朝散大夫',
-    deeds: '諱用格，字必元，號北谷。原族譜記為「谷賢公」。原籍福建寧化石壁村，娶九妻（錢、程、古、董、鄭、饒、白、蔣、韓），共生十八子一女。後裔遍布閩粵贛各地。據《族譜錄》及《羅氏家園》記載。',
+    deeds: '諱用格，字必元，號北谷。原族譜記為「谷賢公」。原籍福建寧化石壁村（今福建省三明市寧化縣石壁鎮，客家祖地），娶九妻（錢、程、古、董、鄭、饒、白、蔣、韓），共生十八子一女。後裔遍布閩粵贛各地。據《族譜錄》及《羅氏家園》記載。',
     isAncestor: true,
     spouses: [
       { name: '饒氏', surname: '饒', children: ['xiaojiu','boqi','dawu'] },
@@ -43,7 +43,7 @@ export const members = [
     branch: 'main', birth: '1261-11-01', birthNote: '宋理宗景定二年辛酉十月初八卯时',
     title: '宋朝循州學正',
     note: '洪德公十八子之一，行第小九，又稱小九公。按《大成譜》為豫章羅氏第四十七世。筑「九廳十八井」以紀念父親洪德公九妻十八子。',
-    deeds: '原籍福建寧化縣石壁村，宋末以貢生任廣東循州（今龍川、和平、興寧、五華、連平等縣市地）學正，解組後道經興寧，見山水悠揚、土地沃野豐裕，遂築居縣城東郊，為興寧東門羅氏開基祖。據《羅氏家園·廣東興寧東門羅氏源流考》記載。',
+    deeds: '原籍福建寧化縣石壁村（今三明市寧化縣石壁鎮，客家祖地），宋末以貢生任廣東循州（今龍川、和平、興寧、五華、連平等縣市地）學正，解組後道經興寧，見山水悠揚、土地沃野豐裕，遂築居縣城東郊，為興寧東門羅氏開基祖。據《羅氏家園·廣東興寧東門羅氏源流考》記載。',
     spouses: [
       { name: '曾氏', surname: '曾', note: '大孺人', children: ['shenghan'] },
       { name: '胡氏', surname: '胡', note: '大孺人', children: ['xinhan'] },
@@ -623,8 +623,8 @@ export const mainLineage = [
 export const migrations = [
   { year: '前1048', from: '宣城', to: '羅國', person: '劻正公', event: '周武王三年鎮守宣城有功，受封於羅，子孫以國為氏', landmark: 'xuancheng',
     yearEn: '1048 BC', fromEn: 'Xuancheng', toEn: 'State of Luo', eventEn: 'Defended Xuancheng for King Wu of Zhou, enfeoffed at Luo — origin of the Luo surname' },
-  { year: '约1280', from: '福建寧化石壁村', to: '廣東興寧', person: '小九公', event: '宋末客道廣東，赴任循州（今龍川、和平、興寧、五華、連平等地）學正，見興寧山水悠揚遂立家', landmark: 'xingning',
-    yearEn: 'c.1280', fromEn: 'Shibi Village, Fujian', toEn: 'Xingning, Guangdong', eventEn: 'Traveled to Guangdong in late Song, served as Education Commissioner; settled in Xingning' },
+  { year: '约1280', from: '福建寧化石壁村（今福建省三明市寧化縣石壁鎮，客家祖地）', to: '廣東興寧', person: '小九公', event: '宋末客道廣東，赴任循州（今龍川、和平、興寧、五華、連平等地）學正，見興寧山水悠揚遂立家', landmark: 'xingning',
+    yearEn: 'c.1280', fromEn: 'Shibi Village, Fujian (present-day Shibi Town, Ninghua County, Sanming City — Hakka ancestral homeland)', toEn: 'Xingning, Guangdong', eventEn: 'Traveled to Guangdong in late Song, served as Education Commissioner; settled in Xingning' },
   { year: '约1648', from: '廣東興寧', to: '揚州', person: '萬榮公', event: '幼年喪父成孤兒，獨赴揚州與叔合股貿易', landmark: 'yangzhou',
     yearEn: 'c.1648', fromEn: 'Xingning, Guangdong', toEn: 'Yangzhou', eventEn: 'Orphaned young, traveled alone to Yangzhou to trade with his uncle' },
   { year: '约1660', from: '揚州', to: '廣東興寧', person: '萬榮公', event: '數年間積累財款，衣錦還鄉，回興寧置產立業', landmark: 'xingning',
