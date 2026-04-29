@@ -52,7 +52,7 @@ const eraStoriesData = [
   {
     title: { zh: '客道興寧', en: 'Settling in Xingning' },
     subtitle: { zh: '小九公開基立業', en: 'Xiaojiu Founds the Lineage' },
-    body: { zh: '宋理宗景定二年（1261年），始祖小九公（洪德公）自福建寧化石壁村客道廣東，任循州（今龍川、和平、興寧、五華、連平等縣市地）學正。見興寧山水悠揚、土地沃野豐裕，遂擇東廓而立家。娶曾氏、胡氏、黃氏三位夫人，開三大房。', en: 'In 1261, founding ancestor Xiaojiu (Hongde) traveled from Shibi Village, Fujian to Guangdong as Education Commissioner of Xunzhou (present-day Longchuan, Heping, Xingning, Wuhua, Lianping). Seeing the beautiful mountains and fertile lands of Xingning, he settled here. He married three wives (Zeng, Hu, Huang), founding three major branches.' },
+    body: { zh: '宋理宗景定二年（1261年），洪德公之子小九公自福建寧化石壁村（今三明市寧化縣石壁鎮）客道廣東，以貢生任循州（今龍川、和平、興寧、五華、連平等縣市地）學正。見興寧山水悠揚、土地沃野豐裕，遂擇東廓而立家。娶曾氏、胡氏、黃氏三位夫人，開三大房。筑「九廳十八井」以紀念父親洪德公。', en: 'In 1261, Xiaojiu, son of Hongde, traveled from Shibi Village, Fujian (present-day Shibi Town, Ninghua) to Guangdong as Education Commissioner of Xunzhou. Seeing the beautiful mountains and fertile lands of Xingning, he settled here. He married three wives (Zeng, Hu, Huang), founding three major branches. He built the "Nine Halls and Eighteen Wells" in honor of his father Hongde.' },
     era: { zh: '宋末元初', en: 'Late Song / Early Yuan' },
     landmark: 'xingning',
   },
